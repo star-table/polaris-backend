@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-rolesvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-rolesvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-rolesvc:/data/logs/polaris-rolesvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-rolesvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-rolesvc
+    expose:
+      - "80"
+      - "12006"
+    ports:
+      - "12006:12006"
+
+networks:
+  envoymesh: {}

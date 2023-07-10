@@ -1,0 +1,29 @@
+type CustomValue {
+    "字段id"
+    id:Int64!
+    "字段名称"
+    name:String!
+    "字段值"
+    value:Any!
+    "类型(1文本类型2单选框3多选框4日期选框5人员选择6是非选择7数字框)"
+    fieldType:Int!
+    "选项值"
+    fieldValue:[Map!]!
+    "是否属于组织字段库(1组织2项目3系统)"
+    isOrgField:Int!
+    "字段描述"
+    remark:String!
+    "字段"
+    title:String!
+    "启用状态（1启用2禁用）对于项目而言"
+    status:Int!
+}
+
+input UpdateIssueCustionFieldData {
+    "字段id"
+    fieldId:Int64!
+    "字段值"
+    value:Any!
+    "名称"
+    title:String!
+}

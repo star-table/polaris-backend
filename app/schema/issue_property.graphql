@@ -1,0 +1,95 @@
+"问题性质结构体"
+type IssueProperty{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"语言编号"
+	langCode:String!
+	"类型名称"
+	name:String!
+	"排序"
+	sort:Int!
+	"对象类型id"
+	projectObjectTypeId:Int64!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+}
+
+"创建问题性质请求结构体"
+input CreateIssuePropertyReq{
+	"组织id"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"语言编号"
+	langCode:String!
+	"类型名称"
+	name:String!
+	"排序"
+	sort:Int!
+	"对象类型id"
+	projectObjectTypeId:Int64!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新问题性质请求结构体"
+input UpdateIssuePropertyReq{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"语言编号"
+	langCode:String!
+	"类型名称"
+	name:String!
+	"排序"
+	sort:Int!
+	"对象类型id"
+	projectObjectTypeId:Int64!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}

@@ -1,0 +1,155 @@
+"部门结构体"
+type Department{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"部门名称"
+	name:String!
+	"部门标识"
+	code:String!
+	"父部门id"
+	parentId:Int64!
+	"排序"
+	sort:Int!
+	"部门状态"
+	status: Int!
+	"是否隐藏部门,1隐藏,2不隐藏"
+	isHide:Int!
+	"来源渠道,"
+	sourceChannel:String!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+}
+
+"创建部门请求结构体"
+input CreateDepartmentReq{
+	"组织id"
+	orgId:Int64!
+	"部门名称"
+	name:String!
+	"部门标识"
+	code:String!
+	"父部门id"
+	parentId:Int64!
+	"排序"
+	sort:Int!
+	"是否隐藏部门,1隐藏,2不隐藏"
+	isHide:Int!
+	"来源渠道,"
+	sourceChannel:String!
+	"状态, 1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新部门请求结构体"
+input UpdateDepartmentReq{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"部门名称"
+	name:String!
+	"部门标识"
+	code:String!
+	"父部门id"
+	parentId:Int64!
+	"排序"
+	sort:Int!
+	"是否隐藏部门,1隐藏,2不隐藏"
+	isHide:Int!
+	"来源渠道,"
+	sourceChannel:String!
+	"状态, 1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"部门列表响应结构体"
+type DepartmentList{
+	"总数"
+    total:Int64!
+	"列表"
+    list:[Department!]
+}
+
+input DepartmentListReq{
+	"父部门id"
+    parentId: Int64
+	"是否查询最上级部门, 如果是1则为true"
+	isTop: Int
+	"是否显示隐藏的部门，如果是1则为true，默认不显示"
+	showHiding: Int
+	"部门名称"
+	name: String
+	"部门id"
+	departmentIds:[Int64!]
+}
+
+input DepartmentMemberListReq{
+	"部门id"
+	departmentId: Int64
+}
+
+"部门用户信息"
+type DepartmentMemberInfo{
+	"id"
+	userId: Int64!
+	"姓名"
+	name: String!
+	"姓名拼音"
+	namePy: String
+	"用户头像"
+	avatar: String!
+	"工号：企业下唯一"
+	emplId: String!
+	"unionId： 开发者账号下唯一"
+	unionId: String!
+	"用户部门id"
+	departmentId: Int64!
+	"用户组织状态"
+	orgUserStatus:Int!
+}
+
+input DepartmentMembersListReq {
+	"名称"
+	name:String
+	"限定人员范围"
+	userIds:[Int64!]
+	"需要排除的项目id,取项目之外的组织成员"
+	excludeProjectId:Int64
+	"关联类型(1负责人2关注人3全部，默认全部,配合项目id使用)"
+	relationType:Int64
+}
+
+type DepartmentMembersListResp {
+	"总数"
+	total:Int64!
+	"列表"
+	list:[DepartmentMemberInfo!]
+}

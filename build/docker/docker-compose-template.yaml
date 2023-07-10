@@ -1,0 +1,350 @@
+version: "3.7"
+services:
+
+  polaris-front-proxy-outside:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-front-proxy-outside
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-front-proxy-outside:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-front-proxy-outside:/data/logs/polaris-front-proxy-outside
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-front-proxy-outside
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-front-proxy-outside
+    expose:
+      - "80"
+      - "8001"
+    ports:
+      - "8181:80"
+      - "8001:8001"
+
+  polaris-front-proxy-inside:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-front-proxy-inside
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-front-proxy-inside:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-front-proxy-inside:/data/logs/polaris-front-proxy-inside
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-front-proxy-inside
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-front-proxy-inside
+    expose:
+      - "80"
+      - "8001"
+    ports:
+      - "8182:80"
+      - "8002:8001"
+
+  polaris-idsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-idsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-idsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-idsvc:/data/logs/polaris-idsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-idsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-idsvc
+    expose:
+      - "80"
+      - "10002"
+    ports:
+      - "10002:10002"
+
+  polaris-msgsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-msgsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-msgsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-msgsvc:/data/logs/polaris-msgsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-msgsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-msgsvc
+    expose:
+      - "80"
+      - "10003"
+    ports:
+      - "10003:10003"
+
+  #  polaris-appsvc:
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile-polaris-appsvc
+  #    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-appsvc:#DOCKER_TAG#
+  #    volumes:
+  #      - /data/logs/polaris-appsvc:/data/logs/polaris-appsvc
+  #    networks:
+  #      envoymesh:
+  #        aliases:
+  #          - polaris-appsvc
+  #    environment:
+  #      - POL_ENV=#POL_ENV#
+  #      - SERVICE_NAME=polaris-appsvc
+  #    expose:
+  #      - "80"
+  #      - "10001"
+  #    ports:
+  #      - "10001:10001"
+
+  polaris-app:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-app
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-app:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-app:/data/logs/polaris-app
+      - /data/resources/polaris:/data/resources/polaris
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-app
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-app
+    expose:
+      - "80"
+      - "12000"
+    ports:
+      - "12000:12000"
+
+  polaris-orgsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-orgsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-orgsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-orgsvc:/data/logs/polaris-orgsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-orgsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-orgsvc
+    expose:
+      - "80"
+      - "12001"
+    ports:
+      - "12001:12001"
+
+  polaris-projectsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-projectsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-projectsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-projectsvc:/data/logs/polaris-projectsvc
+      - /data/resources/polaris:/data/resources/polaris
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-projectsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-projectsvc
+    expose:
+      - "80"
+      - "12002"
+    ports:
+      - "12002:12002"
+
+  polaris-processsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-processsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-processsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-processsvc:/data/logs/polaris-processsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-processsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-processsvc
+    expose:
+      - "80"
+      - "12003"
+    ports:
+      - "12003:12003"
+
+  polaris-resourcesvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-resourcesvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-resourcesvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-resourcesvc:/data/logs/polaris-resourcesvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-resourcesvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-resourcesvc
+    expose:
+      - "80"
+      - "12004"
+    ports:
+      - "12004:12004"
+
+  polaris-rolesvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-rolesvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-rolesvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-rolesvc:/data/logs/polaris-rolesvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-rolesvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-rolesvc
+    expose:
+      - "80"
+      - "12006"
+    ports:
+      - "12006:12006"
+
+  polaris-callsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-callsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-callsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-callsvc:/data/logs/polaris-callsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-callsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-callsvc
+    expose:
+      - "80"
+      - "12007"
+    ports:
+      - "12007:12007"
+
+  polaris-trendssvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-trendssvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-trendssvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-trendssvc:/data/logs/polaris-trendssvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-trendssvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-trendssvc
+    expose:
+      - "80"
+      - "12008"
+    ports:
+      - "12008:12008"
+
+  polaris-commonsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-commonsvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-commonsvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-commonsvc:/data/logs/polaris-commonsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-commonsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-commonsvc
+    expose:
+      - "80"
+      - "10005"
+    ports:
+      - "10005:10005"
+
+
+  polaris-schedule:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-schedule
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-schedule:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-schedule:/data/logs/polaris-schedule
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-schedule
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-schedule
+    expose:
+      - "80"
+      - "12009"
+    ports:
+      - "12009:12009"
+
+  polaris-websitesvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-websitesvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-websitesvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-websitesvc:/data/logs/polaris-websitesvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-websitesvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-websitesvc
+    expose:
+      - "80"
+      - "12011"
+    ports:
+      - "12011:12011"
+
+  polaris-ordersvc:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-ordersvc
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-ordersvc:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-websitesvc:/data/logs/polaris-ordersvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-ordersvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-ordersvc
+    expose:
+      - "80"
+      - "12012"
+    ports:
+      - "12012:12012"
+
+networks:
+  envoymesh: {}

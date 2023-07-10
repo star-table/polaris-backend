@@ -1,0 +1,7 @@
+INSERT INTO ppm_prs_issue_source(`id`, `org_id`, `project_id`, `lang_code`, `name`, `sort`, `project_object_type_id`, `remark`, `status`, `creator`, `create_time`, `updator`, `update_time`, `version`, `is_delete`) VALUES
+({{.IssueSource1}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.PM', '产品经理', '1', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueSource2}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Customer', '客户', '2', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueSource3}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Boss', '老板', '3', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueSource4}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Market', '市场需求', '4', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueSource5}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Activity', '活动需求', '5', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueSource6}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Other', '其他', '6', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2')

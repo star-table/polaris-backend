@@ -1,0 +1,182 @@
+"动态列表请求结构体"
+input TrendReq {
+	"上次分页的最后一条动态id"
+	lastTrendId:Int64
+	"对象类型"
+    objType:String
+	"对象id"
+	objId:Int64
+	"操作id"
+	operId:Int64
+    "开始时间"
+	startTime:Time
+	"结束时间"
+    endTime:Time
+	"分类（1任务动态2评论3项目动态（仅包括项目）4项目动态（包括项目和任务））5审批"
+	type:Int
+	"page"
+    page:Int64
+	"size"
+    size:Int64
+	"排序（1时间正序2时间倒叙）"
+	orderType:Int
+}
+
+"动态列表"
+type TrendsList {
+	"总数量"
+	total: Int64!
+	"页码"
+	page:  Int64!
+	"size"
+	size:  Int64!
+	"分页的最后一条动态id"
+	lastTrendId:Int64!
+	"列表"
+	list:  [Trend]
+}
+
+"动态信息"
+type Trend {
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"一级模块, 系统,组织,项目等"
+	module1:String!
+	"二级模块id"
+	module2Id:Int64!
+	"二级模块.系统设置,消息设置,项目问题等"
+	module2:String!
+	"三级模块id"
+	module3Id:Int64!
+	"三级模块,issus,迭代"
+	module3:String!
+	"操作编号"
+	operCode:String!
+	"被操作对象id"
+	operObjId:Int64!
+	"被操作对象类型"
+	operObjType:String!
+	"操作对象属性"
+	operObjProperty:String!
+	"主关联对象id"
+	relationObjId:Int64!
+	"主关联对象类型"
+	relationObjType:String!
+	"关联类型"
+	relationType:String!
+	"新值,json"
+	newValue:String
+	"旧值,json"
+	oldValue:String
+	"扩展信息"
+	ext:String!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"被操作对象名称"
+	operObjName:String!
+	"操作人名称"
+	creatorInfo:UserIdInfo!
+	"评论内容"
+	comment:String
+	"扩展信息详情"
+	extension:TrendExtension
+	"操作对象是否被删除"
+	objIsDelete:Boolean!
+}
+
+type TrendExtension {
+	issueType:String
+	"操作对象名称"
+	ObjName:String
+	"变更列表（主要用于更新字段）"
+	changeList:[ChangeList]
+	"涉及的变更成员信息（人员更新，关联对象增加/删除）"
+	memberInfo:[MemberInfo]
+	"涉及的标签变更信息"
+	tagInfo:[SimpleTagInfo]
+
+	"关联问题信息"
+	relationIssue:RelationIssue
+	"关联资源信息"
+	resourceInfo:[ResourceInfo]
+	"通用变更数组"
+	commonChange:[String]
+	"文件夹id"
+	folderId:Int64
+	"字段id"
+	fieldIds:[Int64]
+#	"项目对象类型id"
+#	projectObjectTypeId:Int64
+#	"项目对象类型名称"
+#	projectObjectTypeName:String
+	"审批信息"
+	auditInfo:TrendAuditInfo
+	"增加的字段"
+	addedFormFields:[String!]
+	"删除的字段"
+	deletedFormFields:[String!]
+	"更新的字段"
+	updatedFormFields:[String!]
+}
+
+type TrendAuditInfo {
+	"确认装填（3通过4驳回）"
+	status:Int
+	"确认内容"
+	remark:String
+	"附件"
+	attachments:[ResourceInfo]
+}
+
+type SimpleTagInfo {
+	id:Int64
+	name:String
+}
+
+type ChangeList {
+	"字段"
+	field:String
+	"字段名"
+	fieldName:String
+	"旧值"
+	oldValue:String
+	"新值"
+	newValue:String
+}
+
+type MemberInfo{
+	"成员信息id"
+	id: Int64
+	"成员名称"
+	name: String
+	"成员头像"
+	avatar: String
+}
+
+type RelationIssue {
+	"关联信息id"
+	id: Int64
+	"关联信息名称"
+	title: String
+}
+
+type ResourceInfo{
+	"路径"
+	url: String
+	"资源名称"
+	name: String
+	"资源大小"
+	size: Int64
+	"上传时间"
+	uploadTime:Time
+	"文件后缀"
+	suffix:String
+	"上传人"
+	creator:Int64
+	"上传人名"
+	creatorName:String
+}

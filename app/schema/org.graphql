@@ -1,0 +1,188 @@
+"创建组织请求结构体"
+input CreateOrgReq{
+    "组织名称"
+    orgName: String!
+    "补全个人姓名"
+    creatorName: String
+    "是否要导入示例数据, 1：导入，2：不导入，默认不导入"
+    importSampleData: Int
+    "来源平台"
+    sourcePlatform:String
+    "来源渠道"
+    sourceChannel:String
+    "所属行业"
+    industryId:Int64
+    "组织规模"
+    scale:String
+    "codeToken如果是绑定飞书团队就传入"
+    codeToken: String
+}
+
+"用户组织列表响应结构体"
+type UserOrganization{
+    "组织id"
+    id:Int64!
+    "组织名称"
+    name: String!
+    "组织code"
+    code: String!
+    "组织网站"
+    webSite: String!
+    "所属行业"
+    industryId:Int64!
+    "组织规模"
+    scale:String!
+    "来源平台"
+    sourcePlatform:String!
+    "来源渠道"
+    sourceChannel:String!
+    "所在国家"
+    countryId:Int64!
+    "所在省份"
+    provinceId:Int64!
+    "所在城市"
+    cityId:Int64!
+    "组织地址"
+    address:String!
+    "组织logo地址"
+    logoUrl:String!
+    "组织标识"
+    resorceId:Int64!
+    "组织所有人,创建时默认为创建人"
+    owner:Int64!
+    "企业是否认证"
+    IsAuthenticated:Int!
+    "是否为企业管理员"
+    isAdmin: Boolean!
+    "描述"
+    remark:String!
+    "是否展示"
+    isShow:Int!
+    "是否删除,1是,2否"
+    isDelete:Int
+    "对于该用户组织是否可用（1是2否）"
+    OrgIsEnabled:Int
+    "组织可用功能"
+    functions:[String!]!
+}
+
+type UserOrganizationListResp{
+    "用户组织列表"
+    list:[UserOrganization!]
+}
+
+
+input SwitchUserOrganizationReq{
+    "组织id"
+    orgId:Int64!
+}
+
+"组织设置入参"
+input UpdateOrganizationSettingsReq{
+    "组织id"
+    orgId:Int64!
+    "组织名称"
+    orgName: String!
+    "组织code"
+    code: String
+    "所属行业"
+    industryId:Int64
+    "组织规模"
+    scale:String
+    "所在国家"
+    countryId:Int64
+    "所在省份"
+    provinceId:Int64
+    "所在城市"
+    cityId:Int64
+    "组织地址"
+    address:String
+    "组织logo地址"
+    logoUrl:String
+    "组织负责人"
+    owner:Int64
+    "变动的字段列表"
+    updateFields:[String!]!
+}
+
+
+input OrganizationInfoReq{
+    "组织id"
+    orgId:Int64!
+}
+
+"组织设置入参"
+type OrganizationInfoResp{
+    "组织id"
+    orgId:Int64!
+    "组织名称"
+    orgName: String!
+    "code"
+    code:String!
+    "组织网站"
+    webSite: String!
+    "所属行业"
+    industryId:Int64!
+    "所属行业中文名"
+    industryName:String!
+    "组织规模"
+    scale:String!
+    "所在国家"
+    countryId:Int64!
+    "所在国家中文名"
+    countryCname:String!
+    "所在省份"
+    provinceId:Int64!
+    "所在省份中文名"
+    provinceCname:String!
+    "所在城市"
+    cityId:Int64!
+    "所在城市中文名"
+    cityCname:String!
+    "组织地址"
+    address:String!
+    "组织logo地址"
+    logoUrl:String!
+    "组织负责人"
+    owner:Int64!
+    "负责人信息"
+    ownerInfo:UserIdInfo!
+    "备注"
+    remark: String!
+    "第三方企业编号"
+    thirdCode:String!
+}
+
+"修改组织成员状态请求结构体"
+input UpdateOrgMemberStatusReq{
+    "要修改的组织成员列表"
+    memberIds: [Int64!]!
+    "状态,  1可用,2禁用"
+    status: Int!
+}
+
+"修改组织成员审核状态请求结构体"
+input UpdateOrgMemberCheckStatusReq{
+    "要修改的组织成员列表"
+    memberIds: [Int64!]!
+    "审核状态, 1待审核,2审核通过,3审核不过"
+    checkStatus: Int!
+}
+
+type GetAppTicketResp {
+    appId:String!
+    appSecret:String!
+}
+
+input JoinOrgByInviteCodeReq {
+    inviteCode:String!
+}
+
+type CheckTokenValidityResp {
+    id:Int64!
+    orgId:Int64!
+}
+
+type GetJsApiTicketResp {
+    ticket:String!
+}

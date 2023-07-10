@@ -1,0 +1,20 @@
+FROM registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-envoy:v0.0.2
+
+# 服务名
+ENV SERVICE_NAME polaris-front-proxy-outside
+
+# RUN apt-get update && apt-get -q install -y curl tzdata && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+
+
+COPY ./${SERVICE_NAME}.dev.yaml  /etc/envoy/${SERVICE_NAME}.dev.yaml
+COPY ./${SERVICE_NAME}.test.yaml  /etc/envoy/${SERVICE_NAME}.test.yaml
+COPY ./${SERVICE_NAME}.stag.yaml  /etc/envoy/${SERVICE_NAME}.stag.yaml
+COPY ./${SERVICE_NAME}.prod.yaml  /etc/envoy/${SERVICE_NAME}.prod.yaml
+COPY ./${SERVICE_NAME}.unittest.yaml  /etc/envoy/${SERVICE_NAME}.unittest.yaml
+COPY ./start_front_proxy.sh /docker_start.sh
+
+WORKDIR /
+
+RUN chmod u+x /*.sh
+
+ENTRYPOINT ["/docker_start.sh"]

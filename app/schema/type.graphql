@@ -1,0 +1,11 @@
+scalar Time
+#scalar Date
+scalar Int64
+scalar Map
+scalar Any
+
+"空响应结构体"
+type Void{
+    "主键"
+    id: Int64!
+}

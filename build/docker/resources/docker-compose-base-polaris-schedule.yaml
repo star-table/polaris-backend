@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-schedule:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-schedule:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-schedule:/data/logs/polaris-schedule
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-schedule
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-schedule
+    expose:
+      - "80"
+      - "12009"
+    ports:
+      - "12009:12009"
+
+networks:
+  envoymesh: {}

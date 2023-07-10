@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-websitesvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-websitesvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-websitesvc:/data/logs/polaris-websitesvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-websitesvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-websitesvc
+    expose:
+      - "80"
+      - "12011"
+    ports:
+      - "12011:12011"
+
+networks:
+  envoymesh: {}

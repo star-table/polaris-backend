@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-trendssvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-trendssvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-trendssvc:/data/logs/polaris-trendssvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-trendssvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-trendssvc
+    expose:
+      - "80"
+      - "12008"
+    ports:
+      - "12008:12008"
+
+networks:
+  envoymesh: {}

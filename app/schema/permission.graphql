@@ -1,0 +1,131 @@
+"结构体"
+type Permission{
+	"主键"
+	id:Int64!
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"语言编号"
+	langCode:String!
+	"编号,仅支持大写英文字母"
+	code:String!
+	"名称"
+	name:String!
+	"父id"
+	parentId:Int64!
+	"权限项类型,1系统,2组织,3项目"
+	type:Int!
+	"权限路径"
+	path:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+}
+
+"创建请求结构体"
+input CreatePermissionReq{
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"语言编号"
+	langCode:String!
+	"编号,仅支持大写英文字母"
+	code:String!
+	"名称"
+	name:String!
+	"父id"
+	parentId:Int64!
+	"权限项类型,1系统,2组织,3项目"
+	type:Int!
+	"权限路径"
+	path:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新请求结构体"
+input UpdatePermissionReq{
+	"主键"
+	id:Int64!
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"语言编号"
+	langCode:String!
+	"编号,仅支持大写英文字母"
+	code:String!
+	"名称"
+	name:String!
+	"父id"
+	parentId:Int64!
+	"权限项类型,1系统,2组织,3项目"
+	type:Int!
+	"权限路径"
+	path:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"删除请求结构体"
+input DeletePermissionReq{
+	"主键"
+	id:Int64!
+}
+
+"列表响应结构体"
+type PermissionList{
+    total:Int64!
+    list:[Permission!]
+}
+
+type PermissionOperationListResp{
+	"权限项信息"
+	permissionInfo:Permission!
+	"权限操作项信息"
+	operationList:[PermissionOperation!]
+	"角色拥有的操作项权限id"
+	permissionHave:[Int64!]
+}
+type GetPersonalPermissionInfoResp{
+	Data:Map!
+}

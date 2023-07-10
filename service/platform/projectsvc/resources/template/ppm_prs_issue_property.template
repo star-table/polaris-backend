@@ -1,0 +1,5 @@
+INSERT INTO ppm_prs_issue_property(`id`, `org_id`, `project_id`, `lang_code`, `name`, `sort`, `project_object_type_id`, `remark`, `status`, `creator`, `create_time`, `updator`, `update_time`, `version`, `is_delete`) VALUES
+({{.IssueProperty1}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Property.Advise', '建议', '1', {{.ProjectObjectBugId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueProperty2}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Common', '一般', '2', {{.ProjectObjectBugId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueProperty3}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Serious', '严重', '3', {{.ProjectObjectBugId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2'),
+({{.IssueProperty4}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.Source.Dead', '致命', '4', {{.ProjectObjectBugId}}, '', '1', '0', '2019-08-29 16:59:23', '0', '2019-08-29 17:00:29', '1', '2')

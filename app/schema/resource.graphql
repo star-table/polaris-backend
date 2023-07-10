@@ -1,0 +1,182 @@
+"存放各类资源，其他业务表统一关联此表id结构体"
+type Resource{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"host"
+	host:String!
+	"路径"
+	path:String!
+	"OfficeUrl"
+	officeUrl:String!
+	"缩略图路径"
+	pathCompressed: String!
+	"文件名"
+	name:String!
+	"存储类型,1：本地，2：oss,3.钉盘"
+	type:Int!
+	"文件大小"
+	size:Int64!
+	"创建人姓名"
+	creatorName: String!
+	"文件后缀"
+	suffix:String!
+	"文件的md5"
+	md5:String!
+	"文件类型"
+	fileType:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"创建存放各类资源，其他业务表统一关联此表id请求结构体"
+input CreateResourceReq{
+	"组织id"
+	orgId:Int64!
+	"路径"
+	path:String!
+	"文件名"
+	name:String!
+	"存储类型,1：本地，2：oss,3.钉盘"
+	type:Int!
+	"文件后缀"
+	suffix:String!
+	"文件的md5"
+	md5:String!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新存放各类资源，其他业务表统一关联此表id请求结构体"
+input UpdateResourceReq{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"路径"
+	path:String!
+	"文件名"
+	name:String!
+	"存储类型,1：本地，2：oss,3.钉盘"
+	type:Int!
+	"文件后缀"
+	suffix:String!
+	"文件的md5"
+	md5:String!
+	"文件大小"
+	size: Int64!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"删除存放各类资源，其他业务表统一关联此表id请求结构体"
+input DeleteResourceReq{
+	"主键"
+	id:Int64!
+}
+
+"存放各类资源，其他业务表统一关联此表id列表响应结构体"
+type ResourceList{
+    total:Int64!
+    list:[Resource!]
+}
+
+input UpdateProjectResourceFolderReq{
+    "当前文件夹id"
+    currentFolderId:Int64!
+    "目标文件夹id"
+    targetFolderId:Int64!
+    "文件id数组"
+    resourceIds:[Int64!]!
+    "项目id"
+    projectId: Int64!
+}
+
+type UpdateProjectResourceFolderResp{
+    "文件id数组"
+    resourceIds:[Int64!]!
+}
+
+input UpdateProjectResourceNameReq{
+    "文件id"
+    resourceId:Int64!
+    "项目id"
+    projectId: Int64!
+
+    "文件名"
+    fileName: String
+    "文件后缀"
+    fileSuffix: String
+
+    "修改项"
+    updateFields:[String!]!
+}
+
+input UpdateProjectFileResourceReq{
+    "文件id"
+    resourceId:Int64!
+    "项目id"
+    appId: Int64!
+	"问题 id"
+	issueId: Int64!
+    "文件名"
+    fileName: String
+    "文件后缀"
+    fileSuffix: String
+	"文件大小"
+	fileSize: Int64
+    "修改项"
+    updateFields:[String!]!
+}
+
+input DeleteProjectResourceReq{
+    "文件id数组"
+    resourceIds:[Int64!]!
+    "文件夹id,只支持相同目录下的批量文件删除"
+    folderId:Int64!
+    "项目id"
+    projectId:Int64!
+}
+
+type DeleteProjectResourceResp{
+    "文件id数组"
+    resourceIds:[Int64!]!
+}
+
+input ProjectResourceReq {
+    "文件夹id"
+    folderId:Int64!
+    "项目id"
+    projectId:Int64!
+}

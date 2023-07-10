@@ -1,0 +1,2 @@
+INSERT INTO `ppm_tem_team` (`id`, `org_id`, `name`, `nick_name`, `is_default`, `status`) VALUES
+({{.TeamId}}, {{.OrgId}}, "{{.Name}}", "{{.NickName}}", {{.IsDefault}}, {{.Status}})

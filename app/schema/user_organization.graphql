@@ -1,0 +1,144 @@
+"结构体"
+type OrganizationUser{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"用户id"
+	userId:Int64!
+	"审核状态,1待审核,2审核通过,3审核不过"
+	checkStatus:Int!
+	"使用状态,1已使用,2未使用"
+	useStatus:Int!
+	"企业用户状态, 1可用,2禁用"
+	status:Int!
+	"状态变更人id"
+	statusChangerId:Int64!
+	"状态变更时间"
+	statusChangeTime:Time!
+	"审核人id"
+	auditorId:Int64!
+	"审核时间"
+	auditTime:Time!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"用户信息"
+	userInfo:PersonalInfo!
+	"审核人信息"
+	auditorInfo:PersonalInfo
+	"用户角色"
+	userRole:UserRoleInfo
+}
+
+type UserRoleInfo {
+	"角色id"
+	id:Int64!
+	"角色名称"
+	name:String!
+    "角色lang_code"
+    langCode:String!
+}
+
+"创建请求结构体"
+input CreateUserOrganizationReq{
+	"组织id"
+	orgId:Int64!
+	"用户id"
+	userId:Int64!
+	"审核状态,1待审核,2审核通过,3审核不过"
+	checkStatus:Int!
+	"使用状态,1已使用,2未使用"
+	useStatus:Int!
+	"企业用户状态, 1可用,2禁用"
+	status:Int!
+	"状态变更人id"
+	statusChangerId:Int64!
+	"状态变更时间"
+	statusChangeTime:Time!
+	"审核人id"
+	auditorId:Int64!
+	"审核时间"
+	auditTime:Time!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新请求结构体"
+input UpdateUserOrganizationReq{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"用户id"
+	userId:Int64!
+	"审核状态,1待审核,2审核通过,3审核不过"
+	checkStatus:Int!
+	"使用状态,1已使用,2未使用"
+	useStatus:Int!
+	"企业用户状态, 1可用,2禁用"
+	status:Int!
+	"状态变更人id"
+	statusChangerId:Int64!
+	"状态变更时间"
+	statusChangeTime:Time!
+	"审核人id"
+	auditorId:Int64!
+	"审核时间"
+	auditTime:Time!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"删除请求结构体"
+input DeleteUserOrganizationReq{
+	"主键"
+	id:Int64!
+}
+
+"列表响应结构体"
+type UserOrganizationList{
+    total:Int64!
+    list:[OrganizationUser!]
+}
+
+"列表请求结构体"
+input OrgUserListReq{
+	"审核状态,1待审核,2审核通过,3审核不过(成员管理取审核通过的，成员审核取待审核和审核不过的)"
+	checkStatus:[Int!]
+	"使用状态,1已使用,2未使用"
+	useStatus:Int
+	"企业用户状态, 1可用,2禁用"
+	status:Int
+	"姓名"
+	name:String
+	"邮箱"
+	email:String
+	"手机号"
+	mobile:String
+}

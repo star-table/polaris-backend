@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+
+  polaris-front-proxy-outside:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-front-proxy-outside:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-front-proxy-outside:/data/logs/polaris-front-proxy-outside
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-front-proxy-outside
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-front-proxy-outside
+    expose:
+      - "80"
+      - "8001"
+    ports:
+      - "8181:80"
+      - "8001:8001"
+
+networks:
+  envoymesh: {}

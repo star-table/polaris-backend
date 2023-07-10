@@ -1,0 +1,50 @@
+Server:
+  Port: 12001
+
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-orgsvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-orgsvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-orgsvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+
+Sentry:
+  Dsn: https://42a092cd3e024bbc96c322614ef4e71a@sentry.startable.cn/9
+
+Application:
+  Name: orgsvc
+  Version:

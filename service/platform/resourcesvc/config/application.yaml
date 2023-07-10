@@ -1,0 +1,49 @@
+Server:
+  Port: 12004
+
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-resourcesvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-resourcesvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-resourcesvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+
+Application:
+  Name: resourcesvc
+  Version:
+Sentry:
+  Dsn: https://9a77a2b2e90e478ebdcaca556760c0e7@sentry.startable.cn/12

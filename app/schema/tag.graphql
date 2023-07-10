@@ -1,0 +1,23 @@
+"结构体"
+type Tag{
+    "id"
+    id:Int64!
+    "组织id"
+    orgId:Int64!
+    "项目id"
+    projectId:Int64!
+    "名称"
+    name:String!
+    "名称拼音"
+    namePinyin:String!
+    "背景色"
+    bgStyle:String!
+    "字体色"
+    fontStyle:String!
+    "使用任务数"
+    usedNum:Int64!
+    "创建人id"
+    creator:Int64!
+    "创建时间"
+    createTime:Time!
+}

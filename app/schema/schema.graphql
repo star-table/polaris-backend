@@ -1,0 +1,390 @@
+type Query {
+    ############### business
+    "获取的当前用户的信息"
+    personalInfo: PersonalInfo!
+
+    "获取组织配置信息"
+    getOrgConfig: OrgConfig!
+
+    "获取付费到期提醒"
+    getPayRemind:GetPayRemindResp!
+
+    "获取用户配置信息"
+    userConfigInfo: UserConfig!
+
+    "获取任务信息，不能查询删除/无权限的任务信息。否则会提示不存在或无权限。"
+    issueInfoNotDelete(param: IssueInfoNotDeleteReq!): IssueInfo!
+
+    "任务状态类型数量统计(不统计已归档的项目)"
+    issueStatusTypeStat(input: IssueStatusTypeStatReq): IssueStatusTypeStatResp!
+
+    "任务类型统计(不统计已归档的项目)"
+    issueStatusTypeStatDetail(input: IssueStatusTypeStatReq):IssueStatusTypeStatDetailResp!
+  
+    "任务分配rank排行(Top5)(不统计已归档的项目)"
+    issueAssignRank(input: IssueAssignRankReq!):[IssueAssignRankInfo!]
+
+    "获取飞书云文档列表"
+    fsDocumentList(page:Int, size:Int, input:fsDocumentListReq!):fsDocumentListResp!
+
+    "获取动态列表"
+    trendList(input:TrendReq):TrendsList!
+
+    "获取迭代信息"
+    iterationInfo(input: IterationInfoReq!): IterationInfoResp!
+
+    "获取OSS policy认证信息"
+    getOssPostPolicy(input: OssPostPolicyReq!): OssPostPolicyResp!
+
+
+    "获取邀请码"
+    getInviteCode(input: GetInviteCodeReq): GetInviteCodeResp!
+
+    "获取邀请信息"
+    getInviteInfo(input: GetInviteInfoReq!): GetInviteInfoResp!
+
+    "获取MQTT通道key"
+    getMQTTChannelKey(input: GetMQTTChannelKeyReq!): GetMQTTChannelKeyResp!
+
+    ## power by codegen
+
+    "获取项目列表"
+    projects(page: Int!, size: Int!, params: Map!, order:[String], input: ProjectsReq):ProjectList!
+
+    "获取项目信息"
+    projectInfo(input: ProjectInfoReq!): ProjectInfo!
+
+    "获取迭代列表"
+    iterations(page: Int, size: Int, params: IterationListReq):IterationList!
+
+    "获取迭代燃尽图统计"
+    iterationStats(page: Int, size: Int, params: IterationStatReq!):IterationStatList!
+
+    "获取项目明细列表"
+    projectDetail(projectId:Int64!):ProjectDetail!
+
+    "获取项目中任务的燃尽图"
+    projectDayStats(page: Int, size: Int, params: ProjectDayStatReq):ProjectDayStatList!
+
+    ## power by codegen
+    "获取部门列表"
+    departments(page: Int, size: Int, params: DepartmentListReq):DepartmentList!
+
+    "获取部门成员列表"
+    departmentMembers(params: DepartmentMemberListReq!):[DepartmentMemberInfo!]!
+    
+    "获取部门成员列表(带分页)"
+    departmentMembersList(page: Int, size: Int, params: DepartmentMembersListReq):DepartmentMembersListResp!
+
+    "用户组织列表(不需要验证当前用户组织状态)"
+    userOrganizationList:UserOrganizationListResp!
+
+    "地区联动列表"
+    areaLinkageList(input:AreaLinkageListReq!):AreaLinkageListResp!
+    "行业列表"
+    industryList:IndustryListResp!
+    "组织信息"
+    organizationInfo(input:OrganizationInfoReq!):OrganizationInfoResp!
+
+    "导出项目任务excel模板"
+    exportIssueTemplate(projectId:Int64!, tableId:String!):ExportIssueTemplateResp!
+
+    "组织成员列表"
+    orgUserList(page: Int, size: Int, input: OrgUserListReq!):UserOrganizationList!
+
+    "导出项目任务数据"
+    exportData(projectId:Int64!, iterationId:Int64, tableId: String!, isNeedDocument:Boolean):ExportIssueTemplateResp!
+
+    "查询项目文件资源"
+    projectResource(page: Int, size: Int,params:ProjectResourceReq!):ResourceList!
+
+    "查询项目文件夹"
+    projectFolder(page: Int, size: Int,params:ProjectFolderReq!):FolderList!
+  
+    "查询项目下所有附件"
+    projectAttachment(page: Int, size: Int,params: ProjectAttachmentReq!):AttachmentList!
+    
+    "查询项目下附件"
+    projectAttachmentInfo(input: ProjectAttachmentInfoReq!):Attachment!
+
+    getPersonalPermissionInfo(projectId: Int64, issueId: Int64):GetPersonalPermissionInfoResp!
+
+    "回收站内容列表"
+    recycleBinList(page: Int, size: Int, params:RecycleBinListReq!):RecycleBinList!
+
+    "数量限制查询"
+    payLimitNum:PayLimitNumResp!
+
+    "获取任务的工时详情"
+    getIssueWorkHoursInfo(params: GetIssueWorkHoursInfoReq!): GetIssueWorkHoursInfoResp!
+
+    "工时统计查询"
+    getWorkHourStatistic(params: GetWorkHourStatisticReq!): GetWorkHourStatisticResp!
+
+    "检查员工是否是任务成员、负责人"
+    checkIsIssueMember(params: CheckIsIssueMemberReq!): BoolResp!
+
+    "检查项目的工时是否开启"
+    checkIsEnableWorkHour(params: CheckIsEnableWorkHourReq!): CheckIsEnableWorkHourResp!
+
+    "工时统计的导出"
+    exportWorkHourStatistic(params: GetWorkHourStatisticReq!): ExportWorkHourStatisticResp!
+
+    "获取项目主群聊id"
+    getProjectMainChatId(params:GetProjectMainChatIdReq!):GetProjectMainChatIdResp!
+
+    "获取项目群聊推送设置"
+    getFsProjectChatPushSettings(params:GetFsProjectChatPushSettingsReq!):GetFsProjectChatPushSettingsResp!
+
+    "项目成员展示（包括成员和部门）"
+    projectMemberIdList(params: ProjectMemberIdListReq!):ProjectMemberIdListResp!
+
+    "获取组织openApi配置信息"
+    getAppTicket:GetAppTicketResp!
+
+    "获取任务视图列表"
+    getIssueViewList(params: GetIssueViewListReq!): getIssueViewListResp!
+
+    "查询是否有指定的权限"
+    checkSpecificScope(params: CheckSpecificScopeReq!): CheckSpecificScopeResp!
+
+    "判断token是否有效"
+    checkTokenValidity: CheckTokenValidityResp!
+
+    "获取jsapi_ticket"
+    getJsApiTicket:GetJsApiTicketResp!
+}
+
+type Mutation {
+    ## coding by nico
+
+    "发送短信登录验证码"
+    sendSmsLoginCode(input: SendSmsLoginCodeReq!): Void!
+
+    "发送各种验证码(目前支持手机号以及邮箱)"
+    sendAuthCode(input: SendAuthCodeReq!): Void!
+    
+    "通过手机号和邮箱找回密码"
+    retrievePassword(input: RetrievePasswordReq!): Void!
+
+    "重设密码"
+    resetPassword(input: ResetPasswordReq!): Void!
+
+    "设置密码"
+    setPassword(input: SetPasswordReq!): Void! 
+
+    "解绑登录方式"
+    unbindLoginName(input: UnbindLoginNameReq!): Void!
+
+    "绑定登录方式"
+    bindLoginName(input: BindLoginNameReq!): Void!
+
+    "检测邮箱、手机号、账户是否存在"
+    checkLoginName(input: CheckLoginNameReq!): Void!
+
+    "验证旧绑定方式（为换绑服务）"
+    verifyOldName(input: UnbindLoginNameReq!): Void!
+
+    "换绑新登录账号"
+    changeLoginName(input: BindLoginNameReq!): Void! 
+
+    "飞书auth"
+    authFs(input: FeiShuAuthReq!) : FeiShuAuthResp!
+
+    "飞书code认证"
+    authFsCode(input: FeiShuAuthReq!): FeiShuAuthCodeResp!
+
+    "绑定飞书团队"
+    boundFs(input: BoundFeiShuReq!): Void!
+
+    "绑定飞书账号"
+    boundFsAccount(input: BoundFeiShuAccountReq!): Void!
+
+    "初始化飞书账号"
+    initFsAccount(input: InitFeiShuAccountReq!): FeiShuAuthCodeResp!
+
+    "用户登录"
+    userLogin(input: UserLoginReq!): UserLoginResp!
+
+    "用户注册"
+    userRegister(input: UserRegisterReq!): UserRegisterResp!
+
+    "用户退出"
+    userQuit:Void!
+       
+    "修改项目状态"
+    updateProjectStatus(input: UpdateProjectStatusReq!): Void!
+
+    "归档项目"
+    archiveProject(projectId:Int64!):Void!
+
+    "项目取消归档"
+    cancelArchivedProject(projectId:Int64!):Void!
+
+    "删除项目"
+    deleteProject(projectId:Int64!):Void!
+
+    "更新用户配置"
+    updateUserConfig(input: UpdateUserConfigReq!): UpdateUserConfigResp!
+
+    "更新用户pc的通知配置"
+    updateUserPcConfig(input: UpdateUserPcConfigReq!): UpdateUserConfigResp!
+    
+    "更新迭代状态"
+    updateIterationStatus(input: UpdateIterationStatusReq!): Void!
+    ## power by codegen
+
+    "创建组织(不需要验证当前用户组织状态)"
+    createOrg(input: CreateOrgReq!):Void!
+
+    "添加任务评论"
+    createIssueComment(input: CreateIssueCommentReq!): Void!
+
+    "更新任务sort"
+    updateIssueSort(input: UpdateIssueSortReq!): Void!
+
+    "删除任务"
+    deleteIssue(input: DeleteIssueReq!):Issue!
+
+    "批量删除任务"
+    deleteIssueBatch(input: DeleteIssueBatchReq!):DeleteIssueBatchResp!
+
+    "创建项目"
+    createProject(input: CreateProjectReq!):Project!
+
+    "更新项目"
+    updateProject(input: UpdateProjectReq!):Project!
+
+    "创建迭代"
+    createIteration(input: CreateIterationReq!):Void!
+
+    "更新迭代"
+    updateIteration(input: UpdateIterationReq!):Void!
+
+    "删除迭代"
+    deleteIteration(input: DeleteIterationReq!):Void!
+
+    "更新迭代排序"
+    updateIterationSort(input:UpdateIterationSortReq!):Void!
+
+    "更新项目明细"
+    updateProjectDetail(input: UpdateProjectDetailReq!):Void!
+
+    "切换用户组织(不需要验证当前用户组织状态)"
+    switchUserOrganization(input:SwitchUserOrganizationReq!):Void!
+
+    "更新组织设置"
+    updateOrganizationSetting(input:UpdateOrganizationSettingsReq!):Void!
+
+    "修改组织成员状态"
+    updateOrgMemberStatus(input:UpdateOrgMemberStatusReq!): Void!
+
+    "修改组织成员审核状态"
+    updateOrgMemberCheckStatus(input:UpdateOrgMemberCheckStatusReq!): Void!
+
+    "更新用户个人信息"
+    updateUserInfo(input:UpdateUserInfoReq!):Void!
+
+    "更新项目文件目录"
+    updateProjectResourceFolder(input: UpdateProjectResourceFolderReq!): UpdateProjectResourceFolderResp!
+
+    "更新项目文件名"
+    updateProjectResourceName(input: UpdateProjectResourceNameReq!): Void!
+
+    "更新项目文件资源"
+    updateProjectFileResource(input: UpdateProjectFileResourceReq!): Void!
+
+    "删除项目文件"
+    deleteProjectResource(input: DeleteProjectResourceReq!): DeleteProjectResourceResp!
+
+    "创建文件夹"
+    createProjectFolder(input: CreateProjectFolderReq!):Void!
+    "删除文件夹"
+    deleteProjectFolder(input: DeleteProjectFolderReq!):DeleteProjectFolderResp!
+    "更新文件夹"
+    updateProjectFolder(input: UpdateProjectFolderReq!):UpdateProjectFolderResp!
+
+    "删除附件"
+    deleteProjectAttachment(input: DeleteProjectAttachmentReq!):DeleteProjectAttachmentResp!
+
+    "移动任务"
+    moveIssue(input:MoveIssueReq!):Void!
+
+    "批量移动任务"
+    moveIssueBatch(input:MoveIssueBatchReq!):MoveIssueBatchResp!
+        
+    "更新迭代状态时间"
+    updateIterationStatusTime(input:UpdateIterationStatusTimeReq!):Void!
+
+    "复制任务"
+    copyIssue(input:CopyIssueReq!):Issue!
+
+    "批量复制任务"
+    copyIssueBatch(input:CopyIssueBatchReq!):Void!
+
+    "恢复回收站内容"
+    recoverRecycleBinRecord(input:RecoverRecycleBinRecordReq!):Void!
+
+    "彻底删除"
+    completeDelete(input:RecoverRecycleBinRecordReq!):Void!
+
+    "引用任务附件(飞书云文档)"
+    addIssueAttachmentFs(input:AddIssueAttachmentFsReq!):AddIssueAttachmentFsResp!
+
+    "转化为父任务"
+    convertIssueToParent(input:ConvertIssueToParentReq!):Void!
+
+    "变更父任务"
+    changeParentIssue(input:ChangeParentIssueReq!):Void!
+
+    "创建工时记录"
+    createIssueWorkHours(params: CreateIssueWorkHoursReq): BoolResp!
+
+    "创建多个预估工时"
+    createMultiIssueWorkHours(params: CreateMultiIssueWorkHoursReq): BoolResp!
+
+    "编辑工时记录"
+    updateIssueWorkHours(params: UpdateIssueWorkHoursReq): BoolResp!
+
+    "编辑详细预估工时"
+    updateMultiIssueWorkHours(params: UpdateMultiIssueWorkHoursReq): BoolResp!
+    
+    "删除工时记录"
+    deleteIssueWorkHours(params: DeleteIssueWorkHoursReq): BoolResp!
+
+    "将用户加入到任务成员中"
+    setUserJoinIssue(params: SetUserJoinIssueReq!): BoolResp!
+
+    "更新项目群聊推送设置"
+    updateFsProjectChatPushSettings(params:UpdateFsProjectChatPushSettingsReq!):Void!
+
+    "任务催办"
+    urgeIssue(params: UrgeIssueReq!): BoolResp!
+
+    "审核任务"
+    auditIssue(params:AuditIssueReq!):Void!
+
+    "查看审核任务"
+    viewAuditIssue(params:ViewAuditIssueReq!):Void!
+
+    "撤回任务"
+    withdrawIssue(params:WithdrawIssueReq!):Void!
+
+    "催办确认人"
+    urgeAuditIssue(params: UrgeAuditIssueReq!): BoolResp!
+
+    "发起申请授权"
+    applyScopes: ApplyScopesResp!
+
+    "通过邀请码加入组织"
+    joinOrgByInviteCode(params:JoinOrgByInviteCodeReq!):Void!
+}
+
+
+
+
+
+
+
+
+

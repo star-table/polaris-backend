@@ -1,0 +1,16 @@
+INSERT INTO ppm_prs_issue_object_type(`id`, `org_id`, `project_id`, `lang_code`, `name`, `sort`, `project_object_type_id`, `remark`, `status`, `creator`, `create_time`, `updator`, `update_time`, `version`, `is_delete`) VALUES
+({{.IssueObjectType1}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.Features', '新功能', '1', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType2}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.OptimizationDemand', '需求优化', '2', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType3}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.OptimizationInteractive', '交互优化', '3', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType4}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.OptimizationVision', '视觉优化', '4', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType5}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.Other', '其它', '5', {{.ProjectObjectDemandId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+
+({{.IssueObjectType6}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.FunctionalProblems', '功能问题', '1', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType7}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.SecurityIssues', '性能问题', '2', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType8}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.InterfaceProblem', '接口问题', '3', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType9}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.UIInterfaceProblem', '界面问题', '4', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType10}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.CompatibilityProblem', '兼容问题', '5', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType11}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.EaseOfUse', '易用性问题', '6', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType12}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.CompatibilityProblem', '逻辑问题', '7', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType13}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.DemandProblems', '需求问题', '8', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2'),
+({{.IssueObjectType14}}, {{.OrgId}}, {{.ProjectId}}, 'Issue.ObjectType.Uncertain', '不确定', '9', {{.ProjectObjectBugId}}, '', '1', '0', '2019-09-10 18:45:39', '0', '2019-09-10 18:45:39', '1', '2')

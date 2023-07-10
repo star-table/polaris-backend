@@ -1,0 +1,25 @@
+Mysql:
+#  Host: 127.0.0.1
+#  Port: 33309
+#  Usr: root
+#  Pwd: root
+  # 数据库库名
+  Database: polaris_project_manage_projectsvc_lctest
+OSS:
+  # RootPath: D:\programData\polaris\projectsvc
+  RootPath: ./tmpLocalStaticPath
+
+#Redis:
+#  Host: 47.102.143.45
+#  Port: 26379
+#  Pwd: sau2Al!tn12
+#  Database: 4
+#  MaxIdleTimeout: 90000
+
+Logs:
+  Default:
+    LogPath: ./run.log
+  RR:
+    LogPath: ./rr.log
+  MQ:
+    LogPath: ./mq.log

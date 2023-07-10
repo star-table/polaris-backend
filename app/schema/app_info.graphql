@@ -1,0 +1,124 @@
+"接入应用信息结构体"
+type AppInfo{
+	"主键"
+	id:Int64!
+	"名称"
+	name:String!
+	"应用编号"
+	code:String!
+	"秘钥1"
+	secret1:String!
+	"秘钥2"
+	secret2:String!
+	"负责人"
+	owner:String!
+	"审核状态,1待审核,2审核通过,3审核未通过"
+	checkStatus:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"创建接入应用信息请求结构体"
+input CreateAppInfoReq{
+	"名称"
+	name:String!
+	"应用编号"
+	code:String!
+	"秘钥1"
+	secret1:String!
+	"秘钥2"
+	secret2:String!
+	"负责人"
+	owner:String!
+	"审核状态,1待审核,2审核通过,3审核未通过"
+	checkStatus:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新接入应用信息请求结构体"
+input UpdateAppInfoReq{
+	"主键"
+	id:Int64!
+	"名称"
+	name:String!
+	"应用编号"
+	code:String!
+	"秘钥1"
+	secret1:String!
+	"秘钥2"
+	secret2:String!
+	"负责人"
+	owner:String!
+	"审核状态,1待审核,2审核通过,3审核未通过"
+	checkStatus:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"删除接入应用信息请求结构体"
+input DeleteAppInfoReq{
+	"主键"
+	id:Int64!
+}
+
+"接入应用信息列表响应结构体"
+type AppInfoList{
+    total:Int64!
+    list:[AppInfo!]
+}
+
+"申请授权请求返回"
+type ApplyScopesResp {
+    "申请时的三方返回 code"
+    thirdCode: Int64!
+    "申请时的三方返回 msg"
+    thirdMsg: String!
+}
+
+"检查是否有特定的权限，请求参数"
+input CheckSpecificScopeReq {
+    "权限标识。后端提供的枚举值。"
+    powerFlag: String!
+}
+
+"检查是否有特定的权限，响应参数"
+type CheckSpecificScopeResp {
+    hasPower: Boolean!
+}

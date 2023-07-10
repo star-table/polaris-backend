@@ -1,0 +1,7 @@
+"获取任务标签列表请求结构体"
+input IssueTagsReq{
+    "任务id"
+    issueId: Int64!
+}
+
+

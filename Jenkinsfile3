@@ -1,0 +1,34 @@
+#!/usr/bin/env groovy
+
+pipeline{
+	agent {
+		label 'jenkins-slave'
+	}
+    options {
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
+    }
+	environment{
+		GO111MODULE="on"
+		GOPROXY="https://goproxy.cn,direct"
+		POL_ENV="dev"
+		GONOPROXY="*.bjx.cloud"
+		GONOSUMDB="*.bjx.cloud"
+		GOSUMDB="off"
+		GOPRIVATE="*.bjx.cloud"
+	}
+	stages {
+		stage('package') {
+			steps {
+				sh "/data/package/polaris-backend/install_single.sh $branch ${tag}.${env.BUILD_ID} dev ${single_name}"
+			}
+		}
+		stage('make configmap') {
+			steps {
+				sh "/data/package/polaris-backend/release/scripts/getconfigfile_single.sh ${single_name}"
+			}
+		}
+	}
+}

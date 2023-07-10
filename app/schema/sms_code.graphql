@@ -1,0 +1,27 @@
+"发送短信登录验证码请求结构体"
+input SendSmsLoginCodeReq{
+    "手机号"
+    phoneNumber: String!
+    "验证码id"
+    captchaId:String
+    "输入的验证码"
+    captchaPassword:String
+    "易盾验证码"
+    yidunValidate:String
+}
+
+"发送各种验证码请求结构体"
+input SendAuthCodeReq{
+    "验证方式: 1: 登录验证码，2：注册验证码，3：修改密码验证码，4：找回密码验证码，5：绑定验证码, 6：解绑验证码"
+    authType: Int!
+    "地址类型: 1：手机号，2：邮箱"
+    addressType: Int!
+    "联系地址，根据地址类型区分手机号或者邮箱"
+    address: String!
+    "验证码id"
+    captchaId:String
+    "输入的验证码"
+    captchaPassword:String
+    "易盾验证码"
+    yidunValidate:String
+}

@@ -1,0 +1,89 @@
+"创建文件夹请求结构体"
+input CreateProjectFolderReq {
+    "项目id"
+    projectId:Int64!
+    "文件夹名"
+    name:String!
+    "父级文件夹id"
+    parentId:Int64!
+    "文件夹类型,0其他,1文档,2图片,3视频,4音频"
+    fileType:Int64!
+}
+"文件夹结构体"
+type Folder {
+    "文件夹id"
+    id:Int64!
+    "组织id"
+    orgId:Int64!
+    "项目id"
+    projectId:Int64!
+    "文件夹名"
+    name:String!
+    "父级文件夹id"
+    parentId:Int64!
+    "文件夹类型,0其他,1文档,2图片,3视频,4音频"
+    fileType:Int64!
+    "文件路径"
+    path:String!
+    "创建人"
+    creator:Int64!
+    "创建人中文名"
+    creatorName:String!
+    "创建时间"
+    createTime:Time!
+    "更新人"
+    updator:Int64!
+    "更新时间"
+    updateTime:Time!
+   	"乐观锁"
+   	version:Int!
+   	"是否删除,1是,2否"
+   	isDelete:Int!
+}
+
+"删除文件夹请求结构体"
+input DeleteProjectFolderReq{
+    "文件夹id数组"
+    folderIds:[Int64!]!
+    "项目id"
+    projectId:Int64!
+}
+
+"更新文件夹请求结构体"
+input UpdateProjectFolderReq{
+    "文件夹id"
+    folderId:Int64!
+    "项目id"
+    projectId:Int64!
+    "文件夹名"
+    name:String
+    "父级文件夹id"
+    parentId:Int64
+    "文件夹类型,0其他,1文档,2图片,3视频,4音频"
+    fileType:Int64
+    "变动的字段列表"
+    updateFields:[String!]
+}
+
+type UpdateProjectFolderResp{
+    "文件夹id"
+    folderId:Int64!
+}
+
+type DeleteProjectFolderResp{
+    "文件夹id数组"
+    folderIds:[Int64!]!
+}
+
+input ProjectFolderReq{
+    "父文件夹id"
+    parentId:Int64
+    "项目id"
+    projectId:Int64!
+}
+
+"文件夹列表相应结构体"
+type FolderList{
+    total:Int64!
+    list:[Folder!]!
+}

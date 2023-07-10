@@ -1,0 +1,4 @@
+INSERT INTO `ppm_org_department` (`id`, `org_id`, `name`, `code`, `parent_id`, `sort`, `is_hide`, `source_channel`, `source_platform`, `status`, `creator`) VALUES
+({{.DepartmentId}}, {{.OrgId}}, '{{.OrgName}}', '', '0', '0', '2', "{{.SourceChannel}}", "{{.SourcePlatform}}", '1', {{.Creator}})
+
+

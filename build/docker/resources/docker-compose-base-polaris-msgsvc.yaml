@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-msgsvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-msgsvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-msgsvc:/data/logs/polaris-msgsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-msgsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-msgsvc
+    expose:
+      - "80"
+      - "10003"
+    ports:
+      - "10003:10003"
+
+networks:
+  envoymesh: {}

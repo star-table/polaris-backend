@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+
+  polaris-resources:
+    image: nginx:1.17
+    restart: always
+    volumes:
+      - /data/logs/polaris-resources:/data/logs/polaris-resources
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-resources
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-resources
+      - NGINX_HOST=polaris-resources
+      - NGINX_PORT=80
+    expose:
+      - "80"
+    ports:
+      - "12010:80"
+
+networks:
+  envoymesh: {}

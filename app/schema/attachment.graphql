@@ -1,0 +1,136 @@
+input DeleteProjectAttachmentReq{
+    "文件id数组"
+    resourceIds:[Int64!]!
+    "项目id"
+    projectId:Int64!
+
+}
+type DeleteProjectAttachmentResp{
+    "文件id数组"
+    resourceIds:[Int64!]!
+}
+
+input ProjectAttachmentReq {
+    "项目id"
+    projectId:Int64!
+    "文件类型,0其他,1文档,2图片,3视频,4音频"
+    fileType:Int
+    "文件搜索关键字"
+    keyWord:String
+}
+
+input ProjectAttachmentInfoReq {
+    "appId"
+    appId: Int64!
+	"resourceId"
+	resourceId: Int64!
+	"issueId"
+	issueId: Int64!
+    "文件类型,0其他,1文档,2图片,3视频,4音频"
+    fileType: Int
+}
+
+type AttachmentList{
+    total:Int64!
+    list:[Attachment!]
+}
+
+
+type Attachment{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"host"
+	host:String!
+	"路径"
+	path:String!
+	"officeUrl"
+	officeUrl:String!
+	"缩略图路径"
+	pathCompressed: String!
+	"文件名"
+	name:String!
+	"存储类型,1：本地，2：oss,3.钉盘"
+	type:Int!
+	"文件大小"
+	size:Int64!
+	"创建人姓名"
+	creatorName: String!
+	"文件后缀"
+	suffix:String!
+	"文件的md5"
+	md5:String!
+	"文件类型"
+	fileType:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+    "关联任务列表"
+    issueList:[Issue!]!
+}
+
+input fsDocumentListReq {
+	"关键字"
+	searchKey:String
+}
+
+type fsDocumentListResp {
+	total:Int64!
+	list:[fsDocumentData!]
+}
+
+type fsDocumentData {
+	"标题"
+	title:String!
+	"文档类型"
+	docsType:String!
+	"token"
+	docsToken:String!
+	"url"
+	docsUrl:String!
+	"创建人"
+	ownerName:String!
+	"创建人id"
+	ownerId:String!
+}
+
+
+input AddIssueAttachmentFsReq {
+	folderId:Int64!
+	projectId:Int64!
+	issueId:Int64!
+	data:[AddIssueAttachmentFsData!]!
+}
+
+input AddIssueAttachmentFsData {
+	"标题"
+	title:String!
+	"链接"
+	url:String!
+}
+
+type AddIssueAttachmentFsResp {
+	"资源"
+	resources:[Resource!]!
+}
+
+input AttachmentSimpleInfo {
+	"url"
+	url:String!
+	"附件名"
+	name:String!
+	"后缀"
+	suffix:String!
+	"文件大小"
+	size:Int64!
+}

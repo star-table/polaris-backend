@@ -1,0 +1,40 @@
+#!/usr/bin/env groovy
+pipeline{
+	agent {
+		label 'sonar-scanner'
+	}
+    options {
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+        timeout(time: 1, unit: 'HOURS')
+        timestamps()
+    }
+	environment{
+		credentialsId = "989050c7-b02d-4f9f-a4b1-d081667e4b56"
+		giturl = "https://github.com/star-table/polaris-backend.git"
+		app = "polaris-backend"
+		branch = "release/v1.4.3"
+	}
+	stages {
+		stage('run sonar') {
+			steps {
+				container('sonar-scanner') {
+					sh '''
+					rundir=${RANDOM}${RANDOM}
+					mkdir ${rundir} && cd ${rundir}
+					git clone ${giturl}
+					cd ${app}
+					now_branch=$(for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" ${branch} | head -n 1` ${branch}; done |sort -r |awk '{print $7}' |head -n1 |awk -F 'origin/' '{print $NF}')
+					git checkout ${now_branch}
+					branch_tag=$(echo ${now_branch} | awk -F '/' '{print $1"-"$2}')
+					sed -i "s/${app}/${app}-${branch_tag}/g" sonar-project.properties
+					sed -i "s/password=admin/password=runx@123/g" sonar-project.properties
+					sonar-scanner
+					cd ../..
+					rm -rf ${rundir}
+					'''
+				}
+			}
+		}
+	}
+}

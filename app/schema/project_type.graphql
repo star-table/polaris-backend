@@ -1,0 +1,38 @@
+
+"结构体"
+type ProjectType{
+    "主键"
+    id:Int64!
+    "组织编号"
+    orgId:Int64!
+    "语言编号"
+    langCode:String!
+    "名称"
+    name:String!
+    "排序"
+    sort:Int!
+    "封面"
+    cover:String!
+    "默认流程编号"
+    defaultProcessId:Int64!
+    "是否只读,2否,1是"
+    isReadonly:Int!
+    "描述"
+    remark:String!
+    "状态,  1可用,2禁用"
+    status:Int!
+    "创建人"
+    creator:Int64!
+    "创建时间"
+    createTime:Time!
+    "更新人"
+    updator:Int64!
+    "更新时间"
+    updateTime:Time!
+}
+
+"列表响应结构体"
+type ProjectTypeList{
+    total:Int64!
+    list:[ProjectType!]
+}

@@ -1,0 +1,84 @@
+"获取JSApi签名请求结构体"
+input JsApiSignReq{
+    "类型:目前只支持:jsapi"
+    type: String!
+    "路由url"
+    url: String!
+    "dingtalk企业id"
+    corpId: String!
+}
+
+"获取JSApi签名响应结构体"
+type JsApiSignResp{
+    "应用代理id"
+    agentId: Int64!
+    "时间戳"
+    timeStamp: String!
+    "随机字符串"
+    noceStr: String!
+    "签名"
+    signature: String!
+}
+
+#"DingTalk免登陆 Code 登录验证请求结构体"
+#input AuthReq{
+#    "免登code"
+#    code: String!
+#    "企业id"
+#    corpId: String!
+#}
+#
+#"DingTalk第三方扫码登录"
+#input AuthDingCodeReq {
+#    "免登code"
+#    code: String!
+#    "免登code类型，1: code2session, 2: oauth(默认为1)"
+#    codeType: Int
+#    "企业id"
+#    corpId: String!
+#}
+#
+#"DingTalk免登陆 Code 登录验证响应结构体"
+#type AuthResp{
+#    "持久化登录信息的Token"
+#    token: String!
+#    "组织id"
+#    orgId: Int64!
+#    "组织名称"
+#    orgName: String!
+#    "授权企业id"
+#    corpId: String!
+#    "用户id"
+#    userId: Int64!
+#    "用户姓名"
+#    name: String!
+#}
+#
+#"钉钉扫码登录返回结果"
+#type DingAuthCodeResp {
+#    "持久化登录信息的Token"
+#    token: String!
+#    "组织id"
+#    orgId: Int64!
+#    "组织名称"
+#    orgName: String!
+#    "授权企业id"
+#    corpId: String!
+#    "用户id"
+#    userId: Int64!
+#    "用户姓名"
+#    name: String!
+#}
+
+#type OrgInfoForChosen {
+#    "组织id"
+#    id:Int64!
+#    "组织名称"
+#    name:String!
+#}
+#
+#"选择组织返回登录信息"
+#input AuthForChosenOrgReq {
+#    outUserId: String!
+#    orgId:Int64!
+#}

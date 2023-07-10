@@ -1,0 +1,81 @@
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId1}}, {{.OrgId}}, {{.ProjectId}}, '8', '2', '6', '1', '0', "{{.Day1}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId2}}, {{.OrgId}}, {{.ProjectId}}, '7', '3', '4', '1', '0', "{{.Day2}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId3}}, {{.OrgId}}, {{.ProjectId}}, '6', '2', '4', '0', '0', "{{.Day3}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId4}}, {{.OrgId}}, {{.ProjectId}}, '4', '3', '1', '0', '0', "{{.Day4}}", '1');
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId1}}, {{.OrgId}}, 'QYSLXMYS-1', {{.ProjectId}}, {{.ObjectTypeDemand}}, '企业项目介绍', {{.OperatorId}}, {{.PriorityP0}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', '0', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId1}}, {{.OrgId}}, {{.IssueId1}}, {{.ProjectId}}, '0', '企业项目为公开项目，企业成员均为看见当前项目', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId1}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId1}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}});
+
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId2}}, {{.OrgId}}, 'QYSLXMYS-2', {{.ProjectId}}, {{.ObjectTypeDemand}}, '创建任务栏', {{.OperatorId}}, {{.PriorityP0}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', '0', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId2}}, {{.OrgId}}, {{.IssueId2}}, {{.ProjectId}}, '0', '点击第一个悬浮操作按钮，即可快速创建一个任务栏，快去定义自己的工作流程吧', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId2}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId2}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}});
+
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId3}}, {{.OrgId}}, 'QYSLXMYS-3', {{.ProjectId}}, {{.ObjectTypeDemand}}, '创建一条任务', {{.OperatorId}}, {{.PriorityP1}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', '0', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId3}}, {{.OrgId}}, {{.IssueId3}}, {{.ProjectId}}, '0', '点击任务栏中的添加按钮，快速添加一条任务', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId3}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId3}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}});
+
+
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId4}}, {{.OrgId}}, 'QYSLXMYS-4', {{.ProjectId}}, {{.ObjectTypeDemand}}, '更多任务管理', {{.OperatorId}}, {{.PriorityP4}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', {{.IssueId3}}, {{.NotStartStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId4}}, {{.OrgId}}, {{.IssueId4}}, {{.ProjectId}}, '0', '你可以为任务指派一个负责人，添加任务的优先级，创建一个标签、发布任务讨论', {{.NotStartStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId4}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId4}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}});
+
+
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId5}}, {{.OrgId}}, 'QYSLXMYS-5', {{.ProjectId}}, {{.ObjectTypeDemand}}, '创建一个新的企业项目项目', {{.OperatorId}}, {{.PriorityP0}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', '0', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId5}}, {{.OrgId}}, {{.IssueId5}}, {{.ProjectId}}, '0', '在项目列表页面点击创建按钮，选择企业项目,创建您的第一个项目吧', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId5}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId5}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}});
+
+
+
+
+INSERT INTO `ppm_pri_issue` (`id`, `org_id`, `code`, `project_id`, `project_object_type_id`, `title`, `owner`, `priority_id`, `source_id`, `issue_object_type_id`, `plan_start_time`, `plan_end_time`, `plan_work_hour`, `iteration_id`, `version_id`, `module_id`, `parent_id`, `status`, `creator`, `updator`) VALUES
+({{.IssueId6}}, {{.OrgId}}, 'SRSLXMYS-1', {{.PrivateProjectId}}, {{.PrivateObjectTypeDemand}}, '私人项目介绍', {{.OperatorId}}, {{.PriorityP0}}, '0', '0', "{{.NowTime}}", '2099-12-12 12:00:00', '-1', '0', '0', '0', '0', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_detail` (`id`, `org_id`, `issue_id`, `project_id`, `story_point`, `remark`, `status`, `creator`, `updator`) VALUES
+({{.IssueDetailId6}}, {{.OrgId}}, {{.IssueId6}}, {{.PrivateProjectId}}, '0', '私人项目为个人所拥有的项目，除创建者和您邀请进入的项目成员外，其余组织人员将不会浏览到该项目', {{.RunningStatus}}, {{.OperatorId}}, {{.OperatorId}});
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_type`, `creator`, `updator`) VALUES
+({{.RelationId6}}, {{.OrgId}}, {{.PrivateProjectId}}, {{.IssueId6}}, {{.OperatorId}}, '1', {{.OperatorId}}, {{.OperatorId}})

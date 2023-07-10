@@ -1,0 +1,53 @@
+input RecoverRecycleBinRecordReq{
+    "回收站id"
+    recycleId:Int64!
+    "项目id"
+    projectId:Int64!
+    "对应资源的id"
+    relationId:Int64!
+    "类型1：任务2：标签3：文件夹4：文件5：附件"
+    relationType:Int!
+}
+
+input RecycleBinListReq{
+    "项目id"
+    projectId:Int64!
+    "类型1：任务2：标签3：文件夹4：文件5：附件 不传或0为全部"
+    relationType:Int!
+}
+
+type RecycleBinList{
+    total:Int64!
+    list:[RecycleBin!]
+}
+
+type RecycleBin{
+    "主键"
+    id:Int64!
+    "组织id"
+    orgId:Int64!
+    "项目id"
+    projectId:Int64!
+    "关联对象id"
+    relationId:Int64!
+    "类型1：任务2：标签3：文件夹4：文件5：附件"
+    relationType: Int!
+    "名称"
+    name:String!
+    "创建人"
+    creator:Int64!
+    "创建时间"
+    createTime:Time!
+    "更新人"
+    updator:Int64!
+    "更新时间"
+    updateTime:Time!
+    "执行人信息"
+    creatorInfo: UserIdInfo!
+    "是否可操作"
+    isCanDo:Boolean!
+    "关联资源信息"
+    resourceInfo:ResourceInfo
+    "标签信息"
+    tagInfo:Tag
+}

@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-commonsvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-commonsvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-commonsvc:/data/logs/polaris-commonsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-commonsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-commonsvc
+    expose:
+      - "80"
+      - "10005"
+    ports:
+      - "10005:10005"
+
+networks:
+  envoymesh: {}

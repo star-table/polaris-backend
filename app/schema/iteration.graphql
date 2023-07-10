@@ -1,0 +1,176 @@
+"迭代列表请求结构体"
+input IterationListReq{
+	"项目id"
+	projectId: Int64
+	"名称，模糊搜索"
+	name: String
+	"状态,1:未开始，2：进行中，3：已完成"
+	statusType: Int
+	"排序（1创建时间正序2创建时间倒序3sort正序4sort倒序,默认4）"
+	orderBy:Int
+}
+
+"迭代结构体"
+type Iteration{
+	"主键"
+	id:Int64!
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"名称"
+	name:String!
+	"负责人"
+	owner:Int64!
+	"排序"
+	sort:Int64!
+	"版本"
+	versionId:Int64!
+	"计划开始时间"
+	planStartTime:Time!
+	"计划结束时间"
+	planEndTime:Time!
+	"预估工时"
+	planWorkHour:Int!
+	"故事点"
+	storyPoint:Int!
+	"描述"
+	remark:String
+	"项目状态,从状态表取"
+	status:Int64!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"负责人信息"
+	ownerInfo: HomeIssueOwnerInfo!
+	"状态信息"
+	statusInfo: HomeIssueStatusInfo!
+	"总任务数量"
+	allIssueCount:Int64!
+	"已完成任务数量"
+	finishedIssueCount:Int64!
+}
+
+"创建迭代请求结构体"
+input CreateIterationReq{
+	"项目id"
+	projectId:Int64!
+	"名称"
+	name:String!
+	"负责人"
+	owner:Int64!
+	"计划开始时间"
+	planStartTime:Time!
+	"计划结束时间"
+	planEndTime:Time!
+}
+
+"更新迭代请求结构体"
+input UpdateIterationReq{
+	"主键"
+	id:Int64!
+	"名称"
+	name:String
+	"负责人"
+	owner:Int64
+	"计划开始时间"
+	planStartTime:Time
+	"计划结束时间"
+	planEndTime:Time
+	"变动的字段列表"
+	updateFields:[String!]
+}
+
+"删除迭代结构体"
+input DeleteIterationReq{
+	"主键"
+	id:Int64!
+}
+
+"迭代列表响应结构体"
+type IterationList{
+	"总数量"
+    total:Int64!
+	"迭代列表"
+    list:[Iteration!]
+}
+
+"迭代状态类型统计请求结构体"
+input IterationStatusTypeStatReq{
+	"项目id"
+	projectId: Int64
+}
+
+
+"更新迭代状态请求结构体"
+input UpdateIterationStatusReq{
+	"迭代id"
+	id:Int64!
+	"要更新的状态id"
+	nextStatusId:Int64!
+	"上个状态的实际结束时间"
+	beforeStatusEndTime:Time!
+	"下个状态的实际开始时间"
+	nextStatusStartTime:Time!
+}
+
+"迭代信息请求结构体"
+input IterationInfoReq{
+	"迭代id"
+	id: Int64!
+}
+
+"迭代信息响应结构体"
+type IterationInfoResp{
+	"迭代信息"
+	iteration: Iteration!
+	"项目信息"
+	project: HomeIssueProjectInfo!
+	"状态信息"
+	status: HomeIssueStatusInfo!
+	"负责人信息"
+	owner: UserIdInfo!
+	"下一步骤状态列表"
+	nextStatus: [HomeIssueStatusInfo!]
+	"迭代的状态列表"
+	iterStatusList: [HomeIssueStatusInfo!]!
+	"状态时间信息"
+	statusTimeInfo:[StatusTimeInfo!]
+}
+
+type StatusTimeInfo{
+	statusId:Int64!
+	statusName:String!
+	statusType:Int!
+	planStartTime:Time!
+	planEndTime:Time!
+	startTime:Time!
+	endTime:Time!
+}
+
+input StatusTimeInfoReq{
+	statusId:Int64!
+	planStartTime:Time
+	planEndTime:Time
+	startTime:Time
+	endTime:Time
+}
+
+input UpdateIterationSortReq {
+	"迭代id"
+	iterationId:Int64!
+	"移动位置的前一个迭代id,移到最前面传0"
+	beforeId:Int64!
+	"后一个迭代，分页导致找不到前一个目标迭代"
+	afterId:Int64
+}
+
+input UpdateIterationStatusTimeReq{
+	iterationId:Int64!
+	statusUpdate:[StatusTimeInfoReq!]!
+}

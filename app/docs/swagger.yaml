@@ -1,0 +1,1181 @@
+definitions:
+  vo.ActualListItem:
+    properties:
+      actualWorkHourDateList:
+        description: 一个日期内的工时信息
+        items:
+          $ref: '#/definitions/vo.ActualWorkHourDateItem'
+        type: array
+      name:
+        description: 工时执行人名字
+        type: string
+    type: object
+  vo.ActualWorkHourDateItem:
+    properties:
+      date:
+        description: 实际工时的日期，开始日期。
+        type: string
+      workHour:
+        description: 工时，单位：小时。
+        type: string
+    type: object
+  vo.BoolRespVo:
+    properties:
+      code:
+        type: integer
+      data:
+        type: boolean
+      message:
+        type: string
+    type: object
+  vo.CreateIssueViewReq:
+    properties:
+      config:
+        description: 视图配置
+        type: string
+      isPrivate:
+        description: 是否私有
+        type: boolean
+      projectId:
+        description: 项目 id
+        type: integer
+      projectObjectTypeId:
+        description: 所属任务类型 id：需求、任务、缺陷的 id 值
+        type: integer
+      remark:
+        description: 视图备注
+        type: string
+      sort:
+        description: 视图排序
+        type: integer
+      type:
+        description: 类型，1：表格视图，2：看板视图，3：照片视图
+        type: integer
+      viewName:
+        description: 视图名称
+        type: string
+    type: object
+  vo.CustomValue:
+    properties:
+      fieldType:
+        description: 类型(1文本类型2单选框3多选框4日期选框5人员选择6是非选择7数字框)
+        type: integer
+      fieldValue:
+        description: 选项值
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      id:
+        description: 字段id
+        type: integer
+      isOrgField:
+        description: 是否属于组织字段库(1组织2项目3系统)
+        type: integer
+      name:
+        description: 字段名称
+        type: string
+      remark:
+        description: 字段描述
+        type: string
+      status:
+        description: 启用状态（1启用2禁用）对于项目而言
+        type: integer
+      title:
+        description: 字段
+        type: string
+      value:
+        description: 字段值
+    type: object
+  vo.DeleteIssueBatchResp:
+    properties:
+      noAuthIssues:
+        description: 没有权限的任务id
+        items:
+          $ref: '#/definitions/vo.Issue'
+        type: array
+      remainChildrenIssues:
+        description: 还有子任务没有选择的父任务id
+        items:
+          $ref: '#/definitions/vo.Issue'
+        type: array
+      successIssues:
+        description: 删除成功的id
+        items:
+          $ref: '#/definitions/vo.Issue'
+        type: array
+    type: object
+  vo.ExportIssueTemplateResp:
+    properties:
+      url:
+        description: 模板地址
+        type: string
+    type: object
+  vo.GetFormConfigResp:
+    properties:
+      columns:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      customConfig:
+        additionalProperties:
+          items: {}
+          type: array
+        type: object
+      fieldOrders: {}
+      fields:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+    type: object
+  vo.HomeIssueInfo:
+    properties:
+      afterIssueIds:
+        description: 后置任务id集合
+        items:
+          type: integer
+        type: array
+      allStatus:
+        description: 状态列表
+        items:
+          $ref: '#/definitions/vo.HomeIssueStatusInfo'
+        type: array
+      auditorsInfo:
+        description: 确认人信息
+        items:
+          $ref: '#/definitions/vo.UserIDInfoExtraForIssueAudit'
+        type: array
+      childsFinishedNum:
+        description: 子任务已完成数量
+        type: integer
+      childsNum:
+        description: 子任务数量
+        type: integer
+      customField:
+        description: 自定义字段结果
+        items:
+          $ref: '#/definitions/vo.CustomValue'
+        type: array
+      followerInfos:
+        description: 关注人
+        items:
+          $ref: '#/definitions/vo.UserIDInfo'
+        type: array
+      isAttach:
+        description: 是否是查询结果附带的父任务1是0否
+        type: integer
+      issue:
+        $ref: '#/definitions/vo.Issue'
+        description: 任务信息
+      issueId:
+        description: 任务id
+        type: integer
+      iterationName:
+        description: 迭代名称
+        type: string
+      lessData:
+        additionalProperties: true
+        description: 无码数据
+        type: object
+      owner:
+        description: 执行人信息
+        items:
+          $ref: '#/definitions/vo.HomeIssueOwnerInfo'
+        type: array
+      parentId:
+        description: 父任务id
+        type: integer
+      parentInfo:
+        description: 父任务信息
+        items:
+          $ref: '#/definitions/vo.ParentInfo'
+        type: array
+      parentIsMeetCondition:
+        description: 父任务是否是满足条件1是0否
+        type: integer
+      priority:
+        $ref: '#/definitions/vo.HomeIssuePriorityInfo'
+        description: 优先级信息
+      project:
+        $ref: '#/definitions/vo.HomeIssueProjectInfo'
+        description: 项目信息
+      projectObjectTypeName:
+        description: 任务栏名称
+        type: string
+      propertyInfo:
+        $ref: '#/definitions/vo.IssuePropertyInfo'
+        description: 严重程度信息
+      relateCommentCount:
+        description: 关联评论数量
+        type: integer
+      relateIssueCount:
+        description: 关联任务数量
+        type: integer
+      relateResourceCount:
+        description: 关联资源数量
+        type: integer
+      sourceInfo:
+        $ref: '#/definitions/vo.IssueSourceInfo'
+        description: 来源信息
+      status:
+        $ref: '#/definitions/vo.HomeIssueStatusInfo'
+        description: 状态信息
+      tags:
+        description: 标签信息
+        items:
+          $ref: '#/definitions/vo.HomeIssueTagInfo'
+        type: array
+      title:
+        description: 任务标题
+        type: string
+      typeInfo:
+        $ref: '#/definitions/vo.IssueObjectTypeInfo'
+        description: 类型信息
+      workHourInfo:
+        $ref: '#/definitions/vo.HomeIssueWorkHourInfo'
+        description: 工时信息
+    type: object
+  vo.HomeIssueInfoResp:
+    properties:
+      actualTotal:
+        description: 实际总数量
+        type: integer
+      list:
+        description: 首页任务列表
+        items:
+          $ref: '#/definitions/vo.HomeIssueInfo'
+        type: array
+      total:
+        description: 总数量
+        type: integer
+    type: object
+  vo.HomeIssueOwnerInfo:
+    properties:
+      avatar:
+        description: 负责人头像
+        type: string
+      id:
+        description: 负责人信息
+        type: integer
+      isDeleted:
+        description: 是否已被删除，为true则代表被组织移除
+        type: boolean
+      isDisabled:
+        description: 是否已被禁用, 为true则代表被组织禁用
+        type: boolean
+      name:
+        description: 负责人名称
+        type: string
+      userId:
+        description: 负责人id
+        type: integer
+    type: object
+  vo.HomeIssuePriorityInfo:
+    properties:
+      bgStyle:
+        description: 背景色
+        type: string
+      fontStyle:
+        description: 字体色
+        type: string
+      id:
+        description: 优先级id
+        type: integer
+      name:
+        description: 优先级名称
+        type: string
+    type: object
+  vo.HomeIssueProjectInfo:
+    properties:
+      appId:
+        description: 项目对应的应用 id（无码系统）
+        type: string
+      id:
+        description: 项目id
+        type: integer
+      isFilling:
+        description: 是否归档(1是2否)
+        type: integer
+      name:
+        description: 项目名称
+        type: string
+      privacyStatus:
+        description: 项目隐私状态。1开启隐私；2不开启。
+        type: integer
+      projectTypeId:
+        description: 项目类型
+        type: integer
+    type: object
+  vo.HomeIssueStatusInfo:
+    properties:
+      bgStyle:
+        description: 背景色
+        type: string
+      displayName:
+        description: 显示名，为空则显示状态名
+        type: string
+      fontStyle:
+        description: 字体色
+        type: string
+      id:
+        description: 状态id
+        type: integer
+      name:
+        description: 状态名
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      type:
+        description: 状态类型,1未开始,2进行中,3已完成
+        type: integer
+    type: object
+  vo.HomeIssueTagInfo:
+    properties:
+      bgStyle:
+        description: 背景颜色
+        type: string
+      fontStyle:
+        description: 字体颜色
+        type: string
+      id:
+        description: 标签id
+        type: integer
+      name:
+        description: 标签名
+        type: string
+    type: object
+  vo.HomeIssueWorkHourInfo:
+    properties:
+      actualList:
+        description: 实际工时详情列表
+        items:
+          $ref: '#/definitions/vo.ActualListItem'
+        type: array
+      actualWorkHour:
+        description: 任务的实际工时，单位：小时。
+        type: string
+      predictList:
+        description: 预估工时详情列表
+        items:
+          $ref: '#/definitions/vo.PredictListItem'
+        type: array
+      predictWorkHour:
+        description: 任务的预估工时，单位：小时。
+        type: string
+    type: object
+  vo.HomeIssuesRestReq:
+    properties:
+      condition:
+        $ref: '#/definitions/vo.LessCondsData'
+      filterColumns:
+        items:
+          type: string
+        type: array
+      menuAppId:
+        type: string
+      orders:
+        items:
+          $ref: '#/definitions/vo.LessOrder'
+        type: array
+      page:
+        type: integer
+      size:
+        type: integer
+      tableId:
+        type: string
+    type: object
+  vo.Issue:
+    properties:
+      auditStatus:
+        description: 审批状态（1待审批3审批通过）
+        type: integer
+      code:
+        description: 任务code
+        type: string
+      createTime:
+        description: 创建时间
+        type: string
+      creator:
+        description: 创建者
+        type: integer
+      dataId:
+        description: 数据id
+        type: string
+      endTime:
+        description: 实际结束时间
+        type: string
+      id:
+        description: 任务id
+        type: integer
+      isDelete:
+        description: 是否删除,1是,2否
+        type: integer
+      isFiling:
+        description: 是否归档
+        type: integer
+      issueIds:
+        description: 影响的id集合
+        items:
+          type: integer
+        type: array
+      issueObjectTypeId:
+        description: 问题类型id
+        type: integer
+      iterationId:
+        description: 迭代id
+        type: integer
+      moduleId:
+        description: 模块id
+        type: integer
+      orgId:
+        description: 组织id
+        type: integer
+      owner:
+        description: 负责人id 注:这个owner字段废弃使用，新增了下面的owners字段，为了支持多负责人
+        type: integer
+      owners:
+        description: 负责人id列表
+        items:
+          type: integer
+        type: array
+      parentId:
+        description: 父任务id
+        type: integer
+      parentInfo:
+        description: 父任务信息
+        items:
+          $ref: '#/definitions/vo.ParentInfo'
+        type: array
+      parentTitle:
+        description: 父任务标题
+        type: string
+      planEndTime:
+        description: 计划结束时间
+        type: string
+      planStartTime:
+        description: 计划开始时间
+        type: string
+      planWorkHour:
+        description: 计划工时
+        type: integer
+      priorityId:
+        description: 优先级id
+        type: integer
+      projectId:
+        description: 项目id
+        type: integer
+      projectObjectTypeId:
+        description: 项目对象类型id
+        type: integer
+      propertyId:
+        description: 性质id
+        type: integer
+      remark:
+        description: 备注
+        type: string
+      remarkDetail:
+        description: 备注详情
+        type: string
+      sort:
+        description: 排序
+        type: integer
+      sourceId:
+        description: 来源
+        type: integer
+      startTime:
+        description: 实际开始时间
+        type: string
+      status:
+        description: 状态id
+        type: integer
+      tableId:
+        description: 表id
+        type: string
+      title:
+        description: 标题
+        type: string
+      updateTime:
+        description: 更新时间
+        type: string
+      updator:
+        description: 更新者
+        type: integer
+      versionId:
+        description: 版本id
+        type: integer
+    type: object
+  vo.IssueObjectTypeInfo:
+    properties:
+      id:
+        description: 类型id
+        type: integer
+      name:
+        description: 类型名
+        type: string
+    type: object
+  vo.IssuePropertyInfo:
+    properties:
+      id:
+        description: id
+        type: integer
+      name:
+        description: 来源名称
+        type: string
+    type: object
+  vo.IssueSourceInfo:
+    properties:
+      id:
+        description: id
+        type: integer
+      name:
+        description: 来源名称
+        type: string
+    type: object
+  vo.IssueStatusTypeStatResp:
+    properties:
+      beAboutToOverdueSum:
+        description: 即将到期
+        type: integer
+      callMeTotal:
+        description: '@我的数量'
+        type: integer
+      completedTodayTotal:
+        description: 今日完成数
+        type: integer
+      completedTotal:
+        description: 状态为已完成的数量
+        type: integer
+      list:
+        description: 概览
+        items:
+          $ref: '#/definitions/vo.StatCommon'
+        type: array
+      notStartTotal:
+        description: 状态为未开始的数量
+        type: integer
+      overdueCompletedTotal:
+        description: 逾期完成
+        type: integer
+      overdueTodayTotal:
+        description: 今日到期
+        type: integer
+      overdueTomorrowTotal:
+        description: 状态为明日逾期
+        type: integer
+      overdueTotal:
+        description: 状态为逾期的数量
+        type: integer
+      processingTotal:
+        description: 状态为进行中的数量
+        type: integer
+      todayCount:
+        description: 指派给我的任务
+        type: integer
+      todayCreateCount:
+        description: 今日创建
+        type: integer
+      total:
+        description: 任务总数
+        type: integer
+      waitConfirmedTotal:
+        description: 待确认的任务数量
+        type: integer
+    type: object
+  vo.LessBatchUpdateIssueReq:
+    properties:
+      appId:
+        type: string
+      data:
+        description: map[string]interface{}中id必传，和values保持一致，传issueId
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      tableId:
+        type: string
+    type: object
+  vo.LessCondsData:
+    properties:
+      column:
+        description: 字段id
+        type: string
+      conds:
+        description: 嵌套
+        items:
+          $ref: '#/definitions/vo.LessCondsData'
+        type: array
+      fieldType:
+        description: 字段类型
+        type: string
+      left:
+        description: 左值
+      noPretreat:
+        description: 不进行预处理
+        type: boolean
+      right:
+        description: 右值
+      type:
+        description: 类型(between,equal,gt,gte,in,like,lt,lte,not_in,not_like,not_null,is_null,all_in,values_in)
+        type: string
+      value:
+        description: 值
+      values:
+        description: 值（数组）
+    type: object
+  vo.LessCreateIssueReq:
+    properties:
+      afterDataId:
+        type: string
+      afterId:
+        type: integer
+      asc:
+        type: boolean
+      beforeDataId:
+        type: string
+      beforeId:
+        type: integer
+      form:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      menuAppId:
+        type: string
+      tableId:
+        type: string
+    type: object
+  vo.LessDeleteIssueBatchReq:
+    properties:
+      appValueIds:
+        items:
+          type: integer
+        type: array
+      menuAppId:
+        type: string
+      tableId:
+        type: string
+    type: object
+  vo.LessOrder:
+    properties:
+      asc:
+        description: 是否是正序
+        type: boolean
+      column:
+        description: 字段
+        type: string
+    type: object
+  vo.MirrorCountReq:
+    properties:
+      appIds:
+        items:
+          type: string
+        type: array
+    type: object
+  vo.MirrorsStatResp:
+    properties:
+      dataStat:
+        additionalProperties:
+          type: integer
+        type: object
+    type: object
+  vo.ParentInfo:
+    properties:
+      code:
+        description: code
+        type: string
+      id:
+        description: id
+        type: integer
+      title:
+        description: 标题
+        type: string
+    type: object
+  vo.PredictListItem:
+    properties:
+      name:
+        description: 工时执行人名字
+        type: string
+      workHour:
+        description: 工时，单位：小时。
+        type: string
+    type: object
+  vo.SaveFormHeaderData:
+    properties:
+      baseFields:
+        items:
+          type: string
+        type: array
+      config:
+        items: {}
+        type: array
+      customConfig:
+        additionalProperties:
+          items: {}
+          type: array
+        type: object
+      fieldOrders:
+        items:
+          type: string
+        type: array
+      isUpdateIssueStatus:
+        type: boolean
+      isUpdateProjectObjectType:
+        type: boolean
+      menuAppId:
+        type: string
+      name:
+        type: string
+      projectId:
+        type: integer
+      projectObjectTypeId:
+        type: integer
+      viewOrders:
+        items:
+          type: string
+        type: array
+    type: object
+  vo.SaveFormHeaderRespData:
+    properties:
+      appId:
+        type: integer
+      config:
+        type: string
+      drafted:
+        type: boolean
+      extendsId:
+        type: integer
+      isExt:
+        type: boolean
+      orgId:
+        type: integer
+      type:
+        type: integer
+      userId:
+        type: integer
+    type: object
+  vo.StatCommon:
+    properties:
+      count:
+        description: 数量
+        type: integer
+      name:
+        description: 名称
+        type: string
+    type: object
+  vo.UserIDInfo:
+    properties:
+      avatar:
+        description: 用户头像
+        type: string
+      emplId:
+        description: 工号：企业下唯一
+        type: string
+      id:
+        description: 用户id
+        type: integer
+      isDeleted:
+        description: 是否已被删除，为true则代表被组织移除
+        type: boolean
+      isDisabled:
+        description: 是否已被禁用, 为true则代表被组织禁用
+        type: boolean
+      name:
+        description: 用户名称
+        type: string
+      namePy:
+        description: 用户拼音
+        type: string
+      unionId:
+        description: unionId： 开发者账号下唯一(暂时废弃，返回空)
+        type: string
+      userId:
+        description: 用户id
+        type: integer
+    type: object
+  vo.UserIDInfoExtraForIssueAudit:
+    properties:
+      auditStatus:
+        description: 状态(1未查看2已查看未审核3审核通过4驳回)
+        type: integer
+      avatar:
+        description: 用户头像
+        type: string
+      emplId:
+        description: 工号：企业下唯一
+        type: string
+      id:
+        description: 用户id
+        type: integer
+      isDeleted:
+        description: 是否已被删除，为true则代表被组织移除
+        type: boolean
+      isDisabled:
+        description: 是否已被禁用, 为true则代表被组织禁用
+        type: boolean
+      name:
+        description: 用户名称
+        type: string
+      namePy:
+        description: 用户拼音
+        type: string
+      unionId:
+        description: unionId： 开发者账号下唯一(暂时废弃，返回空)
+        type: string
+      userId:
+        description: 用户id
+        type: integer
+    type: object
+  vo.Void:
+    properties:
+      id:
+        description: 主键
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: 极星接口文档.
+  title: Polaris Apis
+  version: v1.0.0
+paths:
+  /api/rest/issue/stat:
+    get:
+      consumes:
+      - application/json
+      description: 任务统计
+      parameters:
+      - description: 项目id
+        in: query
+        name: projectId
+        type: integer
+      - description: 迭代id
+        in: query
+        name: iterationId
+        type: integer
+      - description: 关联类型：1我负责的2我参与的3我关注的4我发起的5我确认的
+        in: query
+        name: relationType
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.IssueStatusTypeStatResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 任务统计
+      tags:
+      - 任务
+  /api/rest/issueView/create:
+    post:
+      consumes:
+      - application/json
+      description: 新增任务视图
+      parameters:
+      - description: 入参
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/vo.CreateIssueViewReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: ""
+      security:
+      - PM-TOEKN: []
+      summary: 新增任务视图
+      tags:
+      - 任务视图
+  /api/rest/mirrors/stat:
+    post:
+      consumes:
+      - application/json
+      description: 视图镜像统计
+      parameters:
+      - description: 入参
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/vo.MirrorCountReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.MirrorsStatResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 视图镜像统计
+      tags:
+      - 镜像
+  /api/rest/project/{projectId}/batch_values:
+    post:
+      consumes:
+      - application/json
+      description: 批量更新任务
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        required: true
+        type: integer
+      - description: 入参
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/vo.LessBatchUpdateIssueReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 批量更新任务
+      tags:
+      - 任务
+  /api/rest/project/{projectId}/config:
+    get:
+      consumes:
+      - application/json
+      description: 获取表头
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        required: true
+        type: integer
+      - description: 任务栏id,通用项目传0，敏捷项目传对应的 缺陷|任务|需求 id
+        in: query
+        name: projectObjectTypeId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.GetFormConfigResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 获取表头
+      tags:
+      - 项目
+  /api/rest/project/{projectId}/issue/filter:
+    post:
+      consumes:
+      - application/json
+      description: 任务列表
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        required: true
+        type: integer
+      - description: 入参
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/vo.HomeIssuesRestReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.HomeIssueInfoResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 任务列表
+      tags:
+      - 任务
+  /api/rest/project/{projectId}/saveForm:
+    post:
+      consumes:
+      - application/json
+      description: 保存表头
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        required: true
+        type: integer
+      - description: 入参
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/vo.SaveFormHeaderData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.SaveFormHeaderRespData'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 保存表头
+      tags:
+      - 项目
+  /api/rest/project/{projectId}/values:
+    post:
+      consumes:
+      - application/json
+      description: 创建任务
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        required: true
+        type: integer
+      - description: 入参
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/vo.LessCreateIssueReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/vo.Void'
+            type: array
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 创建任务
+      tags:
+      - 任务
+  /api/rest/project/{projectId}/values/delete:
+    post:
+      consumes:
+      - application/json
+      description: 任务删除
+      parameters:
+      - description: 项目id
+        in: path
+        name: projectId
+        type: integer
+      - description: 入参
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/vo.LessDeleteIssueBatchReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.DeleteIssueBatchResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 任务删除
+      tags:
+      - 任务
+  /api/rest/project/export-same-user-dept:
+    post:
+      consumes:
+      - application/json
+      description: 导出同名的部门和用户列表，导出为 excel
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.ExportIssueTemplateResp'
+        "400":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 导出同名的部门和用户列表，导出为 excel
+      tags:
+      - 项目
+  /api/rest/user/setUserGuideStatus:
+    post:
+      consumes:
+      - application/json
+      description: 设定用户浏览过新用户指引
+      parameters:
+      - description: 状态类型、标识
+        in: query
+        name: flag
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/vo.BoolRespVo'
+        "400":
+          description: ""
+      security:
+      - PM-TOEKN: []
+      summary: 设定用户浏览过新用户指引
+      tags:
+      - 用户
+  /api/task/importData:
+    post:
+      consumes:
+      - application/json
+      description: 任务导入
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: ""
+      security:
+      - PM-TOEKN: []
+      summary: 任务导入
+      tags:
+      - 任务
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"

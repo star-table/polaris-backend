@@ -1,0 +1,31 @@
+
+
+"问题来源结构体"
+type IssueSource{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"语言编号"
+	langCode:String!
+	"名称"
+	name:String!
+	"排序"
+	sort:Int!
+	"对象类型id"
+	projectObjectTypeId:Int64!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+}

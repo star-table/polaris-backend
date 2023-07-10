@@ -1,0 +1,73 @@
+"结构体"
+type Notice{
+	"主键"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"通知类型, 1项目通知,2组织通知,"
+	type:Int!
+	"操作类型"
+	relationType:String!
+	"冗余信息"
+	ext:String!
+	"项目id"
+	projectId:Int64!
+	"issueId"
+	issueId:Int64!
+	"关联动态id"
+	trendsId:Int64!
+	"通知内容"
+	content:String!
+	"被通知人"
+	noticer:Int64!
+	"状态, 1未读,2已读"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"创建人信息"
+	creatorInfo:UserIdInfo!
+	"项目名称"
+	projectName:String!
+	"任务名称"
+	issueName:String!
+	"父任务id（没有则为0）"
+	parentIssueId:Int64!
+}
+
+"阅读通知结构体"
+input ReadNoticeReq{
+	"主键"
+	id:Int64!
+}
+
+"删除请求结构体"
+input DeleteNoticeReq{
+	"主键"
+	id:Int64!
+}
+
+"获取MQTT通道key请求结构体"
+input GetMQTTChannelKeyReq{
+	"通道类型：1、项目（任务，标签，工作栏），2、组织（成员）"
+	channelType: Int!
+	"通道类型为1时必传"
+	projectId: Int64
+	"通道类型为4时必传"
+	appId: Int64
+}
+
+"获取MQTT通道key响应结构体"
+type GetMQTTChannelKeyResp{
+	"连接地址"
+	address: String!
+	"host"
+	host: String!
+	"port"
+	port: Int
+	"通道"
+	channel: String!
+	"通道key"
+	key: String!
+}

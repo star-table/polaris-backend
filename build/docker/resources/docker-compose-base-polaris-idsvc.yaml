@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-idsvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-idsvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-idsvc:/data/logs/polaris-idsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-idsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-idsvc
+    expose:
+      - "80"
+      - "10002"
+    ports:
+      - "10002:10002"
+
+networks:
+  envoymesh: {}

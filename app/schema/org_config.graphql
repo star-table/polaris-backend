@@ -1,0 +1,37 @@
+"组织配置响应结构体"
+type OrgConfig{
+    "id"
+    id:Int64!
+    "组织id"
+    orgId: Int64!
+    "付费级别1通用免费，2标准版"
+    payLevel:Int!
+    "付费开始时间"
+    payStartTime:Time!
+    "付费结束时间"
+    payEndTime:Time!
+    "付费级别实际（1免费2标准3试用）"
+    payLevelTrue:Int!
+    "创建时间"
+    createTime:Time!
+    "组织人数"
+    orgMemberNumber:Int64!
+    "是否是灰度企业"
+    isGrayLevel:Boolean!
+    "汇总表id"
+    summaryAppId:String!
+    "展示基础设置"
+    basicShowSetting:BasicShowSetting!
+    "企业自定义logo"
+    logo:String!
+}
+
+"展示基础设置"
+type BasicShowSetting{
+    "工作台"
+    workBenchShow:Boolean!
+    "侧边栏"
+    sideBarShow:Boolean!
+    "镜像统计"
+    mirrorStat:Boolean!
+}

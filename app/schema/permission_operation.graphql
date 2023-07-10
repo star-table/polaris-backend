@@ -1,0 +1,108 @@
+"结构体"
+type PermissionOperation{
+	"主键"
+	id:Int64!
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"权限项id"
+	permissionId:Int64!
+	"语言编号"
+	langCode:String!
+	"名称"
+	name:String!
+	"操作编号,多个半角逗号分隔"
+	operationCodes:String!
+	"描述"
+	remark:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+}
+
+"创建请求结构体"
+input CreatePermissionOperationReq{
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"权限项id"
+	permissionId:Int64!
+	"语言编号"
+	langCode:String!
+	"名称"
+	name:String!
+	"操作编号,多个半角逗号分隔"
+	operationCodes:String!
+	"描述"
+	remark:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"更新请求结构体"
+input UpdatePermissionOperationReq{
+	"主键"
+	id:Int64!
+	"组织id,应该是全局的,因此填0"
+	orgId:Int64!
+	"权限项id"
+	permissionId:Int64!
+	"语言编号"
+	langCode:String!
+	"名称"
+	name:String!
+	"操作编号,多个半角逗号分隔"
+	operationCodes:String!
+	"描述"
+	remark:String!
+	"是否显示,1是,2否"
+	isShow:Int!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"删除请求结构体"
+input DeletePermissionOperationReq{
+	"主键"
+	id:Int64!
+}
+
+input EveryPermission{
+	"权限组id"
+	permissionId:Int64!
+	"修改后的操作项id"
+	operationIds:[Int64!]
+}

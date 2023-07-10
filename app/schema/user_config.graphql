@@ -1,0 +1,103 @@
+"用户配置信息结构体"
+type UserConfig{
+	"主键"
+	id: Int64!
+	"个人日报开启状态, 2否, 1是"
+	dailyReportMessageStatus:Int!
+	"我负责的 2否, 1是"
+	ownerRangeStatus:Int!
+	"我协作的 2否, 1是"
+	collaborateMessageStatus: Int!
+	"我参与的, 2否, 1是"
+	participantRangeStatus:Int!
+	"我关注的, 2否, 1是"
+	attentionRangeStatus:Int!
+	"我创建的, 2否, 1是"
+	createRangeStatus:Int!
+	"任务提醒状态 2否, 1是"
+	remindMessageStatus:Int!
+	"评论和at我的通知"
+	commentAtMessageStatus:Int!
+	"任务更新状态, 2否, 1是"
+	modifyMessageStatus:Int!
+	"任务关联动态, 2否, 1是"
+	relationMessageStatus:Int!
+	"项目日报开启状态, 2  否 1:是"
+	dailyProjectReportMessageStatus:Int!
+	"默认项目id, 机器人创建项目的时候会选用这个项目"
+	defaultProjectId: Int64!
+	"默认工作栏"
+	defaultProjectObjectTypeId: Int64!
+	"pc桌面通知开关状态, 2否, 1是"
+	pcNoticeOpenStatus: Int!
+	"pc任务提醒状态, 2否, 1是"
+	pcIssueRemindMessageStatus: Int!
+	"pc组织相关推送状态, 2否, 1是"
+	pcOrgMessageStatus: Int!
+	"pc项目相关推送状态, 2否, 1是"
+	pcProjectMessageStatus: Int!
+	"pc评论相关推送状态, 2否, 1是"
+	pcCommentAtMessageStatus: Int!
+	"即将逾期提醒, 0-关闭 1-提前1小时 2-提前1天 3-提前2天 4-提前3天 5-提前4天 6-提前5天 7-提前6天 8-提前7天"
+	remindExpiring:Int!
+}
+
+"更新用户配置响应结构体"
+type UpdateUserConfigResp{
+	"主键"
+	id: Int64!
+}
+
+"更新用户配置请求结构体"
+input UpdateUserConfigReq{
+	"主键"
+	id: Int64!
+	"个人日报开启状态, 2否, 1是"
+	dailyReportMessageStatus:Int!
+	"我负责的 2否, 1是"
+	ownerRangeStatus:Int!
+	"我参与的, 2否, 1是"
+	participantRangeStatus:Int!
+	"我关注的, 2否, 1是"
+	attentionRangeStatus:Int!
+	"我创建的, 2否, 1是"
+	createRangeStatus:Int!
+	"我协作的。2否，1是"
+	collaborateMessageStatus:Int!
+	"任务提醒状态 2否, 1是"
+	remindMessageStatus:Int!
+	"评论和at我的通知"
+	commentAtMessageStatus:Int!
+	"任务更新状态, 2否, 1是"
+	modifyMessageStatus:Int!
+	"任务关联动态, 2否, 1是"
+	relationMessageStatus:Int!
+	"项目日报开启状态, 2否, 1是"
+	dailyProjectReportMessageStatus:Int!
+	"即将逾期提醒, 0-关闭 1-提前1小时 2-提前1天 3-提前2天 4-提前3天 5-提前4天 6-提前5天 7-提前6天 8-提前7天"
+	remindExpiring:Int!
+}
+
+"更新用户pc配置请求结构体"
+input UpdateUserPcConfigReq{
+	"pc桌面通知开关状态, 2否, 1是"
+	pcNoticeOpenStatus: Int
+	"pc任务提醒状态, 2否, 1是"
+	pcIssueRemindMessageStatus: Int
+	"pc组织相关推送状态, 2否, 1是"
+	pcOrgMessageStatus: Int
+	"pc项目相关推送状态, 2否, 1是"
+	pcProjectMessageStatus: Int
+	"pc评论相关推送状态, 2否, 1是"
+	pcCommentAtMessageStatus: Int
+	"变动的字段列表"
+	updateFields:[String!]
+}
+
+"更新用户默认项目配置请求结构体"
+input UpdateUserDefaultProjectConfigReq{
+	"默认项目id, 机器人创建项目的时候会选用这个项目"
+	defaultProjectId: Int64!
+	"默认工作栏id"
+	defaultProjectObjectTypeId: Int64
+}

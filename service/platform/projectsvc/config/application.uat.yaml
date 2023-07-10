@@ -1,0 +1,50 @@
+Mysql:
+  # 数据库ip
+  Host: 172.19.132.102
+  # 数据库端口
+  Port: 3306
+  # 数据库用户名
+  Usr: root
+  # 数据库密码
+  Pwd: doulang2022
+  # 数据库库名
+  Database: polaris_project_manage_projectsvc_uat
+Redis:
+  # redis ip
+  Host: 172.19.84.54
+  # redis 端口
+  Port: 26379
+  # redis 密码
+  Pwd: sau2Al!tn12
+  # redis 数据库
+  Database: 11
+
+MQ:
+  Kafka:
+    NameServers: kafka-kafka-brokers.kafka.svc.cluster.local:9092
+Nacos:
+  Client:
+    NamespaceId: "4c635db8-0f29-4b8a-8271-fd4881baec0b" #nacos命名空间
+    TimeoutMs: 10000 #http请求超时时间，单位毫秒
+    ListenInterval: 30000 #监听间隔时间，单位毫秒（仅在ConfigClient中有效）
+    BeatInterval: 5000 #心跳间隔时间，单位毫秒（仅在ServiceClient中有效）
+    Endpoint: "" #获取nacos节点ip的服务地址
+    CacheDir: "cache" #缓存目录
+    LogDir: "logs" #日志目录
+    UpdateThreadNum: 20 #更新服务的线程数
+    NotLoadCacheAtStart: true #在启动时不读取本地缓存数据，true--不读取，false--读取
+    UpdateCacheWhenEmpty: true #当服务列表为空时是否更新本地缓存，true--更新,false--不更新
+    Username: nacos
+    Password: oY4hMsdsqaB06kWK
+  Server:
+    Server1:
+      IpAddr: "127.0.0.1" #nacos服务的ip地址
+      Port: 8848 #nacos服务端口
+      ContextPath: "/nacos" #nacos服务的上下文路径，默认是“/nacos”
+  Discovery:
+    GroupName: "DEFAULT_GROUP"
+    ClusterName: "DEFAULT"
+    Weight: 0
+    Enable: false
+    Healthy: true
+    Ephemeral: true

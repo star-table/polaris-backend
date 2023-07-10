@@ -1,0 +1,9 @@
+Application:
+  Name: orgsvc
+  # 运行模式，1：Saas集群，2：单机部署，3：私有化集群部署，4：私有化单库部署
+  # orgsvc 不在进行库的版本比对。所以改为 2。之前是继承的 common 中的值 3。
+  # RunMode: 3
+  Version:
+Mysql:
+  # 数据库库名
+  Database: polaris_project_manage_orgsvc_uat

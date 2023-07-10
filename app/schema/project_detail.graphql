@@ -1,0 +1,40 @@
+type ProjectDetail{
+	"详情id"
+	id:Int64!
+	"组织id"
+	orgId:Int64!
+	"项目id"
+	projectId:Int64!
+	"公告"
+	notice:String!
+	"是否启用工时和故事点,1启用,2不启用"
+	isEnableWorkHours:Int!
+	"是否同步到飞书日历(1是2否,默认否)"
+	isSyncOutCalendar:Int!
+	creator:Int64!
+	createTime:Time!
+	updator:Int64!
+	updateTime:Time!
+}
+
+input UpdateProjectDetailReq{
+	"详情id"
+	id:Int64!
+	"项目id"
+	projectId:Int64
+	"公告"
+	notice:String
+	"是否启用工时和故事点,1启用,2不启用"
+	isEnableWorkHours:Int
+	"是否同步到飞书日历(1是2否,默认否)"
+	isSyncOutCalendar:Int
+}
+
+input DeleteProjectDetailReq{
+	id:Int64!
+}
+
+type ProjectDetailList{
+    total:Int64!
+    list:[ProjectDetail!]
+}

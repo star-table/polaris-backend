@@ -1,0 +1,44 @@
+
+"Oss Post Policy策略请求结构体"
+input OssPostPolicyReq{
+    "策略类型, 1: 项目封面，2：任务资源（需要callback）, 3：导入任务的excel， 4：项目文件（需要callback），5：兼容测试， 6:用户头像，9: 无码附件, 11：excel导入成员"
+    policyType: Int!
+    "如果policyType为1/2/3/4/9，那么appId必传(创建场景传0)"
+    appId: String
+    "如果policyType为1/2/3/4/9，那么projectId必传(创建场景传0)"
+    projectId: Int64
+    "如果policyType为2/9，那么issueId必传"
+    issueId: Int64
+    "目录id, policy为4的时候必填"
+    folderId: Int64
+    "如果policyType为2/9，那么columnId必传"
+    columnId: String
+    "如果policyType为2/9，那么tableId必传"
+    tableId: String
+}
+
+"Oss Post Policy策略响应结构体"
+type OssPostPolicyResp{
+    "policy"
+    policy: String!
+    "签名"
+    signature: String!
+    "文件上传目录"
+    dir: String!
+    "有效期"
+    expire: String!
+    "access Id"
+    accessId: String!
+    "Host"
+    host: String!
+    "Region"
+    region: String!
+    "bucket名称"
+    bucket: String!
+    "文件名"
+    fileName: String!
+    "文件最大限制"
+    maxFileSize: Int64!
+    "callback回调，为空说明不需要回调"
+    callback: String!
+}

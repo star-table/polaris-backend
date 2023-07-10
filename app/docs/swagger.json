@@ -1,0 +1,1727 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "极星接口文档.",
+        "title": "Polaris Apis",
+        "contact": {},
+        "version": "v1.0.0"
+    },
+    "paths": {
+        "/api/rest/issue/stat": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "任务统计",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "任务统计",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "迭代id",
+                        "name": "iterationId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "关联类型：1我负责的2我参与的3我关注的4我发起的5我确认的",
+                        "name": "relationType",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.IssueStatusTypeStatResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/issueView/create": {
+            "post": {
+                "security": [
+                    {
+                        "PM-TOEKN": []
+                    }
+                ],
+                "description": "新增任务视图",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务视图"
+                ],
+                "summary": "新增任务视图",
+                "parameters": [
+                    {
+                        "description": "入参",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.CreateIssueViewReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/mirrors/stat": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "视图镜像统计",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "镜像"
+                ],
+                "summary": "视图镜像统计",
+                "parameters": [
+                    {
+                        "description": "入参",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.MirrorCountReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.MirrorsStatResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/export-same-user-dept": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "导出同名的部门和用户列表，导出为 excel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "项目"
+                ],
+                "summary": "导出同名的部门和用户列表，导出为 excel",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.ExportIssueTemplateResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/batch_values": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量更新任务",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "批量更新任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "入参",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.LessBatchUpdateIssueReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/config": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取表头",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "项目"
+                ],
+                "summary": "获取表头",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "任务栏id,通用项目传0，敏捷项目传对应的 缺陷|任务|需求 id",
+                        "name": "projectObjectTypeId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.GetFormConfigResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/issue/filter": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "任务列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "任务列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "入参",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.HomeIssuesRestReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.HomeIssueInfoResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/saveForm": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "保存表头",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "项目"
+                ],
+                "summary": "保存表头",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "入参",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.SaveFormHeaderData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.SaveFormHeaderRespData"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/values": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建任务",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "创建任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "入参",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.LessCreateIssueReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/vo.Void"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/project/{projectId}/values/delete": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "任务删除",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "任务删除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "项目id",
+                        "name": "projectId",
+                        "in": "path"
+                    },
+                    {
+                        "description": "入参",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/vo.LessDeleteIssueBatchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.DeleteIssueBatchResp"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/rest/user/setUserGuideStatus": {
+            "post": {
+                "security": [
+                    {
+                        "PM-TOEKN": []
+                    }
+                ],
+                "description": "设定用户浏览过新用户指引",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "设定用户浏览过新用户指引",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "状态类型、标识",
+                        "name": "flag",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/vo.BoolRespVo"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/task/importData": {
+            "post": {
+                "security": [
+                    {
+                        "PM-TOEKN": []
+                    }
+                ],
+                "description": "任务导入",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "任务"
+                ],
+                "summary": "任务导入",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "400": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "vo.ActualListItem": {
+            "type": "object",
+            "properties": {
+                "actualWorkHourDateList": {
+                    "description": "一个日期内的工时信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.ActualWorkHourDateItem"
+                    }
+                },
+                "name": {
+                    "description": "工时执行人名字",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.ActualWorkHourDateItem": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "description": "实际工时的日期，开始日期。",
+                    "type": "string"
+                },
+                "workHour": {
+                    "description": "工时，单位：小时。",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.BoolRespVo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "vo.CreateIssueViewReq": {
+            "type": "object",
+            "properties": {
+                "config": {
+                    "description": "视图配置",
+                    "type": "string"
+                },
+                "isPrivate": {
+                    "description": "是否私有",
+                    "type": "boolean"
+                },
+                "projectId": {
+                    "description": "项目 id",
+                    "type": "integer"
+                },
+                "projectObjectTypeId": {
+                    "description": "所属任务类型 id：需求、任务、缺陷的 id 值",
+                    "type": "integer"
+                },
+                "remark": {
+                    "description": "视图备注",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "视图排序",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "类型，1：表格视图，2：看板视图，3：照片视图",
+                    "type": "integer"
+                },
+                "viewName": {
+                    "description": "视图名称",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.CustomValue": {
+            "type": "object",
+            "properties": {
+                "fieldType": {
+                    "description": "类型(1文本类型2单选框3多选框4日期选框5人员选择6是非选择7数字框)",
+                    "type": "integer"
+                },
+                "fieldValue": {
+                    "description": "选项值",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "id": {
+                    "description": "字段id",
+                    "type": "integer"
+                },
+                "isOrgField": {
+                    "description": "是否属于组织字段库(1组织2项目3系统)",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "字段名称",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "字段描述",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "启用状态（1启用2禁用）对于项目而言",
+                    "type": "integer"
+                },
+                "title": {
+                    "description": "字段",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "字段值"
+                }
+            }
+        },
+        "vo.DeleteIssueBatchResp": {
+            "type": "object",
+            "properties": {
+                "noAuthIssues": {
+                    "description": "没有权限的任务id",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.Issue"
+                    }
+                },
+                "remainChildrenIssues": {
+                    "description": "还有子任务没有选择的父任务id",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.Issue"
+                    }
+                },
+                "successIssues": {
+                    "description": "删除成功的id",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.Issue"
+                    }
+                }
+            }
+        },
+        "vo.ExportIssueTemplateResp": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "description": "模板地址",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.GetFormConfigResp": {
+            "type": "object",
+            "properties": {
+                "columns": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "customConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "fieldOrders": {},
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                }
+            }
+        },
+        "vo.HomeIssueInfo": {
+            "type": "object",
+            "properties": {
+                "afterIssueIds": {
+                    "description": "后置任务id集合",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "allStatus": {
+                    "description": "状态列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.HomeIssueStatusInfo"
+                    }
+                },
+                "auditorsInfo": {
+                    "description": "确认人信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.UserIDInfoExtraForIssueAudit"
+                    }
+                },
+                "childsFinishedNum": {
+                    "description": "子任务已完成数量",
+                    "type": "integer"
+                },
+                "childsNum": {
+                    "description": "子任务数量",
+                    "type": "integer"
+                },
+                "customField": {
+                    "description": "自定义字段结果",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.CustomValue"
+                    }
+                },
+                "followerInfos": {
+                    "description": "关注人",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.UserIDInfo"
+                    }
+                },
+                "isAttach": {
+                    "description": "是否是查询结果附带的父任务1是0否",
+                    "type": "integer"
+                },
+                "issue": {
+                    "description": "任务信息",
+                    "$ref": "#/definitions/vo.Issue"
+                },
+                "issueId": {
+                    "description": "任务id",
+                    "type": "integer"
+                },
+                "iterationName": {
+                    "description": "迭代名称",
+                    "type": "string"
+                },
+                "lessData": {
+                    "description": "无码数据",
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "owner": {
+                    "description": "执行人信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.HomeIssueOwnerInfo"
+                    }
+                },
+                "parentId": {
+                    "description": "父任务id",
+                    "type": "integer"
+                },
+                "parentInfo": {
+                    "description": "父任务信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.ParentInfo"
+                    }
+                },
+                "parentIsMeetCondition": {
+                    "description": "父任务是否是满足条件1是0否",
+                    "type": "integer"
+                },
+                "priority": {
+                    "description": "优先级信息",
+                    "$ref": "#/definitions/vo.HomeIssuePriorityInfo"
+                },
+                "project": {
+                    "description": "项目信息",
+                    "$ref": "#/definitions/vo.HomeIssueProjectInfo"
+                },
+                "projectObjectTypeName": {
+                    "description": "任务栏名称",
+                    "type": "string"
+                },
+                "propertyInfo": {
+                    "description": "严重程度信息",
+                    "$ref": "#/definitions/vo.IssuePropertyInfo"
+                },
+                "relateCommentCount": {
+                    "description": "关联评论数量",
+                    "type": "integer"
+                },
+                "relateIssueCount": {
+                    "description": "关联任务数量",
+                    "type": "integer"
+                },
+                "relateResourceCount": {
+                    "description": "关联资源数量",
+                    "type": "integer"
+                },
+                "sourceInfo": {
+                    "description": "来源信息",
+                    "$ref": "#/definitions/vo.IssueSourceInfo"
+                },
+                "status": {
+                    "description": "状态信息",
+                    "$ref": "#/definitions/vo.HomeIssueStatusInfo"
+                },
+                "tags": {
+                    "description": "标签信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.HomeIssueTagInfo"
+                    }
+                },
+                "title": {
+                    "description": "任务标题",
+                    "type": "string"
+                },
+                "typeInfo": {
+                    "description": "类型信息",
+                    "$ref": "#/definitions/vo.IssueObjectTypeInfo"
+                },
+                "workHourInfo": {
+                    "description": "工时信息",
+                    "$ref": "#/definitions/vo.HomeIssueWorkHourInfo"
+                }
+            }
+        },
+        "vo.HomeIssueInfoResp": {
+            "type": "object",
+            "properties": {
+                "actualTotal": {
+                    "description": "实际总数量",
+                    "type": "integer"
+                },
+                "list": {
+                    "description": "首页任务列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.HomeIssueInfo"
+                    }
+                },
+                "total": {
+                    "description": "总数量",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.HomeIssueOwnerInfo": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "description": "负责人头像",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "负责人信息",
+                    "type": "integer"
+                },
+                "isDeleted": {
+                    "description": "是否已被删除，为true则代表被组织移除",
+                    "type": "boolean"
+                },
+                "isDisabled": {
+                    "description": "是否已被禁用, 为true则代表被组织禁用",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "负责人名称",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "负责人id",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.HomeIssuePriorityInfo": {
+            "type": "object",
+            "properties": {
+                "bgStyle": {
+                    "description": "背景色",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "字体色",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "优先级id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "优先级名称",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.HomeIssueProjectInfo": {
+            "type": "object",
+            "properties": {
+                "appId": {
+                    "description": "项目对应的应用 id（无码系统）",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "项目id",
+                    "type": "integer"
+                },
+                "isFilling": {
+                    "description": "是否归档(1是2否)",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "项目名称",
+                    "type": "string"
+                },
+                "privacyStatus": {
+                    "description": "项目隐私状态。1开启隐私；2不开启。",
+                    "type": "integer"
+                },
+                "projectTypeId": {
+                    "description": "项目类型",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.HomeIssueStatusInfo": {
+            "type": "object",
+            "properties": {
+                "bgStyle": {
+                    "description": "背景色",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "显示名，为空则显示状态名",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "字体色",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "状态id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "状态名",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "状态类型,1未开始,2进行中,3已完成",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.HomeIssueTagInfo": {
+            "type": "object",
+            "properties": {
+                "bgStyle": {
+                    "description": "背景颜色",
+                    "type": "string"
+                },
+                "fontStyle": {
+                    "description": "字体颜色",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "标签id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "标签名",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.HomeIssueWorkHourInfo": {
+            "type": "object",
+            "properties": {
+                "actualList": {
+                    "description": "实际工时详情列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.ActualListItem"
+                    }
+                },
+                "actualWorkHour": {
+                    "description": "任务的实际工时，单位：小时。",
+                    "type": "string"
+                },
+                "predictList": {
+                    "description": "预估工时详情列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.PredictListItem"
+                    }
+                },
+                "predictWorkHour": {
+                    "description": "任务的预估工时，单位：小时。",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.HomeIssuesRestReq": {
+            "type": "object",
+            "properties": {
+                "condition": {
+                    "$ref": "#/definitions/vo.LessCondsData"
+                },
+                "filterColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "menuAppId": {
+                    "type": "string"
+                },
+                "orders": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.LessOrder"
+                    }
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "tableId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vo.Issue": {
+            "type": "object",
+            "properties": {
+                "auditStatus": {
+                    "description": "审批状态（1待审批3审批通过）",
+                    "type": "integer"
+                },
+                "code": {
+                    "description": "任务code",
+                    "type": "string"
+                },
+                "createTime": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "creator": {
+                    "description": "创建者",
+                    "type": "integer"
+                },
+                "dataId": {
+                    "description": "数据id",
+                    "type": "string"
+                },
+                "endTime": {
+                    "description": "实际结束时间",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "任务id",
+                    "type": "integer"
+                },
+                "isDelete": {
+                    "description": "是否删除,1是,2否",
+                    "type": "integer"
+                },
+                "isFiling": {
+                    "description": "是否归档",
+                    "type": "integer"
+                },
+                "issueIds": {
+                    "description": "影响的id集合",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "issueObjectTypeId": {
+                    "description": "问题类型id",
+                    "type": "integer"
+                },
+                "iterationId": {
+                    "description": "迭代id",
+                    "type": "integer"
+                },
+                "moduleId": {
+                    "description": "模块id",
+                    "type": "integer"
+                },
+                "orgId": {
+                    "description": "组织id",
+                    "type": "integer"
+                },
+                "owner": {
+                    "description": "负责人id 注:这个owner字段废弃使用，新增了下面的owners字段，为了支持多负责人",
+                    "type": "integer"
+                },
+                "owners": {
+                    "description": "负责人id列表",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "parentId": {
+                    "description": "父任务id",
+                    "type": "integer"
+                },
+                "parentInfo": {
+                    "description": "父任务信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.ParentInfo"
+                    }
+                },
+                "parentTitle": {
+                    "description": "父任务标题",
+                    "type": "string"
+                },
+                "planEndTime": {
+                    "description": "计划结束时间",
+                    "type": "string"
+                },
+                "planStartTime": {
+                    "description": "计划开始时间",
+                    "type": "string"
+                },
+                "planWorkHour": {
+                    "description": "计划工时",
+                    "type": "integer"
+                },
+                "priorityId": {
+                    "description": "优先级id",
+                    "type": "integer"
+                },
+                "projectId": {
+                    "description": "项目id",
+                    "type": "integer"
+                },
+                "projectObjectTypeId": {
+                    "description": "项目对象类型id",
+                    "type": "integer"
+                },
+                "propertyId": {
+                    "description": "性质id",
+                    "type": "integer"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "remarkDetail": {
+                    "description": "备注详情",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "sourceId": {
+                    "description": "来源",
+                    "type": "integer"
+                },
+                "startTime": {
+                    "description": "实际开始时间",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态id",
+                    "type": "integer"
+                },
+                "tableId": {
+                    "description": "表id",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "标题",
+                    "type": "string"
+                },
+                "updateTime": {
+                    "description": "更新时间",
+                    "type": "string"
+                },
+                "updator": {
+                    "description": "更新者",
+                    "type": "integer"
+                },
+                "versionId": {
+                    "description": "版本id",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.IssueObjectTypeInfo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "类型id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "类型名",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.IssuePropertyInfo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "来源名称",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.IssueSourceInfo": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "来源名称",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.IssueStatusTypeStatResp": {
+            "type": "object",
+            "properties": {
+                "beAboutToOverdueSum": {
+                    "description": "即将到期",
+                    "type": "integer"
+                },
+                "callMeTotal": {
+                    "description": "@我的数量",
+                    "type": "integer"
+                },
+                "completedTodayTotal": {
+                    "description": "今日完成数",
+                    "type": "integer"
+                },
+                "completedTotal": {
+                    "description": "状态为已完成的数量",
+                    "type": "integer"
+                },
+                "list": {
+                    "description": "概览",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.StatCommon"
+                    }
+                },
+                "notStartTotal": {
+                    "description": "状态为未开始的数量",
+                    "type": "integer"
+                },
+                "overdueCompletedTotal": {
+                    "description": "逾期完成",
+                    "type": "integer"
+                },
+                "overdueTodayTotal": {
+                    "description": "今日到期",
+                    "type": "integer"
+                },
+                "overdueTomorrowTotal": {
+                    "description": "状态为明日逾期",
+                    "type": "integer"
+                },
+                "overdueTotal": {
+                    "description": "状态为逾期的数量",
+                    "type": "integer"
+                },
+                "processingTotal": {
+                    "description": "状态为进行中的数量",
+                    "type": "integer"
+                },
+                "todayCount": {
+                    "description": "指派给我的任务",
+                    "type": "integer"
+                },
+                "todayCreateCount": {
+                    "description": "今日创建",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "任务总数",
+                    "type": "integer"
+                },
+                "waitConfirmedTotal": {
+                    "description": "待确认的任务数量",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.LessBatchUpdateIssueReq": {
+            "type": "object",
+            "properties": {
+                "appId": {
+                    "type": "string"
+                },
+                "data": {
+                    "description": "map[string]interface{}中id必传，和values保持一致，传issueId",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "tableId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vo.LessCondsData": {
+            "type": "object",
+            "properties": {
+                "column": {
+                    "description": "字段id",
+                    "type": "string"
+                },
+                "conds": {
+                    "description": "嵌套",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vo.LessCondsData"
+                    }
+                },
+                "fieldType": {
+                    "description": "字段类型",
+                    "type": "string"
+                },
+                "left": {
+                    "description": "左值"
+                },
+                "noPretreat": {
+                    "description": "不进行预处理",
+                    "type": "boolean"
+                },
+                "right": {
+                    "description": "右值"
+                },
+                "type": {
+                    "description": "类型(between,equal,gt,gte,in,like,lt,lte,not_in,not_like,not_null,is_null,all_in,values_in)",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "值"
+                },
+                "values": {
+                    "description": "值（数组）"
+                }
+            }
+        },
+        "vo.LessCreateIssueReq": {
+            "type": "object",
+            "properties": {
+                "afterDataId": {
+                    "type": "string"
+                },
+                "afterId": {
+                    "type": "integer"
+                },
+                "asc": {
+                    "type": "boolean"
+                },
+                "beforeDataId": {
+                    "type": "string"
+                },
+                "beforeId": {
+                    "type": "integer"
+                },
+                "form": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "menuAppId": {
+                    "type": "string"
+                },
+                "tableId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vo.LessDeleteIssueBatchReq": {
+            "type": "object",
+            "properties": {
+                "appValueIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "menuAppId": {
+                    "type": "string"
+                },
+                "tableId": {
+                    "type": "string"
+                }
+            }
+        },
+        "vo.LessOrder": {
+            "type": "object",
+            "properties": {
+                "asc": {
+                    "description": "是否是正序",
+                    "type": "boolean"
+                },
+                "column": {
+                    "description": "字段",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.MirrorCountReq": {
+            "type": "object",
+            "properties": {
+                "appIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "vo.MirrorsStatResp": {
+            "type": "object",
+            "properties": {
+                "dataStat": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "vo.ParentInfo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "code",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "id",
+                    "type": "integer"
+                },
+                "title": {
+                    "description": "标题",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.PredictListItem": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "工时执行人名字",
+                    "type": "string"
+                },
+                "workHour": {
+                    "description": "工时，单位：小时。",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.SaveFormHeaderData": {
+            "type": "object",
+            "properties": {
+                "baseFields": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "config": {
+                    "type": "array",
+                    "items": {}
+                },
+                "customConfig": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "fieldOrders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "isUpdateIssueStatus": {
+                    "type": "boolean"
+                },
+                "isUpdateProjectObjectType": {
+                    "type": "boolean"
+                },
+                "menuAppId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "projectId": {
+                    "type": "integer"
+                },
+                "projectObjectTypeId": {
+                    "type": "integer"
+                },
+                "viewOrders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "vo.SaveFormHeaderRespData": {
+            "type": "object",
+            "properties": {
+                "appId": {
+                    "type": "integer"
+                },
+                "config": {
+                    "type": "string"
+                },
+                "drafted": {
+                    "type": "boolean"
+                },
+                "extendsId": {
+                    "type": "integer"
+                },
+                "isExt": {
+                    "type": "boolean"
+                },
+                "orgId": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.StatCommon": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "description": "数量",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "名称",
+                    "type": "string"
+                }
+            }
+        },
+        "vo.UserIDInfo": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "emplId": {
+                    "description": "工号：企业下唯一",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "用户id",
+                    "type": "integer"
+                },
+                "isDeleted": {
+                    "description": "是否已被删除，为true则代表被组织移除",
+                    "type": "boolean"
+                },
+                "isDisabled": {
+                    "description": "是否已被禁用, 为true则代表被组织禁用",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "namePy": {
+                    "description": "用户拼音",
+                    "type": "string"
+                },
+                "unionId": {
+                    "description": "unionId： 开发者账号下唯一(暂时废弃，返回空)",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "用户id",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.UserIDInfoExtraForIssueAudit": {
+            "type": "object",
+            "properties": {
+                "auditStatus": {
+                    "description": "状态(1未查看2已查看未审核3审核通过4驳回)",
+                    "type": "integer"
+                },
+                "avatar": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "emplId": {
+                    "description": "工号：企业下唯一",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "用户id",
+                    "type": "integer"
+                },
+                "isDeleted": {
+                    "description": "是否已被删除，为true则代表被组织移除",
+                    "type": "boolean"
+                },
+                "isDisabled": {
+                    "description": "是否已被禁用, 为true则代表被组织禁用",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "namePy": {
+                    "description": "用户拼音",
+                    "type": "string"
+                },
+                "unionId": {
+                    "description": "unionId： 开发者账号下唯一(暂时废弃，返回空)",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "用户id",
+                    "type": "integer"
+                }
+            }
+        },
+        "vo.Void": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "主键",
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header"
+        }
+    }
+}

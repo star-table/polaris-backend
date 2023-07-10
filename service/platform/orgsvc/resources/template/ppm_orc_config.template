@@ -1,0 +1,2 @@
+INSERT INTO `ppm_orc_config` (`id`, `org_id`, `time_zone`, `time_difference`, `pay_level`, `pay_start_time`, `pay_end_time`, `language`, `datetime_format`, `password_length`, `password_rule`, `max_login_fail_count`, `remind_send_time`, `status`) VALUES
+({{.Id}}, {{.OrgId}}, "{{.TimeZone}}", "{{.TimeDifference}}", {{.PayLevel}}, "{{.PayStartTime}}", "{{.PayEndTime}}", "{{.Language}}", "{{.DatetimeFormat}}", {{.PasswordLength}}, {{.PasswordRule}}, {{.MaxLoginFailCount}}, "{{.RemindSendTime}}", {{.Status}})

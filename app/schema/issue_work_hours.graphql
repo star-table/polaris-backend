@@ -1,0 +1,319 @@
+"创建工时记录接口请求体"
+input CreateIssueWorkHoursReq {
+    "项目id"
+    projectId: Int64
+    "关联的任务id"
+    issueId: Int64!
+    "枚举记录类型：1预估工时记录（总预估工时），2实际工时记录，3详细预估工时（子预估工时）"
+    type: Int64!
+    "工作者id"
+    workerId: Int64!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "开始时间，时间戳"
+    startTime: Int64!
+    "工时记录的结束时间，时间戳"
+    endTime: Int64
+    "工时记录的内容，工作内容"
+    desc: String
+}
+
+"新增多个预估工时"
+input CreateMultiIssueWorkHoursReq {
+    "关联的任务id"
+    issueId: Int64!
+    "总预估工时"
+    totalIssueWorkHourRecord: NewPredicateWorkHour!
+    "子预估工时列表"
+    predictWorkHourList: [NewPredicateWorkHour!]
+}
+
+"新增详细版的预估工时"
+input NewPredicateWorkHour {
+    "工作者id"
+    workerId: Int64!
+    "预估所需工时时间，单位分钟"
+    needTime: String!
+    "开始时间，时间戳"
+    startTime: Int64!
+    "工时记录的结束时间，时间戳"
+    endTime: Int64
+}
+
+"查询任务的工时信息接口参数"
+input GetIssueWorkHoursInfoReq {
+    "关联的任务id"
+    issueId: Int64!
+}
+
+"查询任务的工时信息接口返回值"
+type GetIssueWorkHoursInfoResp {
+    "总预估工时。issue 一旦有工时记录，则一定会有一个总预估工时记录。"
+    simplePredictWorkHour: OneWorkHourRecord!
+    "预估工时列表"
+    predictWorkHourList: [OneWorkHourRecord]
+    "实际工时列表"
+    actualWorkHourList: [OneActualWorkHourRecord]
+    "实际总工时时间。单位：小时。"
+    actualNeedTimeTotal: String!
+}
+
+"查询返回：一条预估工时记录的信息"
+type OneWorkHourRecord {
+    "工时记录主键"
+    id: Int64!
+    "记录类型：1预估工时记录，2实际工时记录，3子预估工时"
+    type: Int64!
+    "工时记录的工作者、执行者"
+    worker: WorkHourWorker!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "开始时间，时间戳"
+    startTime: Int64!
+    "工时记录的结束时间，秒级时间戳。"
+    endTime: Int64!
+    "工时记录的内容，工作内容"
+    desc: String!
+    "是否允许当前用户修改。1：可以修改；0：不允许修改。"
+    isEnable: Int!
+}
+
+"查询返回：一条实际工时记录的信息"
+type OneActualWorkHourRecord {
+    "工时记录主键"
+    id: Int64!
+    "记录类型：1预估工时记录，2实际工时记录，3子预估工时"
+    type: Int64!
+    "工时记录的工作者、执行者"
+    worker: WorkHourWorker!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "开始时间，时间戳"
+    startTime: Int64!
+    "工时记录的结束时间，秒级时间戳。"
+    endTime: Int64!
+    "创建者名称"
+    creatorName: String!
+    "创建时间"
+    createTime: Int64!
+    "工时记录的内容，工作内容"
+    desc: String!
+    "是否允许当前用户修改。1：可以修改；0：不允许修改。"
+    isEnable: Int!
+}
+
+"工时记录的工作者、执行者"
+type WorkHourWorker {
+    "执行人的id"
+    userId: Int64!
+    "执行人的名字"
+    name: String!
+    "执行人的头像"
+    avatar: String!
+}
+
+	"编辑工时记录接口请求体"
+input UpdateIssueWorkHoursReq {
+    "工时记录id"
+    issueWorkHoursId: Int64!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "工时执行者id"
+    workerId: Int64!
+    "预留，剩余工时计算方式：1动态计算；2手动填写。没有则传 1"
+    remainTimeCalType: Int64!
+    "预留，手动填写的剩余工时的值。没有则传 0"
+    remainTime: Int64!
+    "工时的开始时间，**秒**级时间戳，没有则传 0"
+    startTime: Int64!
+    "工时的截止时间，**秒**级时间戳，没有则传 0"
+    endTime: Int64!
+    "工时记录的内容，工作内容"
+    desc: String
+}
+
+"编辑：编辑详细预估工时"
+input UpdateMultiIssueWorkHoursReq {
+    "关联的任务id"
+    issueId: Int64!
+    "总预估工时记录"
+    totalIssueWorkHourRecord: UpdateOneMultiWorkHourRecord!
+    "子预估工时列表"
+    issueWorkHourRecords: [UpdateOneMultiWorkHourRecord]
+}
+
+"编辑：详细预估工时中的某个单独工时"
+input UpdateOneMultiWorkHourRecord {
+    "工时记录主键"
+    id: Int64!
+    "记录类型：1预估工时记录，2实际工时记录，3子预估工时"
+    type: Int64!
+    "工时记录的工作者、执行者id"
+    workerId: Int64!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "开始时间，秒级时间戳。"
+    startTime: Int64!
+    "截止时间，秒级时间戳。"
+    endTime: Int64!
+    "工时记录的内容，工作内容"
+    desc: String
+}
+
+"删除工时记录接口请求体"
+input DeleteIssueWorkHoursReq {
+    "工时记录id"
+    issueWorkHoursId: Int64!
+}
+
+"一条工时记录信息"
+type IssueWorkHours {
+    "工时记录主键"
+    id: Int64!
+    "记录类型：1预估工时记录，2实际工时记录，3子预估工时"
+    type: Int64!
+    "工作者id"
+    workerId: Int64!
+    "所需工时时间，单位：小时"
+    needTime: String!
+    "开始时间，秒级时间戳。"
+    startTime: Int64!
+    "工时记录的结束时间，秒级时间戳。"
+    endTime: Int64
+    "工时记录的内容，工作内容"
+    desc: String
+}
+
+"工时统计查询请求参数"
+input GetWorkHourStatisticReq {
+    "项目id，查询项目下的工时统计。可选"
+    projectIds: [Int64]
+    "任务 id，查询任务下的工时统计。可选"
+    issueIds: [Int64]
+    "可多选。任务状态,1:未完成，2：已完成，3：未开始，4：进行中，5: 已逾期"
+    issueStatus: [Int]
+    "优先级id，可多选"
+    issuePriorities: [Int64]
+    "执行者，工时执行人id。可选"
+    workerIds: [Int64]
+    "查询的开始时间。秒级时间戳。可选"
+    startTime: Int64
+    "查询的截止时间。秒级时间戳。可选"
+    endTime: Int64
+    "是否显示已离职人员。1显示，2不显示。默认不显示。"
+    showResigned: Int
+    "页码"
+    page: Int64
+    "每页条数"
+    size: Int64
+}
+
+"工时统计查询返回参数"
+type GetWorkHourStatisticResp {
+    "多个成员在一段日期内的工时信息列表"
+    groupStatisticList: [OnePersonWorkHourStatisticInfo]!
+    "数据总数"
+    total: Int64!
+    "汇总的数据"
+    summary: GetWorkHourStatisticSummary!
+}
+
+type GetWorkHourStatisticSummary {
+    "筛选条件下的预估工时的总和"
+    predictTotal: String!
+    "筛选条件下的实际工时的总和"
+    actualTotal: String!
+}
+
+"一个员工的在若干个日期内的工时统计信息"
+type OnePersonWorkHourStatisticInfo {
+    "员工id"
+    workerId: Int64!
+    "员工姓名"
+    name: String!
+    "预估总工时，单位：小时"
+    predictHourTotal: String!
+    "实际总工时，单位：小时"
+    actualHourTotal: String!
+    "在一些日期内的实际工时信息"
+    dateWorkHourList: [OneDateWorkHour!]
+}
+
+"一个员工在某一日期的实际工时信息"
+type OneDateWorkHour {
+    "工时日期"
+    date: String!
+    "星期几。特殊的是：0表示星期天"
+    weekDay: Int64!
+    "工时时间，单位：小时"
+    time: String!
+}
+
+"查询员工是否是任务成员请求参数"
+input CheckIsIssueMemberReq {
+    "查询的任务id"
+    issueId: Int64!
+    "查询该用户是否是任务的成员。成员包括：参与人、负责人"
+    userId: Int64!
+}
+
+"将用户变成任务成员请求参数"
+input SetUserJoinIssueReq {
+    "查询的任务id"
+    issueId: Int64!
+    "查询该用户是否是任务的成员。成员包括：参与人、负责人"
+    userId: Int64!
+}
+
+"检查项目的工时是否开启接口参数"
+input CheckIsEnableWorkHourReq {
+    "项目id"
+    projectId: Int64!
+}
+
+"检查项目的工时是否开启接口返回"
+type CheckIsEnableWorkHourResp {
+    "该项目是否开启工时功能"
+    isEnable: Boolean!
+}
+
+"任务面板页展示的工时信息"
+type HomeIssueWorkHourInfo {
+    "任务的预估工时，单位：小时。"
+    predictWorkHour: String!
+    "任务的实际工时，单位：小时。"
+    actualWorkHour: String!
+    "预估工时详情列表"
+    predictList: [PredictListItem!]
+    "实际工时详情列表"
+    actualList: [ActualListItem!]
+}
+
+"预估工时详情列表单个对象"
+type PredictListItem {
+    "工时执行人名字"
+    name: String!
+    "工时，单位：小时。"
+    workHour: String!
+}
+
+"实际工时详情列表单个对象"
+type ActualListItem {
+    "工时执行人名字"
+    name: String!
+    "一个日期内的工时信息"
+    actualWorkHourDateList: [ActualWorkHourDateItem!]
+}
+
+type ActualWorkHourDateItem {
+    "实际工时的日期，开始日期。"
+    date: String!
+    "工时，单位：小时。"
+    workHour: String!
+}
+
+"工时统计的导出接口请求返回"
+type ExportWorkHourStatisticResp {
+    "导出文件的下载地址。"
+    url: String!
+}

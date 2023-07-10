@@ -1,0 +1,6 @@
+FROM envoyproxy/envoy:v1.11.2
+
+RUN apt-get update && apt-get -q install -y curl tzdata && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["envoy" "-c" "/etc/envoy/envoy.yaml"]

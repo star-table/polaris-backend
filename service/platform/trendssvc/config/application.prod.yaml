@@ -1,0 +1,25 @@
+Mysql:
+  # 数据库ip
+  Host: mysql.prod.svc.cluster.local
+  # 数据库端口
+  Port: 3306
+  # 数据库用户名
+  Usr: trends
+  # 数据库密码
+  Pwd: bJ*~13trends8
+  # 数据库库名
+  Database: polaris_project_manage_trendssvc
+Redis:
+  # redis ip
+  Host: redis.prod.svc.cluster.local
+  # redis 端口
+  Port: 6379
+  # redis 密码
+  Pwd: KJ32o89saks54ElK
+  # redis 数据库
+  Database: 0
+
+MQ:
+  Kafka:
+    # NameServers: kafka.prod.svc.cluster.local
+    NameServers: kafka.prod.svc.cluster.local:9092

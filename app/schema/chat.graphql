@@ -1,0 +1,94 @@
+type ChatData {
+    "群聊id"
+    outChatId:String!
+    "群聊名称"
+    name:String!
+    "群聊描述"
+    description:String
+    "关联id(关联列表时有)"
+    relationId:Int64
+    "群聊头像"
+    avatar:String!
+    "是否是项目主群"
+    isMain:Boolean!
+}
+
+input GetProjectMainChatIdReq {
+    "项目id"
+    projectId:Int64!
+}
+
+type GetProjectMainChatIdResp {
+    "关联群聊id"
+    chatId: String!
+}
+
+input GetFsProjectChatPushSettingsReq {
+    "三方群聊 id，通过群聊 id 获取群聊下的推送配置"
+    chatId: String!
+    "兼容旧的“项目动态设置”按钮链接。如果 chatId 为空，则后端使用该 projectId 查询对应的 chatId"
+    projectId: Int64!
+}
+
+type GetFsProjectChatPushSettingsResp {
+    "该群聊绑定的项目的配置。一个群聊可绑定多个项目。"
+    outChatSettings: GetFsProjectChatPushSettingsOneChat
+}
+
+type GetFsProjectChatPushSettingsOneChat {
+    tables: [GetFsProjectChatPushSettingsOneChatTables]
+    "添加任务(1开2关)"
+    createIssue:Int!
+    "任务有新的评论"
+    createIssueComment:Int!
+    "任务的某些字段被修改时，是否推送。1：推送（字段请看 modifyColumnsOfSend）"
+    updateIssueCase: Int!
+    "如果开启“任务修改推送”时，这些字段被修改时，才推送消息。"
+    modifyColumnsOfSend: [String]
+}
+
+type GetFsProjectChatPushSettingsOneChatTables {
+    "项目 id"
+    projectId:Int64!
+    "项目下的表 id"
+    tableId: String!
+}
+
+type GetFsProjectChatPushSettingsOneProOneTable {
+    "表的 id"
+    tableIdStr: String!
+    "创建任务时，是否推送。1：推送"
+    createIssue: Int!
+    "任务被评论时是否推送。1：推送"
+    createIssueComment: Int!
+    "任务的某些字段被修改时，是否推送。1：推送（字段请看 modifyColumnsOfSend）"
+    updateIssueCase: Int!
+    "如果开启“任务修改推送”时，这些字段被修改时，才推送消息"
+    modifyColumnsOfSend: [String]
+}
+
+input UpdateFsProjectChatPushSettingsReq {
+    "群 id"
+    chatId: String!
+    "兼容旧的“项目动态设置”按钮链接。如果 chatId 为空，则后端使用该 projectId 查询对应的 chatId"
+    projectId: Int64!
+    "配置数据的表信息"
+    tables: [UpdateFsProjectChatPushSettingsOfTableParam]
+    "添加任务(1开2关)"
+    createIssue:Int!
+    "任务有新的评论"
+    createIssueComment:Int!
+    "任务的某些字段被修改时，是否推送。1：推送（字段请看 modifyColumnsOfSend）"
+    updateIssueCase: Int!
+    "如果开启“任务修改推送”时，这些字段被修改时，才推送消息。"
+    modifyColumnsOfSend: [String]
+}
+
+input UpdateFsProjectChatPushSettingsOfTableParam {
+    "项目 id"
+    projectId:Int64!
+    "app id"
+    appId:Int64!
+    "项目下的表 id"
+    tableId: String
+}

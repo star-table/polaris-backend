@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-appsvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-appsvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-appsvc:/data/logs/polaris-appsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-appsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-appsvc
+    expose:
+      - "80"
+      - "10001"
+    ports:
+      - "10001:10001"
+
+networks:
+  envoymesh: {}

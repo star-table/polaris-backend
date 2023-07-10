@@ -1,0 +1,1048 @@
+
+input LessOrder {
+    "是否是正序"
+    asc:Boolean!
+    "字段"
+    column:String!
+}
+
+input LessCondsData {
+    "类型(between,equal,gt,gte,in,like,lt,lte,not_in,not_like,not_null,is_null,all_in,values_in)"
+    type:String!
+    "字段类型"
+    fieldType:String
+    "值"
+    value:Any
+    "值（数组）"
+    values:Any
+    "字段id"
+    column:String!
+    "左值"
+    left:Any
+    "右值"
+    right:Any
+    "嵌套"
+    conds:[LessCondsData!]
+    "不进行预处理"
+    noPretreat:Boolean
+}
+
+input CondsData {
+    "类型(between,equal,gt,gte,in,like,lt,lte,not_in,not_like,not_null,is_null,all_in,values_in)"
+    type:String!
+    "字段类型"
+    fieldType:String
+    "值"
+    value:Any
+    "字段id"
+    column:Int64!
+    "左值"
+    left:Any
+    "右值"
+    right:Any
+}
+
+input CondOrder {
+    "是否是正序"
+    asc:Boolean!
+    "字段"
+    column:Int64!
+}
+
+"首页任务tag信息"
+type HomeIssueTagInfo{
+    "标签id"
+    id: Int64!
+    "标签名"
+    name: String!
+    "背景颜色"
+    bgStyle:String!
+    "字体颜色"
+    fontStyle:String!
+}
+
+"任务结构体"
+type Issue{
+    "任务id"
+    id:Int64!
+    "组织id"
+    orgId:Int64!
+    "任务code"
+    code:String!
+    "项目id"
+    projectId:Int64!
+    "项目对象类型id"
+    projectObjectTypeId:Int64!
+    "标题"
+    title:String!
+    "是否归档"
+    isFiling:Int!
+    "负责人id 注:这个owner字段废弃使用，新增了下面的owners字段，为了支持多负责人"
+    owner:Int64!
+    "负责人id列表"
+    owners: [Int64!]
+    "优先级id"
+    priorityId:Int64!
+    "来源"
+    sourceId:Int64!
+    "问题类型id"
+    issueObjectTypeId:Int64!
+    "性质id"
+    propertyId:Int64!
+    "计划开始时间"
+    planStartTime:Time!
+    "计划结束时间"
+    planEndTime:Time!
+    "实际开始时间"
+    startTime:Time!
+    "实际结束时间"
+    endTime:Time!
+    "计划工时"
+    planWorkHour:Int!
+    "迭代id"
+    iterationId:Int64!
+    "版本id"
+    versionId:Int64!
+    "模块id"
+    moduleId:Int64!
+    "父任务id"
+    parentId:Int64!
+    "父任务标题"
+    parentTitle: String!
+    "父任务信息"
+    parentInfo:[ParentInfo!]!
+    "备注"
+    remark: String
+    "备注详情"
+    remarkDetail: String
+    "状态id"
+    status:Int64!
+    "创建者"
+    creator:Int64!
+    "创建时间"
+    createTime:Time!
+    "更新者"
+    updator:Int64!
+    "更新时间"
+    updateTime:Time!
+    "排序"
+    sort: Int64!
+    "是否删除,1是,2否"
+    isDelete:Int!
+    "审批状态（1待审批3审批通过）"
+    auditStatus:Int!
+    "影响的id集合"
+    issueIds:[Int64!]!
+    "表id"
+    tableId:String!
+    "数据id"
+    dataId:String
+}
+
+type ParentInfo{
+    "id"
+    id:Int64!
+    "标题"
+    title:String!
+    "code"
+    code:String!
+}
+
+"单个任务信息详情结构体"
+type IssueInfo{
+    "任务信息"
+    issue: Issue!
+    "项目信息"
+    project: HomeIssueProjectInfo!
+    "状态信息"
+    status: HomeIssueStatusInfo!
+    "优先级信息"
+    priority: HomeIssuePriorityInfo!
+    "执行人信息"
+    owner: [UserIdInfo!]
+    "执行人信息"
+    creatorInfo: UserIdInfo!
+    "参与人"
+    participantInfos: [UserIdInfo!]
+    "关注人"
+    followerInfos: [UserIdInfo!]
+    "下一个状态"
+    nextStatus: [HomeIssueStatusInfo!]
+    "标签信息"
+    tags: [HomeIssueTagInfo!]
+    "来源信息"
+    sourceInfo: IssueSourceInfo
+    "严重程度信息"
+    propertyInfo: IssuePropertyInfo
+    "类型信息"
+    typeInfo: IssueObjectTypeInfo
+    "迭代名称"
+    iterationName: String!
+    "子任务数量"
+    childsNum: Int64!
+    "子任务已完成数量"
+    childsFinishedNum: Int64!
+    "任务类型名称"
+    projectObjectTypeName:String!
+    "表名称"
+    tableName:String!
+    "状态列表"
+    allStatus:[HomeIssueStatusInfo!]
+    "关联任务数量"
+    relateIssueCount:Int64!
+    "关联资源数量"
+    relateResourceCount:Int64!
+    "关联评论数量"
+    relateCommentCount:Int64!
+    "自定义字段结果"
+    customField:[CustomValue!]
+    "工时信息"
+    workHourInfo: HomeIssueWorkHourInfo!
+    "确认人信息"
+    auditorsInfo:[UserIdInfoExtraForIssueAudit!]
+    "上次任务审批催办时间(时间戳0表示最近没有催办(可以催办))"
+    lastUrgeTime:Int64!
+    "上次**任务**的催办时间(时间戳0表示最近没有催办(可以催办))"
+    lastUrgeTimeForIssue:Int64!
+    "无码数据"
+    lessData:Map
+}
+
+"用户id信息"
+type UserIdInfoExtraForIssueAudit{
+    "用户id"
+    id:Int64!
+    "用户id"
+    userId: Int64!
+    "用户名称"
+    name: String!
+    "用户拼音"
+    namePy:String!
+    "用户头像"
+    avatar: String!
+    "工号：企业下唯一"
+    emplId: String!
+    "unionId： 开发者账号下唯一(暂时废弃，返回空)"
+    unionId: String!
+    "是否已被删除，为true则代表被组织移除"
+    isDeleted: Boolean!
+    "是否已被禁用, 为true则代表被组织禁用"
+    isDisabled: Boolean!
+    "状态(1未查看2已查看未审核3审核通过4驳回)"
+    auditStatus:Int!
+}
+
+"任务标签结构体"
+input IssueTagReqInfo{
+    "标签id"
+    id: Int64!
+    "标签名称"
+    name: String!
+}
+
+"子任务创建结构体"
+input IssueChildren{
+    "名称"
+    title:String!
+    "负责人"
+    ownerId: [Int64!]
+    "类型id，问题，需求...."
+    typeId: Int64
+    "任务所在表 id"
+    tableId: Int64!
+    "优先级"
+    priorityId: Int64!
+    "计划开始时间"
+    planStartTime:Time
+    "计划结束时间"
+    planEndTime:Time
+    "计划工作时长"
+    planWorkHour:Int
+    "备注"
+    remark:String
+    "状态id"
+    statusId:Int64
+    "关联的标签列表"
+    tags: [IssueTagReqInfo!]
+    "关注人"
+    followerIds: [Int64!]
+    "关联的附件id列表"
+    resourceIds:[Int64!]
+    "问题对象类型id"
+    issueObjectId:Int64
+    "来源id"
+    issueSourceId:Int64
+    "性质id"
+    issuePropertyId:Int64
+    "子任务"
+    children: [IssueChildren]
+    "自定义字段"
+    customField:[UpdateIssueCustionFieldData!]
+    "审批人"
+    auditorIds:[Int64!]
+    "迭代"
+    iterationId:Int64
+    "无码入参"
+    lessCreateIssueReq: Map
+    "处理业务时的辅助参数，比如导入任务时，向其中存储 import 表示导入来源，便于后续业务处理"
+    extraInfo: Map
+}
+
+"更新项目对象类型请求结构体"
+input MoveIssueReq {
+    "要更新的任务id"
+    id:Int64!
+    "移动到 项目id"
+    projectId:Int64!
+    "移动到 表id"
+    tableId:String!
+    "是否携带子任务(默认不带)"
+    takeChildren:Boolean
+    "标题"
+    title:String!
+    "需要携带过去的字段"
+    chooseField:[String!]
+    "需要携带的子任务id"
+    childrenIds:[Int64!]
+}
+
+"更新项目对象类型请求结构体"
+input MoveIssueBatchReq {
+    "要更新的任务id"
+    ids:[Int64!]!
+    "原来项目id"
+    fromProjectId:Int64!
+    "任务当前所属的 表id"
+    fromTableId:String!
+    "镜像应用id"
+    menuAppId:String
+    "项目id"
+    projectId:Int64!
+    "要更新的表id"
+    tableId:String!
+    "需要携带过去的字段"
+    chooseField:[String!]
+}
+
+"更新任务状态请求结构体"
+input UpdateIssueStatusReq{
+    "任务id"
+    id:Int64!
+    "要更新的状态id"
+    nextStatusId:Int64
+    "要更新的状态类型,1: 未开始，2：进行中，3：已完成"
+    nextStatusType: Int
+    "完成父任务时，是否同步更新子任务的状态,1:是，2：否，默认为否"
+    needModifyChildStatus: Int
+}
+
+"更新任务Sort请求结构体"
+input UpdateIssueSortReq{
+    "任务id"
+    id: Int64!
+    "任务所属项目，从该项目中移动任务顺序。"
+    fromProjectId: Int64
+    "任务所属的项目类型"
+    fromProjectObjectTypeId: Int64
+    "排序位置标记，上一个任务id, beforeId和afterId至少传一个，否则不会更新sort"
+    beforeId: Int64
+    "排序位置标记，下一个任务id"
+    afterId: Int64
+    "状态id（主要针对于敏捷任务）"
+    statusId:Int64
+    "前置任务数据id"
+    beforeDataId:String
+    "后置任务数据id"
+    afterDataId:String
+    "排序"
+    asc:Boolean
+}
+
+"删除任务响应结构体"
+input DeleteIssueReq{
+    "任务id"
+    id:Int64!
+    "是否携带子任务(默认带上，兼容以前的)"
+    takeChildren:Boolean
+}
+
+"批量删除任务请求结构体"
+input DeleteIssueBatchReq{
+    "项目id"
+    projectId:Int64!
+    "任务id"
+    ids:[Int64!]!
+    "镜像应用id"
+    menuAppId:String
+    "表id"
+    tableId:String!
+}
+
+"批量删除任务响应结构体"
+type DeleteIssueBatchResp {
+    "删除成功的id"
+    successIssues:[Issue!]!
+    "没有权限的任务id"
+    noAuthIssues:[Issue!]!
+    "还有子任务没有选择的父任务id"
+    remainChildrenIssues:[Issue!]!
+}
+
+"批量归档任务响应结构体"
+type ArchiveIssueBatchResp {
+    "成功的id"
+    successIssues:[Issue!]!
+    "没有权限的任务id"
+    noAuthIssues:[Issue!]!
+}
+
+"批量移动任务响应结构体"
+type MoveIssueBatchResp {
+    "成功的id"
+    successIssues:[Issue!]!
+    "没有权限的任务id"
+    noAuthIssues:[Issue!]!
+    "还有子任务没有选择的父任务id"
+    remainChildrenIssues:[Issue!]!
+    "单纯是子任务的任务id"
+    childrenIssues:[Issue!]!
+}
+
+"任务列表响应结构体"
+type IssueList{
+    "总数量"
+    total:Int64!
+    "任务列表"
+    list:[Issue!]
+}
+
+"首页的任务列表请求结构体"
+input HomeIssueInfoReq{
+    "关联类型，1：我发起的，2：我负责的，3：我参与的，4：我关注的，5：我审批的,6:待我审批的（审批人是我，我还没有审批的）"
+    relatedType: Int
+    "排序类型，1：项目分组，2：优先级分组，3：创建日期降序，4：最后更新日期降序, 5: 按开始时间最早, 6：按开始时间最晚, 8：按截止时间最近，9：按创建时间最早, 10: sort排序（正序）11：sort排序（倒序）12:截止时间（正序）13：优先级正序14：优先级倒序15：负责人正序16：负责人倒序17：编号正序18：编号倒序19：标题正序20：标题倒序21：状态正序（必须传项目id，敏捷必须指定任务栏）22：状态倒序（必须传项目id，敏捷必须指定任务栏）23:完成时间倒序24:按照传入id排序25:按照父任务正序26：按照父任务倒序"
+    orderType: Int
+    "状态,1:未完成，2：已完成，3：未开始，4：进行中，5: 已逾期，-1代表待确认，此状态用于审批"
+    status: Int
+    statusList:[Int!]
+    "任务真实状态集合(传入-1代表待确认，此状态用于审批)"
+    trulyStatusIds:[Int64!]
+    "是否逾期 （1是2否，不传为全部）"
+    isOverdue:Int
+    "流程状态id"
+    processStatusId: Int64
+    "类型，1：主任务,2 子任务"
+    type: Int
+    "截止时间开始时间点(若只选择开始时间：表示任务截止日期在这之后的所有任务)"
+    startTime: Time
+    "截止时间结束时间点(若只选择截止时间：则表示任务截止时间在这之前的所有任务)"
+    endTime: Time
+    "负责人"
+    ownerIds: [Int64!]
+    "创建人"
+    creatorIds: [Int64!]
+    "参与人"
+    participantIds: [Int64!]
+    "关注人"
+    followerIds: [Int64!]
+    "时间范围：本周，全部.."
+    timeScope: Time
+    "搜索筛选"
+    searchCond: String
+    "code筛选"
+    code:String
+    "项目id"
+    projectId: Int64
+    "迭代id"
+    iterationId: Int64
+    "是否已规划(是否关联了迭代)，1: 已规划，2：未规划 "
+    planType: Int
+    "项目对象类型id。任务状态改造后，改字段的实际代表的是 tableId。"
+    projectObjectTypeId: Int64
+    "支持多个项目对象类型同时做筛选。任务状态改造后，改字段的实际代表的是 tableId。"
+    projectObjectTypeIds: [Int64!]
+    "优先级"
+    priorityId: Int64
+    "优先级集合"
+    priorityIds: [Int64!]
+    "组合查询类型，1: 今日指派给我，2：最近截止(包括即将逾期和已逾期)，3：今日逾期，4：逾期完成, 5:即将逾期,6:今日创建,7:今日完成,8:今日我关注的，9：今日分配给我审批的，10:今日分配给我审批，待我审批的（审批人是我，我还没有审批的）"
+    combinedType: Int
+    "任务标签id"
+    issueTagId: [Int64!]
+    "项目是否归档(1是2否3所有,不传查询未归档)"
+    isFiling:Int
+    "任务是否归档（1是2否3所有，不传默认未归档）"
+    issueIsFiling:Int
+    "父任务id"
+    parentId:Int64
+    "上次更新时间（会查询这个时间点之后有变动的任务，其中包括被删除的任务）"
+    lastUpdateTime: Time
+    "是否查询父任务的子任务, 如果不是空，且值为1，则将子任务的父任务也查询出来"
+    enableParentIssues: Int
+    "周期开始时间（只要开始时间和截止时间有一个大于该项则命中条件）"
+    periodStartTime: Time
+    "周期结束时间（只要开始时间和截止时间有一个小于该项则命中条件）"
+    periodEndTime: Time
+    "附件资源id"
+    resourceId: Int64
+    "父子堆叠列表(1是2否，不传默认为否)"
+    isParentBeforeChid:Int
+    "任务类型"
+    issueObjectId:Int64
+    "任务类型集合"
+    issueObjectIds: [Int64!]
+    "严重程度"
+    issuePropertyId:Int64
+    "严重程度集合"
+    issuePropertyIds:[Int64!]
+    "需求来源"
+    issueSourceId:Int64
+    "需求来源集合"
+    issueSourceIds:[Int64!]
+    "任务id集合"
+    issueIds:[Int64!]
+    "分组类别(仅用于homeIssuesGroup接口:1负责人2状态3优先级4任务栏5迭代6具体状态，其余默认不分组)"
+    groupType:Int
+    "添加前置任务时传递任务id，排除掉后置任务中已有的任务"
+    issueIdForBefore:Int64
+    "添加后置任务列表时传递任务id，排除掉前置任务中已有的任务"
+    issueIdForAfter:Int64
+    "确认人"
+    auditorIds:[Int64!]
+    "自定义字段(取并集)"
+    conds:[CondsData!]
+    "自定义字段排序"
+    condOrder:[CondOrder!]
+    "无码格式"
+    lessConds:LessCondsData
+    "无码格式排序"
+    lessOrder:[LessOrder!]
+    "仅通过极星查询数据"
+    isOnlyPolaris:Boolean
+    "分配时间开始"
+    ownerChangeTimeStart:Time
+    "分配时间截至"
+    ownerChangeTimeEnd:Time
+    "当前任务（用于变更父任务时查询任务列表）"
+    currentIssueId:Int64
+    "镜像应用id"
+    menuAppId:String
+    "表Id"
+    tableId:String
+    "需要查询的无码字段（id不需要传，默认会查）"
+    filterColumns:[String!]
+}
+
+"首页任务列表响应结构体"
+type HomeIssueInfoResp{
+    "总数量"
+    total:Int64!
+    "实际总数量"
+    actualTotal: Int64!
+    "首页任务列表"
+    list:[HomeIssueInfo!]
+}
+
+"首页任务列表响应结构体"
+type HomeIssueInfoGroupResp{
+    "总数量"
+    total:Int64!
+    "实际总数量"
+    actualTotal: Int64!
+    "时间跨度"
+    timeSpan:Int64!
+    "分组列表"
+    group:[HomeIssueGroup!]
+}
+
+type HomeIssueGroup{
+    id:Int64!
+    name:String!
+    "图片"
+    avatar:String!
+    "背景色"
+    bgStyle: String!
+    "字体色"
+    fontStyle: String!
+    "时间跨度"
+    timeSpan:Int64!
+    "满足甘特图的任务数量"
+    fitTotal:Int64!
+    list:[HomeIssueInfo!]
+}
+
+"首页任务信息结构体"
+type HomeIssueInfo{
+    "任务id"
+    issueId:Int64!
+    "父任务id"
+    parentId:Int64!
+    "父任务信息"
+    parentInfo:[ParentInfo!]!
+    "任务标题"
+    title:String!
+    "是否是查询结果附带的父任务1是0否"
+    isAttach:Int!
+    "父任务是否是满足条件1是0否"
+    parentIsMeetCondition:Int!
+    "任务信息"
+    issue: Issue!
+    "项目信息"
+    project: HomeIssueProjectInfo!
+    "执行人信息"
+    owner: [HomeIssueOwnerInfo!]
+    "状态信息"
+    status: HomeIssueStatusInfo!
+    "优先级信息"
+    priority: HomeIssuePriorityInfo!
+    "标签信息"
+    tags: [HomeIssueTagInfo!]
+    "子任务数量"
+    childsNum: Int64!
+    "子任务已完成数量"
+    childsFinishedNum: Int64!
+    "任务栏名称"
+    projectObjectTypeName:String!
+    "状态列表"
+    allStatus:[HomeIssueStatusInfo!]
+    "来源信息"
+    sourceInfo: IssueSourceInfo
+    "严重程度信息"
+    propertyInfo: IssuePropertyInfo
+    "类型信息"
+    typeInfo: IssueObjectTypeInfo
+    "迭代名称"
+    iterationName: String!
+    "关注人"
+    followerInfos: [UserIdInfo!]
+    "关联任务数量"
+    relateIssueCount:Int64!
+    "关联资源数量"
+    relateResourceCount:Int64!
+    "关联评论数量"
+    relateCommentCount:Int64!
+    "自定义字段结果"
+    customField:[CustomValue!]
+    "工时信息"
+    workHourInfo: HomeIssueWorkHourInfo!
+    "确认人信息"
+    auditorsInfo:[UserIdInfoExtraForIssueAudit!]
+    "后置任务id集合"
+    afterIssueIds:[Int64!]
+    "无码数据"
+    lessData:Map
+}
+
+"任务的简化信息"
+type IssueRestInfo{
+    "任务id"
+    id: Int64!
+    "任务标题"
+    title: String!
+    "负责人"
+    ownerId: Int64!
+    "负责人名称"
+    ownerName: String!
+    "负责人头像"
+    ownerAvatar: String!
+    "是否已被删除，为true则代表被组织移除"
+    ownerIsDeleted: Boolean!
+    "是否已被禁用, 为true则代表被组织禁用"
+    ownerIsDisabled: Boolean!
+    "是否已完成"
+    finished: Boolean!
+    "状态id"
+    statusId:Int64!
+    "任务栏id"
+    projectObjectTypeId:Int64!
+    "迭代id"
+    iterationId:Int64!
+    "状态名称"
+    statusName:String!
+    "计划结束时间"
+    planEndTime:Time!
+    "计划开始时间"
+    planStartTime:Time!
+    "完成时间"
+    endTime:Time!
+    "优先级信息"
+    priorityInfo:HomeIssuePriorityInfo!
+    "状态信息"
+    statusInfo:HomeIssueStatusInfo!
+    "任务栏名称"
+    projectObjectTypeName:String!
+    "迭代名称"
+    iterationName:String!
+    "状态信息"
+    allStatus: [HomeIssueStatusInfo!]
+    "关联状态(1关联2被关联)"
+    type:Int!
+    "审批状态（1待审批3审批通过）"
+    auditStatus:Int!
+    "项目类型"
+    projectTypeId:Int64!
+}
+
+"首页任务-优先级信息结构体"
+type HomeIssuePriorityInfo{
+    "优先级id"
+    id: Int64!
+    "优先级名称"
+    name: String!
+    "背景色"
+    bgStyle: String!
+    "字体色"
+    fontStyle: String!
+}
+
+"任务-来源信息结构体"
+type IssueSourceInfo{
+    "id"
+    id: Int64!
+    "来源名称"
+    name: String!
+}
+
+"任务-类型信息结构体"
+type IssueObjectTypeInfo{
+    "类型id"
+    id: Int64!
+    "类型名"
+    name: String!
+}
+
+"任务-严重程度结构体"
+type IssuePropertyInfo{
+    "id"
+    id: Int64!
+    "来源名称"
+    name: String!
+}
+
+"首页任务-状态信息结构体"
+type HomeIssueStatusInfo{
+    "状态id"
+    id: Int64!
+    "状态名"
+    name: String!
+    "显示名，为空则显示状态名"
+    displayName: String
+    "背景色"
+    bgStyle: String!
+    "字体色"
+    fontStyle: String!
+    "状态类型,1未开始,2进行中,3已完成"
+    type: Int!
+    "排序"
+    sort:Int!
+}
+
+"首页任务-项目信息结构体"
+type HomeIssueProjectInfo{
+    "项目id"
+    id: Int64!
+    "项目对应的应用 id（无码系统）"
+    appId: String!
+    "项目名称"
+    name: String!
+    "是否归档(1是2否)"
+    isFilling:Int!
+    "项目类型"
+    projectTypeId:Int64!
+    "项目隐私状态。1开启隐私；2不开启。"
+    privacyStatus: Int!
+}
+
+"首页任务-负责人信息结构体"
+type HomeIssueOwnerInfo{
+    "负责人信息"
+    id: Int64!
+    "负责人id"
+    userId:Int64!
+    "负责人名称"
+    name: String!
+    "负责人头像"
+    avatar: String
+    "是否已被删除，为true则代表被组织移除"
+    isDeleted: Boolean!
+    "是否已被禁用, 为true则代表被组织禁用"
+    isDisabled: Boolean!
+}
+
+"任务状态数量统计请求结构体"
+input IssueStatusTypeStatReq{
+    "项目id"
+    projectId: Int64
+    "迭代id"
+    iterationId: Int64
+    "关联类型：1我负责的2我参与的3我关注的4我发起的5我确认的"
+    relationType: Int
+}
+
+"每日个人完成图数据统计响应数据"
+type IssueDailyPersonalWorkCompletionStatData{
+    "日期"
+    statDate: String!
+    "完成数量"
+    completedCount: Int64!
+}
+
+"任务状态数量统计响应结构体"
+type IssueStatusTypeStatResp{
+    "状态为未开始的数量"
+    notStartTotal:Int64!
+    "状态为进行中的数量"
+    processingTotal: Int64!
+    "状态为已完成的数量"
+    completedTotal: Int64!
+    "今日完成数"
+    completedTodayTotal: Int64!
+    "状态为逾期的数量"
+    overdueTotal: Int64!
+    "状态为明日逾期"
+    overdueTomorrowTotal: Int64!
+    "逾期完成"
+    overdueCompletedTotal:Int64!
+    "任务总数"
+    total:Int64!
+    "今日到期"
+    overdueTodayTotal:Int64!
+    "即将到期"
+    beAboutToOverdueSum:Int64!
+    "指派给我的任务"
+    todayCount:Int64!
+    "今日创建"
+    todayCreateCount:Int64!
+    "@我的数量"
+    callMeTotal:Int64!
+    "待确认的任务数量"
+    waitConfirmedTotal:Int64!
+    "概览"
+    list:[StatCommon!]
+}
+
+type StatCommon{
+    "名称"
+    name:String!
+    "数量"
+    count:Int64!
+}
+
+
+type IssueStatByObjectType{
+    "对象类型id"
+    projectObjectTypeId: Int64
+    "对象类型名称"
+    projectObjectTypeName: String
+    "数量"
+    total:Int64!
+}
+type IssueStatusTypeStatDetailResp{
+    "未开始的统计"
+    notStart:[IssueStatByObjectType]!
+    "进行中的统计"
+    processing:[IssueStatByObjectType]!
+    "已完成的统计"
+    completed:[IssueStatByObjectType]!
+}
+
+"添加任务评论请求结构体"
+input CreateIssueCommentReq{
+    "任务id"
+    issueId: Int64!
+    "评论信息"
+    comment: String!
+    "提及的用户id"
+    mentionedUserIds: [Int64!]
+    "评论添加附件的资源id"
+    attachmentIds: [Int64!]
+}
+
+"任务添加关联任务"
+input UpdateIssueAndIssueRelateReq{
+    "任务id"
+    issueId: Int64!
+    "添加的关联任务id集合"
+    addRelateIssueIds: [Int64!]
+    "删除的关联任务id集合"
+    delRelateIssueIds: [Int64!]
+}
+
+"任务分配排行请求结构体"
+input IssueAssignRankReq{
+    "项目Id"
+    projectId: Int64!
+    "rank数量， 1 <= rankTop <= 100， 默认为5"
+    rankTop: Int
+}
+
+"任务分配信息"
+type IssueAssignRankInfo{
+    "姓名"
+    name: String!
+    "用户头像"
+    avatar: String!
+    "工号：企业下唯一"
+    emplId: String!
+    "分配的未完成的任务数量"
+    incompleteissueCount: Int64!
+}
+
+type ExportIssueTemplateResp{
+    "模板地址"
+    url:String!
+}
+
+type issueListStatData{
+    "对象类型id"
+    projectObjectTypeId: Int64!
+    "对象类型名称"
+    projectObjectTypeName: String!
+    "数量"
+    total:Int64!
+    "已完成数量"
+    finishedCount:Int64!
+    "逾期数量"
+    overdueCount:Int64!
+}
+
+input CopyIssueReq{
+    "任务id"
+    oldIssueId:Int64!
+    "任务标题"
+    title:String # 没用了
+    "项目id"
+    projectId:Int64!
+    "迭代id(没有则填0)"
+    iterationId:Int64 # 没用了
+    "状态id(没有则填0)"
+    statusId:Int64 # 没用了
+    "复制内容"
+    chooseField:[String!]
+    "需要复制的子任务id"
+    childrenIds:[Int64!]
+    "表id"
+    tableId:String!
+}
+
+input CopyIssueBatchReq{
+    "原有项目id"
+    oldProjectId:Int64!
+    "任务id"
+    oldIssueIds:[Int64!]!
+    "目标项目id"
+    projectId:Int64!
+    "迭代id(没有则填0)"
+    iterationId:Int64!
+    "状态id(没有则填0)"
+    statusId:Int64!
+    "复制内容"
+    chooseField:[String!]!
+    "表id"
+    tableId:String!
+}
+
+"转化为父任务请求结构体"
+input ConvertIssueToParentReq{
+    "要更新的任务id"
+    id:Int64!
+    "任务所属项目的 id，从该项目中移动任务。"
+    fromProjectId: Int64
+#    "要更新的projectObjectType"
+#    projectObjectTypeId:Int64!
+    "状态id"
+    statusId:Int64
+    "迭代id"
+    iterationId:Int64
+    "表id"
+    tableId:String!
+    "项目id"
+    projectId:Int64!
+}
+
+input ChangeParentIssueReq{
+    "任务id"
+    issueId:Int64!
+    "任务所属项目的 id，从该项目中移动任务。"
+    fromProjectId: Int64
+    "变更的父任务id"
+    ParentId:Int64!
+}
+
+input BeforeAfterIssueListReq {
+    "任务id"
+    issueId:Int64!
+}
+
+input UrgeIssueReq {
+    "任务id"
+    issueId: Int64!
+    "是否在任务群聊中 at 负责人"
+    isNeedAtIssueOwner: Boolean!
+    "催促内容。（可选）"
+    urgeText: String
+}
+
+input AuditIssueReq {
+    "任务id"
+    issueId:Int64!
+    "审核结果(3确认4驳回)"
+    status:Int!
+    "评论"
+    comment:String
+    "附件"
+    attachments:[AttachmentSimpleInfo!]
+}
+
+input ViewAuditIssueReq {
+    "任务id"
+    issueId:Int64!
+}
+
+input WithdrawIssueReq {
+    "任务id"
+    issueId:Int64!
+}
+
+input UrgeAuditIssueReq {
+    "任务id"
+    issueId: Int64!
+    "是否在任务群聊中 at 负责人"
+    isNeedAtIssueOwner: Boolean
+    "催促内容"
+    urgeText: String!
+}
+
+input GetExportFieldsReq {
+    "项目id"
+    projectId: Int64
+}
+
+type GetExportFieldsResp {
+    fields: [GetExportFieldsRespFieldsItem]
+}
+
+type GetExportFieldsRespFieldsItem {
+    "字段id"
+    fieldId: Int64!
+    "字段名"
+    name: String!
+    "是否必须。true 表示必须。如果必须，则必须导出该字段。"
+    isMust: Boolean!
+    "定义类型。10原生字段，11用户自定义，12系统字段"
+    defineType: Int!
+}
+
+input IssueInfoNotDeleteReq {
+    "任务id"
+    issueId:Int64!
+}
+
+type ThirdAccountBindListResp {
+    "平台"
+    sourceChannel:String!
+    "姓名"
+    name:String!
+    "头像"
+    avatar:String!
+}

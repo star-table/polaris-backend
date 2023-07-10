@@ -1,0 +1,12 @@
+
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId1}}, {{.OrgId}}, {{.ProjectId}}, '32', '31', '0', '0', '1', "{{.Day1}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId2}}, {{.OrgId}}, {{.ProjectId}}, '32', '32', '0', '0', '0', "{{.Day2}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId3}}, {{.OrgId}}, {{.ProjectId}}, '28', '21', '1', '0', '0', "{{.Day3}}", '1');
+INSERT INTO `ppm_sta_project_day_stat` (`id`, `org_id`, `project_id`, `issue_count`, `issue_wait_count`, `issue_running_count`, `issue_overdue_count`, `issue_end_count`, `stat_date`, `status`) VALUES
+({{.StatId4}}, {{.OrgId}}, {{.ProjectId}}, '22', '22', '0', '0', '0', "{{.Day4}}", '1');
+
+INSERT INTO `ppm_pri_issue_relation` (`id`, `org_id`, `project_id`, `issue_id`, `relation_id`, `relation_code`, `relation_type`) VALUES ({{.RelationId1}}, {{.OrgId}}, {{.ProjectId}}, {{.IssueId}}, {{.RelateIssueId}}, '', '4')
+

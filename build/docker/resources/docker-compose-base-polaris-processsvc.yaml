@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+
+  polaris-processsvc:
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-processsvc:#DOCKER_TAG#
+    restart: always
+    volumes:
+      - /data/logs/polaris-processsvc:/data/logs/polaris-processsvc
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-processsvc
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-processsvc
+    expose:
+      - "80"
+      - "12003"
+    ports:
+      - "12003:12003"
+
+networks:
+  envoymesh: {}

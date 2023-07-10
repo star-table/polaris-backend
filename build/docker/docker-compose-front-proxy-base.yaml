@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+
+  polaris-#SERVICE_NAME_ENV#:
+    build:
+      context: .
+      dockerfile: Dockerfile-polaris-#SERVICE_NAME_ENV#
+    image: registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-#SERVICE_NAME_ENV#:#DOCKER_TAG#
+    volumes:
+      - /data/logs/polaris-#SERVICE_NAME_ENV#:/data/logs/polaris-#SERVICE_NAME_ENV#
+    networks:
+      envoymesh:
+        aliases:
+          - polaris-#SERVICE_NAME_ENV#
+    environment:
+      - POL_ENV=#POL_ENV#
+      - SERVICE_NAME=polaris-#SERVICE_NAME_ENV#
+    expose:
+      - "80"
+      - "#DOCKER_SVC_PORT#"
+    ports:
+      - "#HOST_PORT#:80"
+      - "#DOCKER_SVC_PORT#:#DOCKER_SVC_PORT#"
+
+networks:
+  envoymesh: {}

@@ -1,0 +1,80 @@
+type StatExtResp{
+    issue: StatIssueExt!
+}
+
+type StatIssueExt{
+    data: Any
+}
+
+type StatData{
+    issueCount: Int!
+    issueWaitCount: Int!
+    issueRunningCount: Int!
+    issueEndCount: Int!
+    storyPointCount: Int!
+    storyPointWaitCount: Int!
+    storyPointRunningCount: Int!
+    storyPointEndCount: Int!
+}
+
+type BuildInfoDefine {
+    gitCommitLog: String!
+    gitStatus:  String!
+    buildTime:  String!
+    buildGoVersion: String!
+}
+
+
+input AreaLinkageListReq{
+    "是否是根"
+    isRoot:Boolean
+    "大陆板块"
+    continentId:Int64
+    "国家Id"
+    countryId:Int64
+    "地区Id"
+    areaId:Int64
+    "省/州Id"
+    stateId:Int64
+    "城市Id"
+    cityId:Int64
+}
+
+type AreaLinkageListResp{
+    list:[AreaLinkageResp!]
+}
+
+
+type AreaLinkageResp{
+    "主键"
+    id:Int64!
+    "名字"
+    name:String!
+    "中文名"
+    cname:String!
+    "code"
+    code:String!
+    "是否默认选择"
+    isDefault:Int!
+}
+
+type IndustryListResp{
+    list:[IndustryResp!]
+}
+
+
+type IndustryResp{
+    "主键"
+    id:Int64!
+    "名字"
+    name:String!
+    "中文名"
+    cname:String!
+}
+
+type BoolResp{
+    "是否符合期望、确定、ok：true 表示成功、是、确定；false 表示否定、异常"
+    isTrue: Boolean!
+}
+
+

@@ -1,0 +1,81 @@
+"飞书免登陆Code 登录验证请求结构体"
+input FeiShuAuthReq{
+    "免登code"
+    code: String!
+    "免登code类型，1: code2session, 2: oauth(默认为1)"
+    codeType: Int
+}
+
+"初始化飞书账号"
+input InitFeiShuAccountReq{
+    "codeToken"
+    codeToken: String!
+}
+
+"飞书免登陆Code 登录验证响应结构体"
+type FeiShuAuthResp{
+    "持久化登录信息的Token"
+    token: String!
+    "组织id"
+    orgId: Int64!
+    "组织名称"
+    orgName: String!
+    "组织code"
+    orgCode: String!
+    "用户id"
+    userId: Int64!
+    "用户姓名"
+    name: String!
+    "企业ID"
+    tenantKey: String!
+    "用户OpenID"
+    openId: String!
+    "是否为企业管理"
+    isAdmin: Boolean!
+}
+
+"获取飞书免登陆Code认证信息"
+type FeiShuAuthCodeResp{
+    "企业ID"
+    tenantKey: String!
+    "用户OpenID"
+    openId: String!
+    "是否为企业管理"
+    isAdmin: Boolean!
+    "是否被绑定"
+    binding: Boolean!
+    "refreshToken"
+    refreshToken: String!
+    "accessToken"
+    accessToken: String!
+    "token"
+    token: String!
+    "codeToken"
+    codeToken: String!
+    "组织id"
+    orgId: Int64!
+    "组织名称"
+    orgName: String!
+    "外部组织名称"
+    outOrgName: String!
+    "组织code"
+    orgCode: String!
+    "用户id"
+    userId: Int64!
+    "用户姓名"
+    name: String!
+}
+
+"绑定飞书请求结构体"
+input BoundFeiShuReq{
+    "orgId"
+    orgId: Int64!
+    "codeToken"
+    codeToken: String!
+}
+
+"绑定飞书账号"
+input BoundFeiShuAccountReq{
+    "codeToken"
+    codeToken: String!
+}

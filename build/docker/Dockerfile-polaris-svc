@@ -1,0 +1,34 @@
+FROM registry-vpc.cn-shanghai.aliyuncs.com/polaris-team/polaris-svc-base:v0.0.2
+
+# 服务名
+ENV SERVICE_NAME #SERVICE_NAME_ENV#
+# api段路径
+ENV API_PATH #API_PATH_ENV#
+# 启动端口
+ENV API_PORT #API_PORT_ENV#
+
+ADD ./${SERVICE_NAME}/ /data/app/${SERVICE_NAME}/
+COPY ./start_polaris-svc.sh /data/app/${SERVICE_NAME}/bin/docker_start.sh
+COPY ./polaris-svc.yaml  /etc/envoy/${SERVICE_NAME}.yaml
+
+#RUN apk update && apk upgrade && \
+#        apk add bash && \
+#        apk add tzdata && \
+#        apk add openssl-dev && \
+#        cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+#        echo "Asia/Shanghai" > /etc/timezone && \
+#        mkdir -p /data/app/${SERVICE_NAME}/ && \
+#        mkdir -p /data/logs/${SERVICE_NAME}/ && \
+#        chmod u+x /data/app/${SERVICE_NAME}/bin/*.sh && \
+#        sed -i "s/#API_PATH#/${API_PATH}/g" /etc/${SERVICE_NAME}.yaml && \
+#        sed -i "s/#API_PORT#/${API_PORT}/g" /etc/${SERVICE_NAME}.yaml
+
+RUN mkdir -p /data/logs/${SERVICE_NAME}/ && \
+        chmod u+x /data/app/${SERVICE_NAME}/bin/*.sh && \
+        sed -i "s/#API_PATH#/${API_PATH}/g" /etc/envoy/${SERVICE_NAME}.yaml && \
+        sed -i "s/#API_PORT#/${API_PORT}/g" /etc/envoy/${SERVICE_NAME}.yaml
+
+WORKDIR /data/app/${SERVICE_NAME}/
+
+ENTRYPOINT ["./bin/docker_start.sh"]
+# ENTRYPOINT ["ping", "8.8.8.8"]

@@ -1,0 +1,7 @@
+Mysql:
+  Host: 172.19.132.102
+  Port: 3306
+  Usr: root
+  Pwd: doulang2022
+  # 数据库库名
+  Database: polaris_project_manage_commonsvc_uat

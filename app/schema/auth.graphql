@@ -1,0 +1,154 @@
+type InternalAuthResp{
+    hasPermission: Any!
+}
+
+"用户登录请求结构体"
+input UserLoginReq{
+    "登录类型: 1、短信验证码登录，2、账号密码登录，3、邮箱验证码登录"
+    loginType: Int!
+    "登录类型为1时，loginName为手机号； 登录类型为3时，loginName为邮箱"
+    loginName: String!
+    "登录类型为2时，密码必传"
+    password: String
+    "验证码"
+    authCode: String
+    "注册时可以带上名字"
+    name: String
+    "邀请码, 邀请注册时必填"
+    inviteCode: String
+    "来源通道"
+    sourceChannel: String!
+    "平台"
+    sourcePlatform: String!
+    "codeToken"
+    codeToken: String
+}
+
+"用户登录响应结构体"
+type UserLoginResp{
+    "用户token"
+    token: String!
+    "用户id"
+    userId: Int64!
+    "组织id"
+    orgId: Int64!
+    "组织名称"
+    orgName: String!
+    "组织code"
+    orgCode: String!
+    "用户名称"
+    name: String!
+    "头像"
+    avatar: String!
+    "是否需要创建组织"
+    needInitOrg: Boolean!
+    "是否不是飞书手机号"
+    notFsMobile:Boolean!
+}
+
+"获取邀请码响应结构体"
+type GetInviteCodeResp{
+    "邀请码"
+    inviteCode: String!
+    "有效时长，单位：秒"
+    expire: Int!
+}
+
+"获取邀请码请求结构体"
+input GetInviteCodeReq{
+    "平台"
+    sourcePlatform: String
+}
+
+"获取邀请信息请求结构体"
+input GetInviteInfoReq{
+    "邀请code"
+    inviteCode: String!
+}
+
+"获取邀请信息响应结构体"
+type GetInviteInfoResp{
+    "组织id"
+    orgId: Int64!
+    "组织名"
+    orgName: String!
+    "邀请人id"
+    inviterId: Int64!
+    "邀请人姓名"
+    inviterName: String!
+}
+
+"找回密码请求结构体"
+input RetrievePasswordReq{
+    "账号，可以是邮箱或者手机号"
+    username: String!
+    "验证码"
+    authCode: String
+    "新密码"
+    newPassword: String!
+}
+
+"重新设置密码请求结构体"
+input ResetPasswordReq{
+    "当前密码"
+    currentPassword: String!
+    "新密码"
+    newPassword: String!
+}
+
+"设置登录密码密码请求结构体"
+input SetPasswordReq{
+    "密码"
+    password: String!
+}
+
+"解绑登录方式请求结构体（只剩下一种登录方式的时候不允许解绑）"
+input UnbindLoginNameReq{
+    "地址类型: 1：手机号，2：邮箱"
+    addressType: Int!
+    "验证码"
+    authCode: String!
+}
+
+"绑定手机号或者邮箱请求结构体"
+input BindLoginNameReq{
+    "登录地址，手机号或者邮箱"
+    address: String!
+    "地址类型: 1：手机号，2：邮箱"
+    addressType: Int!
+    "验证码"
+    authCode: String!
+}
+
+"检测邮箱、手机号、账户是否存在请求结构体"
+input CheckLoginNameReq{
+    "登录地址，手机号或者邮箱"
+    address: String!
+    "地址类型: 1：手机号，2：邮箱"
+    addressType: Int!
+}
+
+"用户注册请求结构体"
+input UserRegisterReq{
+    "注册用户名（邮箱，手机号，账号等等）"
+    userName: String!
+    "注册类型(1,手机号，2，账号，3，邮箱)(暂时只支持邮箱/手机)"
+    registerType: Int!
+    "姓名"
+    name: String
+    "密码，只有注册类型为2时必填"
+    password: String
+    "短信或者邮箱验证码，当注册类型为1和3时必填"
+    authCode: String
+    "来源通道"
+    sourceChannel: String!
+    "平台"
+    sourcePlatform: String!
+}
+
+"用户注册响应结构体"
+type UserRegisterResp{
+    "用户token"
+    token: String!
+}
+

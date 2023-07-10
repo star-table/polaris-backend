@@ -1,0 +1,12 @@
+cd %~dp0
+cd ../../
+start .\service\basic\idsvc\bin\build.bat
+start .\service\basic\msgsvc\bin\build.bat
+start .\service\basic\commonsvc\bin\build.bat
+start .\service\platform\orgsvc\bin\build.bat
+start .\service\platform\processsvc\bin\build.bat
+start .\service\platform\projectsvc\bin\build.bat
+start .\service\platform\resourcesvc\bin\build.bat
+start .\service\platform\trendssvc\bin\build.bat
+start .\service\platform\websitesvc\bin\build.bat
+start .\service\platform\ordersvc\bin\build.bat

@@ -1,0 +1,48 @@
+Server:
+  Port: 10003
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-msgsvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-msgsvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-msgsvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+
+Application:
+  Name: msgsvc
+  Version:
+Sentry:
+  Dsn: https://c85dad51d1b94ece916a2ccff1d3d693@sentry.startable.cn/16

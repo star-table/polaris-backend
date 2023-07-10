@@ -1,0 +1,43 @@
+"优先级结构体"
+type Priority{
+	"主键"
+	id:Int64!
+	"组织id,全局的填0"
+	orgId:Int64!
+	"语言编号"
+	langCode:String!
+	"名称"
+	name:String!
+	"类型,1项目优先级,2:需求/任务等优先级"
+	type:Int!
+	"排序"
+	sort:Int!
+	"背景颜色"
+	bgStyle:String!
+	"字体颜色"
+	fontStyle:String!
+	"是否默认,1是,2否"
+	isDefault:Int!
+	"描述"
+	remark:String!
+	"状态,  1可用,2禁用"
+	status:Int!
+	"创建人"
+	creator:Int64!
+	"创建时间"
+	createTime:Time!
+	"更新人"
+	updator:Int64!
+	"更新时间"
+	updateTime:Time!
+	"乐观锁"
+	version:Int!
+	"是否删除,1是,2否"
+	isDelete:Int!
+}
+
+"优先级列表响应结构体"
+type PriorityList{
+	total:Int64!
+	list:[Priority!]
+}

@@ -1,0 +1,68 @@
+
+input GetIssueViewListReq {
+    "筛选：视图 id，支持多个 id"
+    ids: [Int64!]
+    "筛选：项目 id"
+    projectId: Int64
+    "筛选：视图名称。模糊查询"
+    viewName: String
+    "筛选：是否私有，true 私有，false 公开"
+    isPrivate: Boolean
+    "筛选：类型，1：表格视图，2：看板视图，3：照片视图"
+    type: Int
+    "所属任务类型 id：需求、任务、缺陷的 id 值"
+    projectObjectTypeId: Int64
+    "排序类型。1创建时间顺序，2创建时间倒序，3更新时间顺序，4更新时间倒序。默认1。"
+    sortType: Int
+    "页码"
+    page: Int
+    "页大小"
+    size: Int
+}
+
+type getIssueViewListResp {
+    "总数量"
+    total: Int64!
+    "查询到的视图列表"
+    list: [GetIssueViewListItem!]!
+}
+
+type GetIssueViewListItem {
+    "主键id"
+    id: Int64!
+    "项目 id"
+    projectId: Int64!
+    "视图配置"
+    config: String!
+    "视图备注"
+    remark: String!
+    "是否私有"
+    isPrivate: Boolean!
+    "视图名称"
+    viewName: String!
+    "类型，1：表格视图，2：看板视图，3：照片视图"
+    type: Int!
+    "视图排序"
+    sort: Int64!
+    "所属任务类型 id：需求、任务、缺陷的 id 值"
+    projectObjectTypeId: Int64!
+}
+
+input UpdateIssueViewReq {
+    "主键id，根据主键更新"
+    id: Int64!
+    "更新值：视图配置"
+    config: String
+    "更新值：视图备注"
+    remark: String
+    "更新值：是否私有，true 私有，false 公开"
+    isPrivate: Boolean
+    "更新值：视图名称"
+    viewName: String
+    "更新值：类型，1：表格视图，2：看板视图，3：照片视图"
+    type: Int
+    "视图排序"
+    sort: Int64
+    "所属任务类型 id：需求、任务、缺陷的 id 值"
+    projectObjectTypeId: Int64
+}

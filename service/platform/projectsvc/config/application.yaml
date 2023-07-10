@@ -1,0 +1,48 @@
+Server:
+  Port: 12002
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-projectsvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-projectsvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-projectsvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+Sentry:
+  Dsn: https://85421179c0c24aa795c3ce2e71140825@sentry.startable.cn/11
+
+Application:
+  Name: projectsvc
+  Version:

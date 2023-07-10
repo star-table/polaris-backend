@@ -1,0 +1,215 @@
+"个人信息"
+type PersonalInfo{
+    "主键"
+    id:Int64!
+    "工号"
+    emplId: String
+    "组织id"
+    orgId:Int64!
+    "组织名称"
+    orgName: String!
+    "组织code"
+    orgCode: String!
+    "名称"
+    name:String!
+    "第三方名称"
+    thirdName:String!
+    "登录名"
+    loginName:String!
+    "登录名编辑次数"
+    loginNameEditCount:Int!
+    "邮箱"
+    email:String!
+    "电话"
+    mobile:String!
+    "生日"
+    birthday:Time!
+    "性别"
+    sex:Int!
+    "剩余使用时长"
+    rimanente:Int!
+    "付费等级"
+    level:Int!
+    "付费等级名"
+    levelName:String!
+    "头像"
+    avatar:String!
+    "来源"
+    sourceChannel:String!
+    "语言"
+    language:String!
+    "座右铭"
+    motto:String!
+    "上次登录ip"
+    lastLoginIp:String!
+    "上次登录时间"
+    lastLoginTime:Time!
+    "登录失败次数"
+    loginFailCount:Int!
+    "创建时间"
+    createTime:Time!
+    "更新时间"
+    updateTime:Time!
+    "密码是否设置过(1已设置0未设置)"
+    passwordSet:Int!
+    "是否需要提醒（1需要2不需要）"
+    remindBindPhone:Int!
+    "是否是超管"
+    isAdmin:Boolean!
+    "是否是管理员"
+    isManager:Boolean!
+    "权限"
+    functions:[String!]!
+    "一些额外数据，如：观看新手指引的状态"
+    extraDataMap: Map!
+}
+
+type GetPayRemindResp {
+    "是否需要提示付费信息(为空则表示不需要，否则展示提示信息)"
+    remindPayExpireMsg:String!
+}
+
+"用户id信息"
+type UserIdInfo{
+    "用户id"
+    id:Int64!
+    "用户id"
+    userId: Int64!
+    "用户名称"
+    name: String!
+    "用户拼音"
+    namePy:String!
+    "用户头像"
+    avatar: String!
+    "工号：企业下唯一"
+    emplId: String!
+    "unionId： 开发者账号下唯一(暂时废弃，返回空)"
+    unionId: String!
+    "是否已被删除，为true则代表被组织移除"
+    isDeleted: Boolean!
+    "是否已被禁用, 为true则代表被组织禁用"
+    isDisabled: Boolean!
+}
+
+"更改用户个人信息"
+input UpdateUserInfoReq{
+    "姓名"
+    name:String
+    "性别"
+    sex:Int
+    "用户头像"
+    avatar:String
+    "生日"
+    birthday:Time
+    "是否需要提醒绑定手机号"
+    remindBindPhone:Int
+    "变动的字段列表"
+    updateFields:[String!]!
+}
+
+type OrgProjectMemberInfoResp{
+    "用户id"
+    userId:Int64!
+    "外部用户id"
+    outUserId:String!
+    "组织id"
+    orgId:Int64!
+    "外部组织id"
+    outOrgId:String!
+    "姓名"
+    name:String!
+    "姓名拼音（可能为空）"
+    namePy:String
+    "用户头像"
+    avatar:String!
+    "是否有外部信息"
+    hasOutInfo:Boolean!
+    "是否有组织外部信息"
+    hasOrgOutInfo:Boolean!
+    "组织用户是否删除"
+    orgUserIsDelete :Int!
+    "组织用户状态"
+    orgUserStatus:Int!
+    "组织用户check状态"
+    orgUserCheckStatus:Int!
+}
+
+"成员信息结构体"
+type UserInfo {
+    "成员 id"
+    userID: Int64!
+    "姓名"
+    name: String!
+    "姓名拼音"
+    namePy: String!
+    "用户头像"
+    avatar: String!
+    "邮箱"
+    email: String!
+    "手机"
+    phoneNumber: String!
+    "用户部门信息"
+    departmentList: [UserDepartmentData!]!
+    "角色信息"
+    roleList: [UserRoleData!]!
+    "创建时间"
+    createTime: Time!
+    "状态：1启用，2禁用"
+    status: Int!
+    "禁用时间"
+    statusChangeTime: Time!
+    "是否是组织创建人"
+    isCreator: Boolean!
+}
+
+"部门信息"
+type UserDepartmentData {
+    "部门id"
+    departmentId: Int64
+    "是否是主管：1是2否"
+    isLeader: Int
+    "部门名称"
+    deparmentName: String
+}
+
+"角色信息"
+type UserRoleData {
+    "角色id"
+    RoleId: Int64
+    "角色名称"
+    RoleName: String
+}
+
+"邀请成员的结果数据"
+type InviteUserResp {
+    "成功的邮箱"
+    successEmail: [String!]
+    "已邀请的邮箱"
+    invitedEmail: [String!]
+    "已经是用户的邮箱"
+    isUserEmail: [String!]
+    "不符合规范的邮箱"
+    invalidEmail: [String!]
+}
+
+"邀请成员时，传入的单个成员信息"
+input InviteUserData {
+    "邮箱"
+    email: String!
+    "姓名（再次邀请时不用传了）"
+    name: String!
+}
+
+"被邀请的用户信息"
+type InviteUserInfo {
+    "用户id"
+    id: Int64!
+    "名称"
+    name: String!
+    "邮箱"
+    email: String!
+    "邀请时间"
+    inviteTime: Time!
+    "是否24h内已邀请"
+    isInvitedRecent: Boolean!
+}
