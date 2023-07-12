@@ -3,19 +3,19 @@ package main
 import (
 	"flag"
 	"fmt"
-	"os"
-	"runtime"
 	"strconv"
 
 	"github.com/gin-contrib/gzip"
 
 	"github.com/penglongli/gin-metrics/ginmetrics"
 
+	"github.com/DeanThompson/ginpprof"
+	"github.com/gin-gonic/gin"
+	"github.com/opentracing/opentracing-go"
 	"github.com/star-table/common/core/config"
 	"github.com/star-table/common/core/logger"
 	"github.com/star-table/common/core/util/network"
 	"github.com/star-table/common/library/discovery/nacos"
-	"github.com/star-table/common/library/mqtt/emt"
 	"github.com/star-table/polaris-backend/common/core/buildinfo"
 	"github.com/star-table/polaris-backend/common/core/consts"
 	"github.com/star-table/polaris-backend/common/extra/gin/mid"
@@ -23,61 +23,30 @@ import (
 	"github.com/star-table/polaris-backend/common/extra/trace/gin2micro"
 	trace "github.com/star-table/polaris-backend/common/extra/trace/jaeger"
 	"github.com/star-table/polaris-backend/service/basic/msgsvc/api"
-	"github.com/DeanThompson/ginpprof"
-	"github.com/gin-gonic/gin"
-	"github.com/opentracing/opentracing-go"
 )
 
-var log = logger.GetDefaultLogger()
-var env = ""
-var build = false
-var registerHost, registerPort, registerNamespace = "127.0.0.1", "8848", "public"
+var (
+	log   = logger.GetDefaultLogger()
+	build = false
+	env   = ""
+	name  = "msgsvc"
 
-const BaseConfigPath = "./../../../config"
-const SelfConfigPath = "./config"
+	flagconf                             string
+	nacosHost, nacosPort, nacosNamespace string
+)
 
 func init() {
-	env = os.Getenv(consts.RunEnvKey)
-	if "" == env {
-		env = consts.RunEnvLocal
-	}
-	//配置
+	//配置说明：会优先读取 -conf的配置，如果没有传入，则读nacos配置
+	flag.StringVar(&env, "env", "", "eg: -env test")
+	flag.StringVar(&flagconf, "conf", "", "config path, eg: -conf ../test/config.yaml")
+	flag.StringVar(&nacosHost, "register_host", "", "eg: -register_host 127.0.0.1")
+	flag.StringVar(&nacosPort, "register_port", "", " eg: -register_port 33089 ")
+	flag.StringVar(&nacosNamespace, "register_namespace", "", "eg: -register_namespace lesscode")
 	flag.BoolVar(&build, "build", false, "build facade")
-	flag.StringVar(&env, "env", env, "env")
-	flag.StringVar(&registerHost, "registerHost", "127.0.0.1", "registerHost")
-	flag.StringVar(&registerPort, "registerPort", "8848", "registerPort")
-	flag.StringVar(&registerNamespace, "registerNamespace", "public", "registerNamespace")
-	flag.Parse()
 
-	if os.Getenv(consts.REGISTER_HOST) == "" {
-		_ = os.Setenv(consts.REGISTER_HOST, registerHost)
-	}
-	if os.Getenv(consts.REGISTER_PORT) == "" {
-		_ = os.Setenv(consts.REGISTER_PORT, registerPort)
-	}
-	if os.Getenv(consts.REGISTER_NAMESPACE) == "" {
-		_ = os.Setenv(consts.REGISTER_NAMESPACE, registerNamespace)
-	}
-
-	//配置文件
-	if env == consts.RunEnvGray {
-		err := config.LoadNacosConfigAutoConfiguration("msg", env)
-		if err != nil {
-			panic(err)
-		}
-	} else {
-		if runtime.GOOS != consts.LinuxGOOS {
-			config.LoadEnvConfig(BaseConfigPath, "application.common", env)
-			config.LoadEnvConfig(SelfConfigPath, "application", env)
-		} else {
-			if env == "test" {
-				config.LoadEnvConfig(BaseConfigPath, "application.common", env)
-				config.LoadEnvConfig(SelfConfigPath, "application", env)
-			} else {
-				config.LoadEnvConfig(SelfConfigPath, "application.common", env)
-				config.LoadEnvConfig(SelfConfigPath, "application", env)
-			}
-		}
+	err := config.LoadConfig(flagconf, nacosHost, nacosPort, nacosNamespace, name)
+	if err != nil {
+		panic(err)
 	}
 }
 
@@ -154,10 +123,13 @@ func main() {
 	//	}
 	//}
 	//启动nacos
-	nacos.Init()
-
-	//启动MQTT
-	emt.Init()
+	nacos.Init(&config.NacosBaseConfig{
+		AppName:   name,
+		Host:      nacosHost,
+		Port:      nacosPort,
+		NameSpace: nacosNamespace,
+		Group:     "DEFAULT_GROUP",
+	})
 
 	ginHandler := mvc.NewGinHandler(r)
 

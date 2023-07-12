@@ -9,7 +9,6 @@ require (
 	github.com/getsentry/sentry-go v0.12.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/golang-migrate/migrate/v4 v4.6.2
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.2 // indirect
 	github.com/json-iterator/go v1.1.12
 	github.com/jtolds/gls v4.20.0+incompatible
 	github.com/magiconair/properties v1.8.5
@@ -20,14 +19,14 @@ require (
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/cast v1.5.0
-	github.com/star-table/common v1.6.9
+	github.com/star-table/common v1.7.1
 	github.com/star-table/emitter-go-client v0.0.0-20230706083051-a677df920eca
 	github.com/star-table/go-common v1.0.0
 	github.com/star-table/interface v0.0.0-20230707032058-aa3d85d8a825
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.4
 	github.com/uber/jaeger-client-go v2.30.0+incompatible
 	go.uber.org/zap v1.21.0
-	google.golang.org/protobuf v1.28.1
+	google.golang.org/protobuf v1.31.0
 	gopkg.in/fatih/set.v0 v0.2.1
 	gotest.tools v2.2.0+incompatible
 	upper.io/db.v3 v3.7.1+incompatible

@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 
-	"github.com/star-table/common/core/config"
 	"github.com/star-table/common/core/util/validator"
 	"github.com/star-table/polaris-backend/common/core/errs"
 	"github.com/star-table/polaris-backend/common/extra/gin/util"
@@ -14,7 +13,7 @@ import (
 )
 
 func (r *queryResolver) Projects(ctx context.Context, page int, size int, params map[string]interface{}, order []*string, input *vo.ProjectsReq) (*vo.ProjectList, error) {
-	maxPageSize := config.GetParameters().MaxPageSize
+	maxPageSize := 100
 	if size > maxPageSize {
 		return nil, errs.PageSizeOverflowMaxSizeError
 	}

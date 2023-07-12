@@ -1,7 +1,0 @@
-Mysql:
-#  Host: 47.102.143.45
-#  Port: 33307
-#  Usr: pminfo
-#  Pwd: J3SP*s321&s2~
-  # 数据库库名
-  Database: polaris_project_manage_commonsvc_lctest

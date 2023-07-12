@@ -1,5 +1,0 @@
-Server:
-  Port: 10002
-Mysql:
-  # 数据库库名
-  Database: polaris_project_manage_idsvc_lctest

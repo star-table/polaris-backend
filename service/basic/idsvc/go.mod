@@ -11,7 +11,7 @@ require (
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/penglongli/gin-metrics v0.1.10
 	github.com/smartystreets/goconvey v1.6.4
-	github.com/star-table/common v1.6.9
+	github.com/star-table/common v1.7.1
 	github.com/star-table/polaris-backend/common v0.0.0-00010101000000-000000000000
 	upper.io/db.v3 v3.7.1+incompatible
 )

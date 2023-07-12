@@ -13,17 +13,20 @@ require (
 	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f
 	github.com/gin-contrib/gzip v0.0.5
 	github.com/gin-gonic/gin v1.7.4
+	github.com/go-kratos/kratos/contrib/config/nacos/v2 v2.0.0-20230706115902-bffc1a0989a6
+	github.com/go-kratos/kratos/v2 v2.6.3
 	github.com/go-openapi/jsonreference v0.19.6 // indirect
 	github.com/go-openapi/spec v0.20.3 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mozillazg/go-pinyin v0.15.0
+	github.com/nacos-group/nacos-sdk-go v1.0.9
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/penglongli/gin-metrics v0.1.10
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/cast v1.5.0
-	github.com/star-table/common v1.6.9
+	github.com/star-table/common v1.7.1
 	github.com/star-table/go-common v1.0.0
 	github.com/star-table/interface v0.0.0-20230707032058-aa3d85d8a825
 	github.com/star-table/polaris-backend/common v0.0.0-00010101000000-000000000000

@@ -1,0 +1,155 @@
+Server:
+  Port: 12002
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-projectsvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-projectsvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-projectsvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+Sentry:
+  Dsn: https://127.0.0.1/11
+
+Application:
+  Name: projectsvc
+  Version:
+
+Mysql:
+  Host: 127.0.0.1
+  Port: 33309
+  Usr: root
+  Pwd: root
+  # 数据库库名
+  Database: polaris_project_manage_msgsvc_lctest
+Redis:
+  Host: 127.0.0.1
+  Port:
+  Pwd:
+  Database: 4
+  MaxIdle: 20
+  MaxActive: 200
+  MaxIdleTimeout: 3600
+
+
+Nacos:
+  Client:
+    NamespaceId: "public" #nacos命名空间
+    TimeoutMs: 10000 #http请求超时时间，单位毫秒
+    ListenInterval: 30000 #监听间隔时间，单位毫秒（仅在ConfigClient中有效）
+    BeatInterval: 5000 #心跳间隔时间，单位毫秒（仅在ServiceClient中有效）
+    Endpoint: "" #获取nacos节点ip的服务地址
+    CacheDir: "cache" #缓存目录
+    LogDir: "logs" #日志目录
+    UpdateThreadNum: 20 #更新服务的线程数
+    NotLoadCacheAtStart: true #在启动时不读取本地缓存数据，true--不读取，false--读取
+    UpdateCacheWhenEmpty: true #当服务列表为空时是否更新本地缓存，true--更新,false--不更新
+    Username:
+    Password:
+  Server:
+    Server1:
+      IpAddr: "127.0.0.1" #nacos服务的ip地址
+      Port: 8848 #nacos服务端口
+      ContextPath: "/nacos" #nacos服务的上下文路径，默认是“/nacos”
+  Discovery:
+    GroupName: "DEFAULT_GROUP"
+    ClusterName: "DEFAULT"
+    Weight: 1
+    Enable: true
+    Healthy: true
+    Ephemeral: true
+
+MQ:
+  Mode: Kafka
+  Kafka:
+    NameServers: 127.0.0.1:9092
+    # 推送失败重新消费的次数
+    ReconsumeTimes: 3
+  Topics:
+    BatchCreateIssue:
+      Topic: topic_batch_create_issue_fuse_k8s
+      GroupId: topic_batch_create_issue_group_fuse_k8s
+    DailyIssueReportMsg:
+      Topic: topic_daily_issue_report_msg_fuse_k8s
+      GroupId: topic_daily_issue_report_msg_group_fuse_k8s
+    DailyProjectReportMsg:
+      Topic: topic_project_report_msg_fuse_k8s
+      GroupId: topic_project_report_msg_group_fuse_k8s
+    IssueTrends:
+      Topic: topic_issue_trends_fuse_k8s
+      GroupId: topic_issue_trends_group_fuse_k8s
+    IssueRemind:
+      Topic: topic_issue_remind_fuse_k8s
+      GroupId: topic_issue_remind_group_fuse_k8s
+
+# 参数配置
+Parameters:
+  # 服务访问前缀
+  PreUrl:
+    idsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    msgsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    appsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    app: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    orgsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    projectsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    processsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    resourcesvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    noticesvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    rolesvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    callsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    trendssvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    commonsvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    websitesvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    ordersvc: http://polaris-front-proxy-inside.fuse.svc.cluster.local
+    schedule: http://polaris-front-proxy-inside.fuse.svc.cluster.local  # schedule: http://127.0.0.1:12009 # local test
+    compatsvc: http://192.168.1.152:8000
+    usercentersvc: http://127.0.0.1:15001
+    permissionsvc: http://127.0.0.1:10670
+    lesscodeappsvc: http://127.0.0.1:10666
+    lesscodeformsvc: http://127.0.0.1:10667
+    lesscodedatacentersvc: http://127.0.0.1:10675
+    lesscodedashboard: http://127.0.0.1:16888
+    lesscodeauthsvc: http://lesscodeauthsvc.fuse.svc.cluster.local # permission
+    tablesvc: http://go-table.test.svc.cluster.local
+    officesvc: http://officeapi.fuse.svc.cluster.local:8080 # 在线office交互服务
+    pushsvc: http://go-push.test.svc.cluster.local
+
+OSS:
+  BucketName: polaris
+  EndPoint: https://127.0.0.1
+  AccessKeyId:
+  AccessKeySecret:
+  RootPath: /data/resources/
+  LocalDomain: http://127.0.0.1:12010

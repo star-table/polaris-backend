@@ -1,7 +1,0 @@
-Mysql:
-  Host: 127.0.0.1
-  Port: 33309
-  Usr: root
-  Pwd: root
-  # 数据库库名
-  Database: polaris_project_manage_commonsvc_lctest

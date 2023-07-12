@@ -1,0 +1,140 @@
+Server:
+  Port: 12004
+
+Logs:
+  # 默认日志配置
+  Default:
+    LogPath: /data/logs/polaris-resourcesvc/run.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: run
+  # 输入输出日志
+  RR:
+    LogPath: /data/logs/polaris-resourcesvc/rr.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: false
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: rr
+  # 消息队列日志
+  MQ:
+    LogPath: /data/logs/polaris-resourcesvc/mq.log
+    # 日志级别
+    Level: info
+    # 控制台是否输出
+    IsConsoleOut: true
+    # 单个日志文件大小
+    FileSize: 1024
+    # 保留日志文件数
+    MaxBackups: 20
+    # 标签
+    Tag: mq
+
+Application:
+  Name: resourcesvc
+  Version:
+Sentry:
+  Dsn: https://127.0.0.1/12
+
+Mysql:
+  Host: 127.0.0.1
+  Port: 33309
+  Usr: root
+  Pwd: root
+  # 数据库库名
+  Database: polaris_project_manage_resourcesvc_lctest
+Redis:
+  Host: 127.0.0.1
+  Port:
+  Pwd:
+  Database: 4
+  MaxIdle: 20
+  MaxActive: 200
+  MaxIdleTimeout: 3600
+
+# 参数配置
+Parameters:
+  # 服务访问前缀
+  PreUrl:
+    idsvc: http://127.0.0.1:10002
+    msgsvc: http://127.0.0.1:10003
+    orgsvc: http://127.0.0.1:12001
+    projectsvc: http://127.0.0.1:12002
+    trendssvc: http://127.0.0.1:12008
+    usercentersvc: http://127.0.0.1:15001
+
+# 阿里云OSS配置
+OSS:
+  BucketName: polaris
+  EndPoint:
+  AccessKeyId:
+  AccessKeySecret:
+  RootPath: /data/resources/polaris
+  LocalDomain: http://127.0.0.1:12010
+  Policies:
+    ProjectCover:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/cover/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+    IssueResource:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/issue_{{.issueId}}/resource/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+      CallbackUrl: http://polarisfs-local.vaiwan.com/api/callsvc/callback/oss/policy
+    LesscodeResource:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/issue_{{.issueId}}/lesscode_resource/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+      CallbackUrl: http://polarisfs-local.vaiwan.com/api/callsvc/callback/oss/policy
+    IssueInputFile:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/input_issues/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+    ProjectResource:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/resource/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+      CallbackUrl: http://polarisfs-local.vaiwan.com/api/callsvc/callback/oss/policy
+    CompatTest:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/compat_test/apk/{{.year}}/{{.month}}/{{.day}}
+      # 512M
+      MaxFileSize: 536870912
+    UserAvatar:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/folder_resource/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+    Feedback:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/feedback_resource/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+    IssueRemark:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/project_{{.projectId}}/issue_{{.issueId}}/IssueRemark/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
+    ImportMembers:
+      BucketName: polaris-hd2
+      Expire: 300000
+      Dir: org_{{.orgId}}/org/{{.year}}/{{.month}}/{{.day}}
+      MaxFileSize: 10485760
